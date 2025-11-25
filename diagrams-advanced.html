@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma Bioressonância B2C - Advanced Interactive</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #8b5cf6 100%);
+            min-height: 100vh;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .app-container.fullscreen {
+            max-width: 100%;
+            padding: 10px;
+        }
+
+        /* Header with advanced styling */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease;
+            position: relative;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            display: flex;
+            gap: 15px;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            animation: fadeIn 0.8s ease 0.2s both;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toolbar-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .toolbar-button.active {
+            background: white;
+            color: #3b82f6;
+            border-color: white;
+        }
+
+        /* Tabs with enhanced design */
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease 0.4s both;
+        }
+
+        .tab-button {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.25);
+            color: white;
+            padding: 18px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tab-button:hover::before {
+            left: 100%;
+        }
+
+        .tab-button:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+            color: #1e40af;
+            border-color: white;
+            box-shadow: 0 8px 25px rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-number {
+            background: rgba(59,130,246,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .tab-button.active .tab-number {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Diagram container with zoom support */
+        .diagram-wrapper {
+            background: white;
+            border-radius: 24px;
+            padding: 0;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease 0.6s both;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .diagram-header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            padding: 25px 35px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .diagram-title {
+            font-size: 1.9rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .diagram-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .diagram-content {
+            padding: 50px;
+            min-height: 600px;
+            transform-origin: center center;
+            transition: transform 0.3s ease;
+        }
+
+        .diagram-content.zoomed {
+            transform: scale(1.2);
+        }
+
+        /* Enhanced Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .flow-row {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Advanced Node Styles */
+        .flow-node {
+            position: relative;
+            padding: 22px 35px;
+            border-radius: 18px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            min-width: 200px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            animation: nodeEntry 0.6s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        @keyframes nodeEntry {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .flow-node:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .flow-node::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .flow-node:hover::after {
+            opacity: 1;
+        }
+
+        /* Premium Node Types */
+        .node-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .node-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 12px 35px rgba(240, 147, 251, 0.4);
+        }
+
+        .node-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 12px 35px rgba(79, 172, 254, 0.4);
+        }
+
+        .node-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #1a202c;
+            box-shadow: 0 12px 35px rgba(250, 112, 154, 0.4);
+        }
+
+        .node-info {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+            box-shadow: 0 12px 35px rgba(48, 207, 208, 0.4);
+        }
+
+        .node-light {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            color: #1a202c;
+            box-shadow: 0 12px 35px rgba(142, 197, 252, 0.4);
+        }
+
+        .node-accent {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #1a202c;
+            box-shadow: 0 12px 35px rgba(252, 182, 159, 0.4);
+        }
+
+        .node-dark {
+            background: linear-gradient(135deg, #434343 0%, #000000 100%);
+            color: white;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animated Connectors */
+        .flow-connector {
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-connector::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: flowPulse 2s infinite;
+        }
+
+        @keyframes flowPulse {
+            to {
+                left: 100%;
+            }
+        }
+
+        .flow-connector::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: -6px;
+            width: 0;
+            height: 0;
+            border-left: 12px solid #764ba2;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        .flow-connector-vertical {
+            width: 4px;
+            height: 50px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-connector-vertical::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: flowPulseVertical 2s infinite;
+        }
+
+        @keyframes flowPulseVertical {
+            to {
+                top: 100%;
+            }
+        }
+
+        .flow-connector-vertical::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -6px;
+            width: 0;
+            height: 0;
+            border-top: 12px solid #764ba2;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+        }
+
+        /* Icon enhancements */
+        .node-icon {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Grid layouts */
+        .flow-grid {
+            display: grid;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .flow-grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .flow-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Section headers */
+        .section-header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Funnel stages */
+        .funnel-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Branch container */
+        .branch-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .branch-container::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(-50%);
+        }
+
+        .branch-path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .branch-label {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-new {
+            background: #10b981;
+            color: white;
+        }
+
+        .badge-premium {
+            background: #f59e0b;
+            color: white;
+        }
+
+        /* Tooltips */
+        .flow-node[data-tooltip] {
+            position: relative;
+        }
+
+        .flow-node[data-tooltip]:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.95);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            animation: tooltipFade 0.3s ease;
+        }
+
+        @keyframes tooltipFade {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Metrics panel */
+        .metrics-panel {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 250px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .metrics-panel.hidden {
+            transform: translateY(-50%) translateX(300px);
+        }
+
+        .metric-item {
+            margin-bottom: 15px;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e40af;
+        }
+
+        .metric-trend {
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .metric-trend.down {
+            color: #ef4444;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Fullscreen mode */
+        .app-container.fullscreen .header h1 {
+            font-size: 2rem;
+        }
+
+        .app-container.fullscreen .tabs {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .metrics-panel {
+                position: static;
+                transform: none;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .metrics-panel.hidden {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .diagram-content {
+                padding: 25px;
+            }
+
+            .flow-node {
+                min-width: 160px;
+                padding: 16px 25px;
+                font-size: 0.9rem;
+            }
+
+            .tabs {
+                grid-template-columns: 1fr;
+            }
+
+            .branch-container {
+                gap: 40px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .toolbar,
+            .metrics-panel,
+            .diagram-actions {
+                display: none;
+            }
+
+            .diagram-wrapper {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Component definitions for each diagram (reusing previous logic)
+        const DiagramArquitetura = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-sitemap"></i> Visão Macro do Sistema
+                </div>
+
+                <div className="flow-row">
+                    <div className="flow-node node-primary" data-tooltip="Ponto de entrada do sistema">
+                        <i className="node-icon fas fa-door-open"></i>
+                        Landing Pages
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-secondary" data-tooltip="Sistema de agendamento">
+                        <i className="node-icon fas fa-calendar-check"></i>
+                        Sistema de Agendamento
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-success" data-tooltip="Processo de venda">
+                        <i className="node-icon fas fa-shopping-cart"></i>
+                        Checkout
+                    </div>
+                </div>
+
+                <div className="flow-connector-vertical"></div>
+
+                <div className="flow-row">
+                    <div className="flow-node node-warning" data-tooltip="Gestão de clientes">
+                        <i className="node-icon fas fa-users"></i>
+                        CRM / Automação
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-info" data-tooltip="Aplicativo mobile">
+                        <i className="node-icon fas fa-mobile-alt"></i>
+                        App do Cliente
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-accent" data-tooltip="Comunidade exclusiva">
+                        <i className="node-icon fas fa-crown"></i>
+                        Clube de Membros
+                    </div>
+                </div>
+
+                <div className="flow-connector-vertical"></div>
+
+                <div className="flow-row">
+                    <div className="flow-node node-dark" data-tooltip="Gestão operacional">
+                        <i className="node-icon fas fa-cogs"></i>
+                        Backoffice & Analytics
+                    </div>
+                </div>
+            </div>
+        );
+
+        const DiagramFunilB2C = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-filter"></i> Estratégia Multi-Método de Conversão
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '20px'}}>
+                        <i className="node-icon fas fa-bullseye"></i>
+                        ENTRADA - Tráfego Qualificado
+                    </div>
+
+                    <div className="flow-grid flow-grid-2" style={{marginTop: '30px'}}>
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-dna"></i>
+                                Aurículo Diagnóstico
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Exa Aurículo
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-spa"></i>
+                                Aurículo Ansiedade
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Cor Ansiedade
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-heartbeat"></i>
+                                Aurículo Sono
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Cor Sono
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-bolt"></i>
+                                Aurículo Açúcar
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Exa Açúcar
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-fire"></i>
+                                Aurículo Energia
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Cor Energia
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flow-connector-vertical" style={{margin: '30px auto'}}></div>
+
+                    <div className="flow-node node-secondary" style={{margin: '20px auto', maxWidth: '500px'}}>
+                        <i className="node-icon fas fa-chart-line"></i>
+                        Engine Geral de App-Based
+                        <span className="badge badge-new">AI-Powered</span>
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-success" style={{margin: '20px auto', maxWidth: '300px'}}>
+                        <i className="node-icon fas fa-check-circle"></i>
+                        Conversão Final
+                    </div>
+                </div>
+            </div>
+        );
+
+        const DiagramCheckout = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-cash-register"></i> Otimização de Checkout com Order Bumps
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-shopping-bag"></i>
+                        Cliente Chega aos Dados
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-secondary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-clipboard-check"></i>
+                        Página de Checkout
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-row" style={{gap: '20px', flexWrap: 'wrap', justifyContent: 'center'}}>
+                        <div className="flow-node node-accent" data-tooltip="Bump: Desconto especial para segunda consulta">
+                            <i className="node-icon fas fa-percentage"></i>
+                            OB1 - Bump Desconto
+                        </div>
+
+                        <div className="flow-node node-accent" data-tooltip="Bump: Adicionar segunda consulta">
+                            <i className="node-icon fas fa-redo"></i>
+                            OB2 - Bump Consulta
+                        </div>
+
+                        <div className="flow-node node-accent" data-tooltip="Bump: Upgrade para plano avançado">
+                            <i className="node-icon fas fa-star"></i>
+                            OB3 - Bump Avançado
+                        </div>
+
+                        <div className="flow-node node-accent" data-tooltip="Bump: Cashback no app">
+                            <i className="node-icon fas fa-gift"></i>
+                            OB4 - Cashback App
+                        </div>
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-success" style={{marginTop: '30px'}}>
+                        <i className="node-icon fas fa-check-double"></i>
+                        Compra Aprovada
+                        <span className="badge badge-premium">Premium</span>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const DiagramUpsell = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-rocket"></i> Estratégia de Upsell Imediato Pós-Compra
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-check-circle"></i>
+                        Compra Concluída com Sucesso
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-warning" style={{marginBottom: '30px', maxWidth: '500px', margin: '0 auto 30px'}}>
+                        <i className="node-icon fas fa-crown"></i>
+                        Oferta Upsell: Clube de Bioressonância
+                        <span className="badge badge-new">Exclusivo VIP</span>
+                    </div>
+
+                    <div className="branch-container">
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-thumbs-up"></i> ACEITA
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success">
+                                <i className="node-icon fas fa-user-plus"></i>
+                                Cria/Ativa Assinatura do Clube
+                            </div>
+                        </div>
+
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-thumbs-down"></i> RECUSA
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-info">
+                                <i className="node-icon fas fa-envelope"></i>
+                                Segue para Equipe + App Básico
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const DiagramComportamento = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-mobile-alt"></i> Jornada Completa do Cliente no Ecossistema
+                </div>
+
+                <div className="flow-grid flow-grid-3" style={{marginTop: '30px'}}>
+                    <div className="flow-node node-light">
+                        <i className="node-icon fas fa-user-check"></i>
+                        Login / Cadastro
+                    </div>
+                    <div className="flow-node node-light">
+                        <i className="node-icon fas fa-calendar-alt"></i>
+                        Agendamentos
+                    </div>
+                    <div className="flow-node node-light">
+                        <i className="node-icon fas fa-history"></i>
+                        Histórico
+                    </div>
+                    <div className="flow-node node-accent">
+                        <i className="node-icon fas fa-file-medical"></i>
+                        Prontuário Digital
+                    </div>
+                    <div className="flow-node node-accent">
+                        <i className="node-icon fas fa-comments"></i>
+                        Chat Suporte 24/7
+                    </div>
+                    <div className="flow-node node-accent">
+                        <i className="node-icon fas fa-trophy"></i>
+                        Sistema de Gamificação
+                    </div>
+                    <div className="flow-node node-warning">
+                        <i className="node-icon fas fa-crown"></i>
+                        Área Clube Exclusivo
+                    </div>
+                    <div className="flow-node node-warning">
+                        <i className="node-icon fas fa-graduation-cap"></i>
+                        Conteúdo Premium
+                    </div>
+                    <div className="flow-node node-warning">
+                        <i className="node-icon fas fa-users"></i>
+                        Comunidade Privada
+                    </div>
+                </div>
+
+                <div className="flow-connector-vertical" style={{margin: '30px auto'}}></div>
+
+                <div className="flow-node node-success" style={{maxWidth: '500px', margin: '0 auto'}}>
+                    <i className="node-icon fas fa-heart"></i>
+                    Cliente Engajado, Satisfeito e Fidelizado
+                </div>
+            </div>
+        );
+
+        const DiagramAcoesBack = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-robot"></i> Automação Inteligente e Jornadas Backend
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-clock"></i>
+                        Gatilho: Compra Realizada
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-secondary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-network-wired"></i>
+                        Segmentação Inteligente
+                    </div>
+
+                    <div className="branch-container" style={{marginTop: '50px'}}>
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-crown"></i> COM CLUBE VIP
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-paper-plane"></i>
+                                Semana 1: Onboarding Premium
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-running"></i>
+                                Uso Recorrente Incentivado
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-redo"></i>
+                                Semana 3-4: Re-scan Automático
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-warning" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-chart-line"></i>
+                                Mês 2: Evolução e Progresso
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-warning" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-share-alt"></i>
+                                Engajamento Social
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-info">
+                                <i className="node-icon fas fa-star"></i>
+                                Ofertas de Upgrade
+                            </div>
+                        </div>
+
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-user"></i> SEM CLUBE
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-light" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-paper-plane"></i>
+                                Semana 1: Onboarding Básico
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-light" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-bell"></i>
+                                D+3: Lembrete Prontuário
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-light" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-mobile"></i>
+                                Incentivo uso do App
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-unlock"></i>
+                                Desbloqueio de Funcionalidades
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-truck"></i>
+                                D+7-14: Acompanhamento Logística
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-secondary" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-gift"></i>
+                                D+14: Nova Oferta Especial
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-warning">
+                                <i className="node-icon fas fa-crown"></i>
+                                Convite para Clube / Nurture
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Main App with advanced features
+        function App() {
+            const [activeTab, setActiveTab] = useState(0);
+            const [isFullscreen, setIsFullscreen] = useState(false);
+            const [showMetrics, setShowMetrics] = useState(true);
+            const [isZoomed, setIsZoomed] = useState(false);
+
+            const diagrams = [
+                { title: 'Arquitetura Geral', icon: 'sitemap', component: DiagramArquitetura },
+                { title: 'Funil B2C Multi-Métodos', icon: 'filter', component: DiagramFunilB2C },
+                { title: 'Checkout + Order Bumps', icon: 'cash-register', component: DiagramCheckout },
+                { title: 'Upsell Imediato', icon: 'rocket', component: DiagramUpsell },
+                { title: 'Comportamento App + Clube', icon: 'mobile-alt', component: DiagramComportamento },
+                { title: 'Ações do Back', icon: 'robot', component: DiagramAcoesBack }
+            ];
+
+            const CurrentDiagram = diagrams[activeTab].component;
+
+            const exportDiagram = () => {
+                window.print();
+            };
+
+            const toggleFullscreen = () => {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                    setIsFullscreen(true);
+                } else {
+                    document.exitFullscreen();
+                    setIsFullscreen(false);
+                }
+            };
+
+            return (
+                <div className={`app-container ${isFullscreen ? 'fullscreen' : ''}`}>
+                    <div className="header">
+                        <h1>
+                            <i className="fas fa-heartbeat"></i> Fluxograma Bioressonância B2C
+                        </h1>
+                        <p className="header-subtitle">
+                            Sistema Completo de Conversão, Engajamento e Fidelização | Design Premium Funnelytics
+                        </p>
+                        <div className="header-stats">
+                            <div className="stat-card">
+                                <span className="stat-value">6</span>
+                                <span className="stat-label">Diagramas</span>
+                            </div>
+                            <div className="stat-card">
+                                <span className="stat-value">50+</span>
+                                <span className="stat-label">Etapas</span>
+                            </div>
+                            <div className="stat-card">
+                                <span className="stat-value">100%</span>
+                                <span className="stat-label">Interativo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="toolbar">
+                        <div className="toolbar-group">
+                            <button className="toolbar-button" onClick={() => setIsZoomed(!isZoomed)}>
+                                <i className={`fas fa-${isZoomed ? 'search-minus' : 'search-plus'}`}></i>
+                                {isZoomed ? 'Zoom Out' : 'Zoom In'}
+                            </button>
+                            <button className="toolbar-button" onClick={toggleFullscreen}>
+                                <i className="fas fa-expand"></i>
+                                Fullscreen
+                            </button>
+                            <button className="toolbar-button" onClick={exportDiagram}>
+                                <i className="fas fa-download"></i>
+                                Export PDF
+                            </button>
+                        </div>
+                        <div className="toolbar-group">
+                            <button
+                                className={`toolbar-button ${showMetrics ? 'active' : ''}`}
+                                onClick={() => setShowMetrics(!showMetrics)}
+                            >
+                                <i className="fas fa-chart-bar"></i>
+                                Métricas
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="tabs">
+                        {diagrams.map((diagram, index) => (
+                            <button
+                                key={index}
+                                className={`tab-button ${activeTab === index ? 'active' : ''}`}
+                                onClick={() => setActiveTab(index)}
+                            >
+                                <span className="tab-number">{index + 1}</span>
+                                <span>
+                                    <i className={`fas fa-${diagram.icon}`}></i> {diagram.title}
+                                </span>
+                            </button>
+                        ))}
+                    </div>
+
+                    {showMetrics && (
+                        <div className={`metrics-panel ${!showMetrics ? 'hidden' : ''}`}>
+                            <div className="metric-item">
+                                <div className="metric-label">Taxa de Conversão</div>
+                                <div className="metric-value">34%</div>
+                                <div className="metric-trend">
+                                    <i className="fas fa-arrow-up"></i> +12%
+                                </div>
+                            </div>
+                            <div className="metric-item">
+                                <div className="metric-label">AOV (Ticket Médio)</div>
+                                <div className="metric-value">R$ 847</div>
+                                <div className="metric-trend">
+                                    <i className="fas fa-arrow-up"></i> +8%
+                                </div>
+                            </div>
+                            <div className="metric-item">
+                                <div className="metric-label">LTV Cliente</div>
+                                <div className="metric-value">R$ 2.4K</div>
+                                <div className="metric-trend">
+                                    <i className="fas fa-arrow-up"></i> +15%
+                                </div>
+                            </div>
+                            <div className="metric-item">
+                                <div className="metric-label">Retenção (30d)</div>
+                                <div className="metric-value">78%</div>
+                                <div className="metric-trend">
+                                    <i className="fas fa-arrow-up"></i> +5%
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="diagram-wrapper">
+                        <div className="diagram-header">
+                            <div className="diagram-title">
+                                <i className={`fas fa-${diagrams[activeTab].icon}`}></i>
+                                {activeTab + 1}. {diagrams[activeTab].title}
+                            </div>
+                            <div className="diagram-actions">
+                                <button className="action-btn" title="Copiar">
+                                    <i className="fas fa-copy"></i>
+                                </button>
+                                <button className="action-btn" title="Compartilhar">
+                                    <i className="fas fa-share-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div className={`diagram-content ${isZoomed ? 'zoomed' : ''}`}>
+                            <CurrentDiagram />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

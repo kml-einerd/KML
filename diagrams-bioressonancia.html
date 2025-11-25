@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxograma Bioressonância B2C - Estilo Funnelytics</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #1a202c;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .tab-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.3);
+        }
+
+        .diagram-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease;
+            min-height: 600px;
+        }
+
+        .diagram-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .diagram-title i {
+            color: #667eea;
+        }
+
+        /* Node Styles - Funnelytics Inspired */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .flow-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .flow-node {
+            position: relative;
+            padding: 20px 30px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: center;
+            min-width: 180px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .flow-node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        /* Node Types */
+        .node-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .node-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.3);
+        }
+
+        .node-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .node-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(250, 112, 154, 0.3);
+        }
+
+        .node-info {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(48, 207, 208, 0.3);
+        }
+
+        .node-light {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            color: #2d3748;
+            box-shadow: 0 8px 20px rgba(142, 197, 252, 0.3);
+        }
+
+        .node-accent {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #2d3748;
+            box-shadow: 0 8px 20px rgba(252, 182, 159, 0.3);
+        }
+
+        .node-dark {
+            background: linear-gradient(135deg, #434343 0%, #000000 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Connection Lines */
+        .flow-connector {
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+        }
+
+        .flow-connector::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #764ba2;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+
+        .flow-connector-vertical {
+            width: 3px;
+            height: 40px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .flow-connector-vertical::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid #764ba2;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+
+        /* Icon Badges */
+        .node-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* Grid Layout for Complex Diagrams */
+        .flow-grid {
+            display: grid;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .flow-grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .flow-grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Section Headers */
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Special Layout for Multi-stage Funnels */
+        .funnel-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .funnel-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* Decision Nodes */
+        .node-decision {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            min-width: 200px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .diagram-container {
+                padding: 20px;
+            }
+
+            .flow-node {
+                min-width: 140px;
+                padding: 15px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Badge styles */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+
+        .badge-new {
+            background: #48bb78;
+            color: white;
+        }
+
+        .badge-premium {
+            background: #ed8936;
+            color: white;
+        }
+
+        /* Tooltip */
+        .flow-node[data-tooltip] {
+            position: relative;
+        }
+
+        .flow-node[data-tooltip]:hover::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            margin-bottom: 8px;
+            z-index: 1000;
+        }
+
+        /* Branch indicator */
+        .branch-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 30px 0;
+        }
+
+        .branch-container::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(-50%);
+        }
+
+        .branch-path {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .branch-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #667eea;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Diagram 1: Arquitetura Geral
+        const DiagramArquitetura = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-sitemap"></i> Visão Macro do Sistema
+                </div>
+
+                <div className="flow-row">
+                    <div className="flow-node node-primary" data-tooltip="Ponto de entrada do sistema">
+                        <i className="node-icon fas fa-door-open"></i>
+                        Landing Pages
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-secondary" data-tooltip="Sistema de agendamento">
+                        <i className="node-icon fas fa-calendar-check"></i>
+                        Sistema de Agendamento
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-success" data-tooltip="Processo de venda">
+                        <i className="node-icon fas fa-shopping-cart"></i>
+                        Checkout
+                    </div>
+                </div>
+
+                <div className="flow-connector-vertical"></div>
+
+                <div className="flow-row">
+                    <div className="flow-node node-warning" data-tooltip="Gestão de clientes">
+                        <i className="node-icon fas fa-users"></i>
+                        CRM / Automação
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-info" data-tooltip="Aplicativo mobile">
+                        <i className="node-icon fas fa-mobile-alt"></i>
+                        App do Cliente
+                    </div>
+                    <div className="flow-connector"></div>
+                    <div className="flow-node node-accent" data-tooltip="Comunidade exclusiva">
+                        <i className="node-icon fas fa-crown"></i>
+                        Clube de Membros
+                    </div>
+                </div>
+
+                <div className="flow-connector-vertical"></div>
+
+                <div className="flow-row">
+                    <div className="flow-node node-dark" data-tooltip="Gestão operacional">
+                        <i className="node-icon fas fa-cogs"></i>
+                        Backoffice & Analytics
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Diagram 2: Funil B2C Multi-Métodos
+        const DiagramFunilB2C = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-filter"></i> Estratégia Multi-Método de Conversão
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '20px'}}>
+                        <i className="node-icon fas fa-bullseye"></i>
+                        ENTRADA - Tráfego
+                    </div>
+
+                    <div className="flow-grid flow-grid-2" style={{marginTop: '30px'}}>
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-dna"></i>
+                                Aurículo Diagnóstico
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Exa Aurículo
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-spa"></i>
+                                Aurículo Ansiedade
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Cor Ansiedade
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-heartbeat"></i>
+                                Aurículo Sono
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Cor Sono
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-bolt"></i>
+                                Aurículo Açúcar
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Exa Açúcar
+                            </div>
+                        </div>
+
+                        <div className="funnel-stage">
+                            <div className="flow-node node-light">
+                                <i className="node-icon fas fa-fire"></i>
+                                Aurículo Energia
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent">
+                                <i className="node-icon fas fa-hand-pointer"></i>
+                                Landing/Ads - Cor Energia
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="flow-connector-vertical" style={{margin: '30px auto'}}></div>
+
+                    <div className="flow-node node-secondary" style={{margin: '20px auto', maxWidth: '400px'}}>
+                        <i className="node-icon fas fa-chart-line"></i>
+                        Engine Geral de App-Based
+                        <span className="badge badge-new">Inteligente</span>
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-success" style={{margin: '20px auto', maxWidth: '300px'}}>
+                        <i className="node-icon fas fa-check-circle"></i>
+                        Conversão
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Diagram 3: Checkout + Order Bumps
+        const DiagramCheckout = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-cash-register"></i> Otimização de Checkout
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-shopping-bag"></i>
+                        Chega + Aos Dados
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-secondary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-clipboard-check"></i>
+                        Checkout
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-row" style={{gap: '30px', flexWrap: 'wrap', justifyContent: 'center'}}>
+                        <div className="flow-node node-accent" data-tooltip="Bump: Desconto especial">
+                            <i className="node-icon fas fa-percentage"></i>
+                            OB1 - Bump Desconto
+                        </div>
+
+                        <div className="flow-node node-accent" data-tooltip="Bump: Segunda consulta">
+                            <i className="node-icon fas fa-redo"></i>
+                            OB2 - Bump Consulta
+                        </div>
+
+                        <div className="flow-node node-accent" data-tooltip="Bump: Plano Avançado">
+                            <i className="node-icon fas fa-star"></i>
+                            OB3 - Bump Avançado
+                        </div>
+
+                        <div className="flow-node node-accent" data-tooltip="Bump: Cashback">
+                            <i className="node-icon fas fa-gift"></i>
+                            OB4 - Cashback App
+                        </div>
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-success" style={{marginTop: '30px'}}>
+                        <i className="node-icon fas fa-check-double"></i>
+                        Compra Aprovada
+                        <span className="badge badge-premium">Premium</span>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Diagram 4: Upsell Imediato
+        const DiagramUpsell = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-rocket"></i> Estratégia de Upsell Pós-Compra
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-check-circle"></i>
+                        Compra Concluída
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-warning" style={{marginBottom: '30px', maxWidth: '400px', margin: '0 auto 30px'}}>
+                        <i className="node-icon fas fa-crown"></i>
+                        Upsell: Clube de Bioressonância
+                        <span className="badge badge-new">VIP</span>
+                    </div>
+
+                    <div className="branch-container">
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-thumbs-up"></i> ACEITA
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success">
+                                <i className="node-icon fas fa-user-plus"></i>
+                                Cria/Ativa Assinatura Clube
+                            </div>
+                        </div>
+
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-thumbs-down"></i> RECUSA
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-info">
+                                <i className="node-icon fas fa-envelope"></i>
+                                Cliente segue p/ Equipe + App Básico
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Diagram 5: Comportamento App + Clube
+        const DiagramComportamento = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-mobile-alt"></i> Jornada do Cliente no Ecossistema
+                </div>
+
+                <div className="flow-grid flow-grid-3" style={{marginTop: '30px'}}>
+                    <div className="flow-node node-light">
+                        <i className="node-icon fas fa-user-check"></i>
+                        Login / Cadastro
+                    </div>
+                    <div className="flow-node node-light">
+                        <i className="node-icon fas fa-calendar-alt"></i>
+                        Agendamentos
+                    </div>
+                    <div className="flow-node node-light">
+                        <i className="node-icon fas fa-history"></i>
+                        Histórico
+                    </div>
+                    <div className="flow-node node-accent">
+                        <i className="node-icon fas fa-file-medical"></i>
+                        Prontuário Digital
+                    </div>
+                    <div className="flow-node node-accent">
+                        <i className="node-icon fas fa-comments"></i>
+                        Chat Suporte
+                    </div>
+                    <div className="flow-node node-accent">
+                        <i className="node-icon fas fa-trophy"></i>
+                        Gamificação
+                    </div>
+                    <div className="flow-node node-warning">
+                        <i className="node-icon fas fa-crown"></i>
+                        Clube Exclusivo
+                    </div>
+                    <div className="flow-node node-warning">
+                        <i className="node-icon fas fa-graduation-cap"></i>
+                        Conteúdo Premium
+                    </div>
+                    <div className="flow-node node-warning">
+                        <i className="node-icon fas fa-users"></i>
+                        Comunidade
+                    </div>
+                </div>
+
+                <div className="flow-connector-vertical" style={{margin: '30px auto'}}></div>
+
+                <div className="flow-node node-success" style={{maxWidth: '400px', margin: '0 auto'}}>
+                    <i className="node-icon fas fa-heart"></i>
+                    Cliente Engajado e Fidelizado
+                </div>
+            </div>
+        );
+
+        // Diagram 6: Ações do Back
+        const DiagramAcoesBack = () => (
+            <div className="flow-diagram">
+                <div className="section-header">
+                    <i className="fas fa-robot"></i> Automação e Jornadas Backend
+                </div>
+
+                <div style={{marginTop: '30px'}}>
+                    <div className="flow-node node-primary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-clock"></i>
+                        Gatilho Compra
+                    </div>
+
+                    <div className="flow-connector-vertical"></div>
+
+                    <div className="flow-node node-secondary" style={{marginBottom: '30px'}}>
+                        <i className="node-icon fas fa-network-wired"></i>
+                        Segmentação
+                    </div>
+
+                    <div className="branch-container" style={{marginTop: '40px'}}>
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-user"></i> COM CLUBE
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-paper-plane"></i>
+                                Semana 1: Onboarding
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-running"></i>
+                                Uso Recorrente
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-success" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-redo"></i>
+                                Semana 3-4: Re-scan
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-warning" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-shopping-cart"></i>
+                                Meses 2: Evolução
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-warning" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-share-alt"></i>
+                                Ritmo Social
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-info">
+                                <i className="node-icon fas fa-trophy"></i>
+                                Upgrades
+                            </div>
+                        </div>
+
+                        <div className="branch-path">
+                            <div className="branch-label">
+                                <i className="fas fa-user-times"></i> SEM CLUBE
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-light" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-paper-plane"></i>
+                                Semana 1: Onboarding
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-light" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-calendar-check"></i>
+                                D+3: Lembrar Prontar
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-light" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-mobile"></i>
+                                Vai Mexer no App
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-stethoscope"></i>
+                                Semana: Desbloqueaar
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-accent" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-pills"></i>
+                                D+7-14: Logística
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-secondary" style={{marginBottom: '15px'}}>
+                                <i className="node-icon fas fa-chart-line"></i>
+                                D+7-14: Comprado + Oferta
+                            </div>
+                            <div className="flow-connector-vertical"></div>
+                            <div className="flow-node node-warning">
+                                <i className="node-icon fas fa-crown"></i>
+                                Onboarding Clube / Nurture Longo Prazo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Main App Component
+        function App() {
+            const [activeTab, setActiveTab] = useState(0);
+
+            const diagrams = [
+                { title: 'Arquitetura Geral', icon: 'sitemap', component: DiagramArquitetura },
+                { title: 'Funil B2C Multi-Métodos', icon: 'filter', component: DiagramFunilB2C },
+                { title: 'Checkout + Order Bumps', icon: 'cash-register', component: DiagramCheckout },
+                { title: 'Upsell Imediato', icon: 'rocket', component: DiagramUpsell },
+                { title: 'Comportamento App + Clube', icon: 'mobile-alt', component: DiagramComportamento },
+                { title: 'Ações do Back', icon: 'robot', component: DiagramAcoesBack }
+            ];
+
+            const CurrentDiagram = diagrams[activeTab].component;
+
+            return (
+                <div className="app-container">
+                    <div className="header">
+                        <h1>
+                            <i className="fas fa-heartbeat"></i> Fluxograma do Negócio de Bioressonância (B2C)
+                        </h1>
+                        <p>Design profissional inspirado em Funnelytics | Sistema completo de conversão e fidelização</p>
+                    </div>
+
+                    <div className="tabs">
+                        {diagrams.map((diagram, index) => (
+                            <button
+                                key={index}
+                                className={`tab-button ${activeTab === index ? 'active' : ''}`}
+                                onClick={() => setActiveTab(index)}
+                            >
+                                <i className={`fas fa-${diagram.icon}`}></i> {diagram.title}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="diagram-container">
+                        <div className="diagram-title">
+                            <i className={`fas fa-${diagrams[activeTab].icon}`}></i>
+                            {diagrams[activeTab].title}
+                        </div>
+                        <CurrentDiagram />
+                    </div>
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
