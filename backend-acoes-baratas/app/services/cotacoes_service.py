@@ -75,6 +75,10 @@ class CotacoesService:
             CotacaoSnapshotSchema: Cotação inserida
         """
         cotacao_dict = cotacao.model_dump(exclude_none=True, exclude={"id"})
+        
+        # Converter datetime para ISO string
+        if "timestamp" in cotacao_dict and isinstance(cotacao_dict["timestamp"], datetime):
+            cotacao_dict["timestamp"] = cotacao_dict["timestamp"].isoformat()
 
         response = self.supabase.table(self.tabela).insert(cotacao_dict).execute()
 
@@ -90,10 +94,15 @@ class CotacoesService:
         Returns:
             List[CotacaoSnapshotSchema]: Lista de cotações inseridas
         """
-        cotacoes_dict = [
-            cotacao.model_dump(exclude_none=True, exclude={"id"})
-            for cotacao in cotacoes
-        ]
+        cotacoes_dict = []
+        for cotacao in cotacoes:
+            cotacao_dict = cotacao.model_dump(exclude_none=True, exclude={"id"})
+            
+            # Converter datetime para ISO string
+            if "timestamp" in cotacao_dict and isinstance(cotacao_dict["timestamp"], datetime):
+                cotacao_dict["timestamp"] = cotacao_dict["timestamp"].isoformat()
+            
+            cotacoes_dict.append(cotacao_dict)
 
         if not cotacoes_dict:
             return []

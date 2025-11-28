@@ -46,7 +46,7 @@ class CotacaoSnapshotSchema(BaseModel):
     volume_medio: Optional[int] = None
 
     # Valores de Mercado
-    market_cap: Optional[int] = None
+    market_cap: Optional[float] = None  # Mudado para float pois API retorna decimais
 
     # Faixas de Preço
     preco_maximo_52_semanas: Optional[float] = None
