@@ -3,6 +3,7 @@ Job para atualizar snapshots de cotações em tempo real.
 Deve ser executado a cada 5 minutos (ou outra frequência configurada).
 """
 import logging
+import time
 
 from app.services.sync_yfinance import YFinanceSync
 from app.services.cotacoes_service import CotacoesService
@@ -43,6 +44,10 @@ def main():
             )
         else:
             logger.warning(f"  ✗ Não foi possível obter cotação de {acao.ticker}")
+
+        # Delay para evitar rate limiting do Yahoo Finance (429 Too Many Requests)
+        if i < len(acoes):
+            time.sleep(2)
 
     # Salvar no banco de dados
     if cotacoes_atualizadas:

@@ -3,6 +3,7 @@ Job para atualizar fundamentos das ações.
 Deve ser executado 1x por semana.
 """
 import logging
+import time
 
 from app.services.sync_yfinance import YFinanceSync
 from app.services.fundamentos_service import FundamentosService
@@ -43,6 +44,10 @@ def main():
             )
         else:
             logger.warning(f"  ✗ Não foi possível obter fundamentos de {acao.ticker}")
+
+        # Delay para evitar rate limiting do Yahoo Finance (429 Too Many Requests)
+        if i < len(acoes):
+            time.sleep(2)
 
     # Salvar no banco de dados
     if fundamentos_atualizados:
