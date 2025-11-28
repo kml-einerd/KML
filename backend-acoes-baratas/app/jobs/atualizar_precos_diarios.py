@@ -4,6 +4,7 @@ Deve ser executado 1x por dia.
 Atualiza apenas os dias que ainda não existem no banco.
 """
 import logging
+import time
 from datetime import date, timedelta
 
 from app.services.sync_yfinance import YFinanceSync
@@ -51,6 +52,10 @@ def main():
             logger.info(f"  ✓ {acao.ticker} - {len(precos)} dias atualizados")
         else:
             logger.warning(f"  ✗ Não foi possível obter preços de {acao.ticker}")
+
+        # Delay para evitar rate limiting do Yahoo Finance (429 Too Many Requests)
+        if i < len(acoes):
+            time.sleep(2)
 
     logger.info(f"Total de preços inseridos/atualizados: {total_precos_inseridos}")
     logger.info("=== Atualização de preços diários concluída ===")

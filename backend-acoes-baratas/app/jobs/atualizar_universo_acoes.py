@@ -3,6 +3,7 @@ Job para atualizar o universo de ações da B3.
 Deve ser executado 1x por semana.
 """
 import logging
+import time
 
 from app.services.sync_yfinance import YFinanceSync
 from app.services.acoes_service import AcoesService
@@ -36,6 +37,10 @@ def main():
             logger.info(f"  ✓ {ticker} - {acao_info.nome_curto}")
         else:
             logger.warning(f"  ✗ Não foi possível obter dados de {ticker}")
+
+        # Delay para evitar rate limiting do Yahoo Finance (429 Too Many Requests)
+        if i < len(tickers):  # Não precisa delay após o último ticker
+            time.sleep(2)
 
     # Salvar no banco de dados
     if acoes_atualizadas:
