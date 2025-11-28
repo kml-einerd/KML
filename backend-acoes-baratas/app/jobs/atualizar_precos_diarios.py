@@ -3,14 +3,8 @@ Job para atualizar preços diários das ações.
 Deve ser executado 1x por dia.
 Atualiza apenas os dias que ainda não existem no banco.
 """
-import sys
-import os
-from dotenv import load_dotenv
 import logging
 from datetime import date, timedelta
-
-# Adicionar o diretório raiz ao path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 from app.services.sync_yfinance import YFinanceSync
 from app.services.precos_service import PrecosService
@@ -24,8 +18,6 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Atualiza preços diários de todas as ações ativas."""
-    load_dotenv()
-
     logger.info("=== Iniciando atualização de preços diários ===")
 
     # Inicializar serviços

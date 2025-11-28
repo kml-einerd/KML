@@ -2,13 +2,7 @@
 Job para atualizar fundamentos das ações.
 Deve ser executado 1x por semana.
 """
-import sys
-import os
-from dotenv import load_dotenv
 import logging
-
-# Adicionar o diretório raiz ao path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 from app.services.sync_yfinance import YFinanceSync
 from app.services.fundamentos_service import FundamentosService
@@ -22,8 +16,6 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Atualiza fundamentos de todas as ações ativas."""
-    load_dotenv()
-
     logger.info("=== Iniciando atualização de fundamentos ===")
 
     # Inicializar serviços
