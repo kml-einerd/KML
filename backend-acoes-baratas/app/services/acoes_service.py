@@ -7,6 +7,10 @@ from app.supabase_client import obter_cliente_supabase
 from app.models.schemas import AcaoSchema
 
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 class AcoesService:
     """Serviço para gerenciar ações."""
 
@@ -50,7 +54,7 @@ class AcoesService:
             return AcaoSchema(**response.data[0])
         return None
 
-    def inserir_ou_atualizar(self, acao: AcaoSchema) -> AcaoSchema:
+    def inserir_ou_atualizar(self, acao: AcaoSchema) -> Optional[AcaoSchema]:
         """
         Insere uma nova ação ou atualiza se já existe.
 
@@ -58,18 +62,27 @@ class AcoesService:
             acao: Dados da ação
 
         Returns:
-            AcaoSchema: Ação inserida/atualizada
+            AcaoSchema: Ação inserida/atualizada ou None em caso de erro
         """
-        acao_dict = acao.model_dump(exclude_none=True)
-        acao_dict["atualizado_em"] = datetime.utcnow().isoformat()
+        try:
+            acao_dict = acao.model_dump(exclude_none=True)
+            acao_dict["atualizado_em"] = datetime.utcnow().isoformat()
 
-        response = (
-            self.supabase.table(self.tabela)
-            .upsert(acao_dict, on_conflict="ticker")
-            .execute()
-        )
+            response = (
+                self.supabase.table(self.tabela)
+                .upsert(acao_dict, on_conflict="ticker")
+                .execute()
+            )
 
-        return AcaoSchema(**response.data[0])
+            if response.data:
+                return AcaoSchema(**response.data[0])
+            
+            logger.error(f"Erro ao salvar ação {acao.ticker}: Sem dados retornados. Response: {response}")
+            return None
+
+        except Exception as e:
+            logger.exception(f"Exceção ao salvar ação {acao.ticker}: {e}")
+            return None
 
     def inserir_varias(self, acoes: List[AcaoSchema]) -> List[AcaoSchema]:
         """
@@ -81,22 +94,34 @@ class AcoesService:
         Returns:
             List[AcaoSchema]: Lista de ações inseridas/atualizadas
         """
-        acoes_dict = []
-        for acao in acoes:
-            acao_dict = acao.model_dump(exclude_none=True)
-            acao_dict["atualizado_em"] = datetime.utcnow().isoformat()
-            acoes_dict.append(acao_dict)
-
-        if not acoes_dict:
+        if not acoes:
             return []
 
-        response = (
-            self.supabase.table(self.tabela)
-            .upsert(acoes_dict, on_conflict="ticker")
-            .execute()
-        )
+        try:
+            acoes_dict = []
+            for acao in acoes:
+                acao_dict = acao.model_dump(exclude_none=True)
+                acao_dict["atualizado_em"] = datetime.utcnow().isoformat()
+                acoes_dict.append(acao_dict)
 
-        return [AcaoSchema(**acao) for acao in response.data]
+            logger.info(f"Tentando inserir/atualizar {len(acoes_dict)} registros na tabela '{self.tabela}'...")
+            
+            response = (
+                self.supabase.table(self.tabela)
+                .upsert(acoes_dict, on_conflict="ticker")
+                .execute()
+            )
+
+            if response.data:
+                logger.info(f"Sucesso! {len(response.data)} registros processados.")
+                return [AcaoSchema(**acao) for acao in response.data]
+            
+            logger.error(f"Erro ao salvar em lote: Sem dados retornados. Response: {response}")
+            return []
+
+        except Exception as e:
+            logger.exception(f"Exceção ao salvar em lote na tabela '{self.tabela}': {e}")
+            return []
 
     def desativar(self, ticker: str) -> bool:
         """

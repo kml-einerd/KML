@@ -65,11 +65,15 @@ class BrapiSync:
         data = self._fazer_requisicao("/quote/list")
 
         if not data or "stocks" not in data:
-            logger.error("Não foi possível obter lista de tickers")
+            logger.error(f"Não foi possível obter lista de tickers. Resposta da API: {data}")
             return []
 
         tickers = [stock for stock in data["stocks"] if stock]
         logger.info(f"Total de tickers disponíveis: {len(tickers)}")
+        
+        # Logar primeiros 5 tickers para debug
+        if tickers:
+            logger.debug(f"Exemplos de tickers: {tickers[:5]}")
 
         return tickers
 
@@ -88,11 +92,14 @@ class BrapiSync:
         data = self._fazer_requisicao(f"/quote/{ticker}", params={"modules": "summaryProfile"})
 
         if not data or "results" not in data or not data["results"]:
-            logger.warning(f"Nenhum dado retornado para {ticker}")
+            logger.warning(f"Nenhum dado retornado para {ticker}. Resposta: {data}")
             return None
 
         try:
             result = data["results"][0]
+            
+            # Logar dados brutos para debug se necessário
+            # logger.debug(f"Dados brutos de {ticker}: {result}")
 
             return AcaoSchema(
                 ticker=ticker,

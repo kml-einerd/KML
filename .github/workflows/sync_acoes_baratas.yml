@@ -30,6 +30,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Debug Environment Variables
+        run: |
+          echo "Checking environment variables..."
+          if [ -n "$SUPABASE_URL" ]; then echo "SUPABASE_URL is set"; else echo "SUPABASE_URL is NOT set"; fi
+          if [ -n "$SUPABASE_SERVICE_KEY" ]; then echo "SUPABASE_SERVICE_KEY is set"; else echo "SUPABASE_SERVICE_KEY is NOT set"; fi
+          if [ -n "$BRAPI_API_KEY" ]; then echo "BRAPI_API_KEY is set"; else echo "BRAPI_API_KEY is NOT set"; fi
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BRAPI_API_KEY: ${{ secrets.BRAPI_API_KEY }}
+
       - name: Rodar job de universo de ações
         working-directory: backend-acoes-baratas
         env:
