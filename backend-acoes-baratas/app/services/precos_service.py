@@ -5,7 +5,7 @@ from typing import List, Optional
 from datetime import date, datetime, timedelta
 from app.supabase_client import obter_cliente_supabase
 from app.models.schemas import PrecoDiarioSchema
-import numpy as np
+import math
 
 
 class PrecosService:
@@ -190,7 +190,12 @@ class PrecosService:
             retornos_diarios.append(retorno)
 
         # Volatilidade (desvio padrão dos retornos diários)
-        volatilidade = float(np.std(retornos_diarios)) if retornos_diarios else None
+        if retornos_diarios:
+            media = sum(retornos_diarios) / len(retornos_diarios)
+            variancia = sum((x - media) ** 2 for x in retornos_diarios) / len(retornos_diarios)
+            volatilidade = math.sqrt(variancia)
+        else:
+            volatilidade = None
 
         return {
             "retorno_periodo": round(retorno_periodo, 2),

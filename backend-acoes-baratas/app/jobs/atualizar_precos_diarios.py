@@ -2,14 +2,16 @@
 Job para atualizar preços diários das ações.
 Deve ser executado 1x por dia.
 Atualiza apenas os dias que ainda não existem no banco.
+Atualizado para usar brapi.dev API.
 """
 import logging
 import time
 from datetime import date, timedelta
 
-from app.services.sync_yfinance import YFinanceSync
+from app.services.sync_brapi import BrapiSync
 from app.services.precos_service import PrecosService
 from app.services.acoes_service import AcoesService
+from app.config import obter_configuracoes
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -18,11 +20,14 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    """Atualiza preços diários de todas as ações ativas."""
-    logger.info("=== Iniciando atualização de preços diários ===")
+    """Atualiza preços diários de todas as ações ativas usando brapi.dev."""
+    logger.info("=== Iniciando atualização de preços diários (brapi.dev) ===")
+
+    # Obter configurações
+    config = obter_configuracoes()
 
     # Inicializar serviços
-    yf_sync = YFinanceSync()
+    brapi_sync = BrapiSync(api_key=config.brapi_api_key)
     precos_service = PrecosService()
     acoes_service = AcoesService()
 
@@ -43,7 +48,7 @@ def main():
         logger.info(f"[{i}/{len(acoes)}] Processando {acao.ticker}...")
 
         # Buscar histórico
-        precos = yf_sync.obter_historico_precos(acao.ticker, data_inicio, data_fim)
+        precos = brapi_sync.obter_historico_precos(acao.ticker, data_inicio, data_fim)
 
         if precos:
             # Salvar no banco (upsert para não duplicar)
@@ -53,9 +58,9 @@ def main():
         else:
             logger.warning(f"  ✗ Não foi possível obter preços de {acao.ticker}")
 
-        # Delay para evitar rate limiting do Yahoo Finance (429 Too Many Requests)
+        # Delay para respeitar rate limit
         if i < len(acoes):
-            time.sleep(2)
+            time.sleep(0.5)
 
     logger.info(f"Total de preços inseridos/atualizados: {total_precos_inseridos}")
     logger.info("=== Atualização de preços diários concluída ===")
