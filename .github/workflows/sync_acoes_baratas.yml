@@ -35,6 +35,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BRAPI_API_KEY: ${{ secrets.BRAPI_API_KEY }}
         run: |
           python -m app.jobs.atualizar_universo_acoes
 
@@ -63,6 +64,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BRAPI_API_KEY: ${{ secrets.BRAPI_API_KEY }}
         run: |
           python -m app.jobs.atualizar_fundamentos
 
@@ -90,6 +92,7 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BRAPI_API_KEY: ${{ secrets.BRAPI_API_KEY }}
         run: |
           python -m app.jobs.atualizar_precos_diarios
 
@@ -117,5 +120,6 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BRAPI_API_KEY: ${{ secrets.BRAPI_API_KEY }}
         run: |
           python -m app.jobs.atualizar_cotacoes_snapshot

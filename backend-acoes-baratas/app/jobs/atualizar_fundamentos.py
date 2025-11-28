@@ -1,13 +1,15 @@
 """
 Job para atualizar fundamentos das ações.
 Deve ser executado 1x por semana.
+Atualizado para usar brapi.dev API.
 """
 import logging
 import time
 
-from app.services.sync_yfinance import YFinanceSync
+from app.services.sync_brapi import BrapiSync
 from app.services.fundamentos_service import FundamentosService
 from app.services.acoes_service import AcoesService
+from app.config import obter_configuracoes
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
@@ -16,11 +18,14 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    """Atualiza fundamentos de todas as ações ativas."""
-    logger.info("=== Iniciando atualização de fundamentos ===")
+    """Atualiza fundamentos de todas as ações ativas usando brapi.dev."""
+    logger.info("=== Iniciando atualização de fundamentos (brapi.dev) ===")
+
+    # Obter configurações
+    config = obter_configuracoes()
 
     # Inicializar serviços
-    yf_sync = YFinanceSync()
+    brapi_sync = BrapiSync(api_key=config.brapi_api_key)
     fundamentos_service = FundamentosService()
     acoes_service = AcoesService()
 
@@ -33,7 +38,7 @@ def main():
     for i, acao in enumerate(acoes, 1):
         logger.info(f"[{i}/{len(acoes)}] Processando {acao.ticker}...")
 
-        fundamentos = yf_sync.obter_fundamentos(acao.ticker)
+        fundamentos = brapi_sync.obter_fundamentos(acao.ticker)
         if fundamentos:
             # Calcular scores
             fundamentos = fundamentos_service.calcular_scores(fundamentos)
@@ -45,9 +50,9 @@ def main():
         else:
             logger.warning(f"  ✗ Não foi possível obter fundamentos de {acao.ticker}")
 
-        # Delay para evitar rate limiting do Yahoo Finance (429 Too Many Requests)
+        # Delay para respeitar rate limit
         if i < len(acoes):
-            time.sleep(2)
+            time.sleep(0.5)
 
     # Salvar no banco de dados
     if fundamentos_atualizados:
