@@ -80,6 +80,13 @@ class CotacoesService:
         if "timestamp" in cotacao_dict and isinstance(cotacao_dict["timestamp"], datetime):
             cotacao_dict["timestamp"] = cotacao_dict["timestamp"].isoformat()
 
+        # Converter campos BIGINT que podem vir como float da API
+        if "volume" in cotacao_dict and cotacao_dict["volume"] is not None:
+            cotacao_dict["volume"] = int(cotacao_dict["volume"])
+            
+        if "market_cap" in cotacao_dict and cotacao_dict["market_cap"] is not None:
+            cotacao_dict["market_cap"] = int(cotacao_dict["market_cap"])
+
         response = self.supabase.table(self.tabela).insert(cotacao_dict).execute()
 
         return CotacaoSnapshotSchema(**response.data[0])
@@ -101,6 +108,13 @@ class CotacoesService:
             # Converter datetime para ISO string
             if "timestamp" in cotacao_dict and isinstance(cotacao_dict["timestamp"], datetime):
                 cotacao_dict["timestamp"] = cotacao_dict["timestamp"].isoformat()
+
+            # Converter campos BIGINT que podem vir como float da API
+            if "volume" in cotacao_dict and cotacao_dict["volume"] is not None:
+                cotacao_dict["volume"] = int(cotacao_dict["volume"])
+                
+            if "market_cap" in cotacao_dict and cotacao_dict["market_cap"] is not None:
+                cotacao_dict["market_cap"] = int(cotacao_dict["market_cap"])
             
             cotacoes_dict.append(cotacao_dict)
 
