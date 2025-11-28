@@ -140,13 +140,15 @@ class FundamentosService:
         pontos = []
 
         # P/L Trailing (quanto menor, melhor)
-        if fundamentos.pl_trailing and 0 < fundamentos.pl_trailing < 30:
+        # Atualizado: pl_trailing -> preco_sobre_lucro
+        if fundamentos.preco_sobre_lucro and 0 < fundamentos.preco_sobre_lucro < 30:
             # Score inverso: P/L de 5 = score alto, P/L de 30 = score baixo
-            pontos.append(max(0, 100 - (fundamentos.pl_trailing / 30) * 100))
+            pontos.append(max(0, 100 - (fundamentos.preco_sobre_lucro / 30) * 100))
 
         # P/VP (quanto menor, melhor)
-        if fundamentos.preco_valor_patrimonial and fundamentos.preco_valor_patrimonial > 0:
-            pvp = fundamentos.preco_valor_patrimonial
+        # Atualizado: preco_valor_patrimonial -> preco_sobre_valor_patrimonial
+        if fundamentos.preco_sobre_valor_patrimonial and fundamentos.preco_sobre_valor_patrimonial > 0:
+            pvp = fundamentos.preco_sobre_valor_patrimonial
             if pvp < 3:
                 pontos.append(max(0, 100 - (pvp / 3) * 100))
 
@@ -169,19 +171,12 @@ class FundamentosService:
             pontos.append(min(100, (fundamentos.roe * 100) / 20))
 
         # Margem Líquida
-        if fundamentos.margem_liquida and fundamentos.margem_liquida > 0:
+        # Atualizado: margem_liquida -> margem_lucro
+        if fundamentos.margem_lucro and fundamentos.margem_lucro > 0:
             # Margem de 20% = score 100
-            pontos.append(min(100, (fundamentos.margem_liquida * 100) / 20))
+            pontos.append(min(100, (fundamentos.margem_lucro * 100) / 20))
 
-        # Liquidez Corrente (ideal próximo de 1.5-2.0)
-        if fundamentos.liquidez_corrente and fundamentos.liquidez_corrente > 0:
-            lc = fundamentos.liquidez_corrente
-            if 1.0 <= lc <= 3.0:
-                # Ideal em 1.5-2.0
-                if 1.5 <= lc <= 2.0:
-                    pontos.append(100)
-                else:
-                    pontos.append(50)
+        # Liquidez Corrente removida pois não existe no schema atual
 
         return round(sum(pontos) / len(pontos), 2) if pontos else None
 
@@ -192,8 +187,9 @@ class FundamentosService:
         pontos = []
 
         # Crescimento de Receita
-        if fundamentos.crescimento_receita_12m:
-            crescimento = fundamentos.crescimento_receita_12m * 100
+        # Atualizado: crescimento_receita_12m -> crescimento_receita
+        if fundamentos.crescimento_receita:
+            crescimento = fundamentos.crescimento_receita * 100
             if crescimento > 0:
                 # Crescimento de 20% = score 100
                 pontos.append(min(100, (crescimento / 20) * 100))
@@ -201,8 +197,9 @@ class FundamentosService:
                 pontos.append(0)
 
         # Crescimento de Lucro
-        if fundamentos.crescimento_lucro_12m:
-            crescimento = fundamentos.crescimento_lucro_12m * 100
+        # Atualizado: crescimento_lucro_12m -> crescimento_lucro
+        if fundamentos.crescimento_lucro:
+            crescimento = fundamentos.crescimento_lucro * 100
             if crescimento > 0:
                 # Crescimento de 20% = score 100
                 pontos.append(min(100, (crescimento / 20) * 100))
