@@ -3,7 +3,7 @@ Configurações da aplicação.
 Lê variáveis de ambiente necessárias para funcionamento do backend.
 """
 import os
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
 
 
@@ -22,9 +22,12 @@ class Configuracoes(BaseSettings):
     # Ambiente
     environment: str = "development"
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore"
+    )
 
 
 @lru_cache()

@@ -2,13 +2,7 @@
 Job para atualizar snapshots de cotações em tempo real.
 Deve ser executado a cada 5 minutos (ou outra frequência configurada).
 """
-import sys
-import os
-from dotenv import load_dotenv
 import logging
-
-# Adicionar o diretório raiz ao path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
 from app.services.sync_yfinance import YFinanceSync
 from app.services.cotacoes_service import CotacoesService
@@ -22,8 +16,6 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Atualiza snapshots de cotações de todas as ações ativas."""
-    load_dotenv()
-
     logger.info("=== Iniciando atualização de cotações (snapshot) ===")
 
     # Inicializar serviços
