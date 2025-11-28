@@ -68,7 +68,16 @@ class BrapiSync:
             logger.error(f"Não foi possível obter lista de tickers. Resposta da API: {data}")
             return []
 
-        tickers = [stock for stock in data["stocks"] if stock]
+        tickers = []
+        for item in data["stocks"]:
+            if isinstance(item, dict):
+                ticker = item.get("stock")
+            else:
+                ticker = str(item)
+            
+            if ticker:
+                tickers.append(ticker)
+
         logger.info(f"Total de tickers disponíveis: {len(tickers)}")
         
         # Logar primeiros 5 tickers para debug
