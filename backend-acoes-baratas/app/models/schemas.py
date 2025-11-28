@@ -4,7 +4,7 @@ Atualizado para formato brapi.dev API.
 """
 from datetime import datetime, date
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from decimal import Decimal
 
 
@@ -85,6 +85,14 @@ class FundamentosSnapshotSchema(BaseModel):
     # Dados Fundamentalistas
     valor_mercado: Optional[int] = None
     valor_empresa: Optional[int] = None
+
+    @field_validator('valor_mercado', 'valor_empresa', 'receita_total', 'lucro_bruto', 'lucro_liquido', 'ebitda', 'acoes_em_circulacao', mode='before')
+    @classmethod
+    def convert_float_to_int(cls, v):
+        """Converte floats para int, arredondando se necessário."""
+        if v is not None and isinstance(v, float):
+            return int(round(v))
+        return v
 
     # Múltiplos de Mercado
     preco_sobre_lucro: Optional[float] = None  # P/L

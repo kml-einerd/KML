@@ -12,7 +12,7 @@ class FundamentosService:
 
     def __init__(self):
         self.supabase = obter_cliente_supabase()
-        self.tabela = "fundamentos_snapshot"
+        self.tabela = "fundamentos"
 
     def obter_ultimo_por_ticker(
         self, ticker: str
@@ -30,7 +30,7 @@ class FundamentosService:
             self.supabase.table(self.tabela)
             .select("*")
             .eq("ticker", ticker)
-            .order("coletado_em", desc=True)
+            .order("created_at", desc=True)
             .limit(1)
             .execute()
         )
@@ -49,7 +49,7 @@ class FundamentosService:
         response = (
             self.supabase.table(self.tabela)
             .select("*")
-            .order("ticker,coletado_em", desc=True)
+            .order("ticker,created_at", desc=True)
             .execute()
         )
 
