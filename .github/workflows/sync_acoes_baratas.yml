@@ -1,0 +1,150 @@
+name: Sincronização Ações Baratas B3
+
+on:
+  # Permitir execução manual
+  workflow_dispatch:
+
+  # Agendamentos
+  schedule:
+    # Semanal: Domingo às 02:00 UTC (universo de ações e fundamentos)
+    - cron: '0 2 * * 0'
+
+    # Diário: Todo dia às 03:00 UTC (preços diários)
+    - cron: '0 3 * * *'
+
+    # A cada 5 minutos durante horário de pregão (10:00-17:00 UTC = 07:00-14:00 BRT)
+    # Executar apenas em dias úteis (Segunda a Sexta)
+    - cron: '*/5 10-17 * * 1-5'
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # Job 1: Atualizar Universo de Ações (Semanal)
+  atualizar-universo:
+    name: Atualizar Universo de Ações
+    runs-on: ubuntu-latest
+    # Executar apenas no agendamento de domingo
+    if: github.event.schedule == '0 2 * * 0' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'backend-acoes-baratas/requirements.txt'
+
+      - name: Instalar dependências
+        run: |
+          cd backend-acoes-baratas
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Executar atualização do universo de ações
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd backend-acoes-baratas
+          python -m app.jobs.atualizar_universo_acoes
+
+  # Job 2: Atualizar Fundamentos (Semanal)
+  atualizar-fundamentos:
+    name: Atualizar Fundamentos
+    runs-on: ubuntu-latest
+    needs: atualizar-universo
+    # Executar apenas no agendamento de domingo
+    if: github.event.schedule == '0 2 * * 0' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'backend-acoes-baratas/requirements.txt'
+
+      - name: Instalar dependências
+        run: |
+          cd backend-acoes-baratas
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Executar atualização de fundamentos
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd backend-acoes-baratas
+          python -m app.jobs.atualizar_fundamentos
+
+  # Job 3: Atualizar Preços Diários (Diário)
+  atualizar-precos-diarios:
+    name: Atualizar Preços Diários
+    runs-on: ubuntu-latest
+    # Executar no agendamento diário ou manual
+    if: github.event.schedule == '0 3 * * *' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'backend-acoes-baratas/requirements.txt'
+
+      - name: Instalar dependências
+        run: |
+          cd backend-acoes-baratas
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Executar atualização de preços diários
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd backend-acoes-baratas
+          python -m app.jobs.atualizar_precos_diarios
+
+  # Job 4: Atualizar Cotações Snapshot (A cada 5 minutos)
+  atualizar-cotacoes:
+    name: Atualizar Cotações (Tempo Real)
+    runs-on: ubuntu-latest
+    # Executar a cada 5 minutos ou manual
+    if: github.event.schedule == '*/5 10-17 * * 1-5' || github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'backend-acoes-baratas/requirements.txt'
+
+      - name: Instalar dependências
+        run: |
+          cd backend-acoes-baratas
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Executar atualização de cotações
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          cd backend-acoes-baratas
+          python -m app.jobs.atualizar_cotacoes_snapshot
