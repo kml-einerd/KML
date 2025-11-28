@@ -75,6 +75,10 @@ class FundamentosService:
             FundamentosSnapshotSchema: Fundamentos inseridos
         """
         fundamentos_dict = fundamentos.model_dump(exclude_none=True, exclude={"id"})
+        
+        # Converter date para ISO string
+        if "data_referencia" in fundamentos_dict and hasattr(fundamentos_dict["data_referencia"], "isoformat"):
+            fundamentos_dict["data_referencia"] = fundamentos_dict["data_referencia"].isoformat()
 
         response = self.supabase.table(self.tabela).insert(fundamentos_dict).execute()
 
@@ -92,9 +96,15 @@ class FundamentosService:
         Returns:
             List[FundamentosSnapshotSchema]: Lista de fundamentos inseridos
         """
-        fundamentos_dict = [
-            f.model_dump(exclude_none=True, exclude={"id"}) for f in fundamentos_lista
-        ]
+        fundamentos_dict = []
+        for f in fundamentos_lista:
+            f_dict = f.model_dump(exclude_none=True, exclude={"id"})
+            
+            # Converter date para ISO string
+            if "data_referencia" in f_dict and hasattr(f_dict["data_referencia"], "isoformat"):
+                f_dict["data_referencia"] = f_dict["data_referencia"].isoformat()
+            
+            fundamentos_dict.append(f_dict)
 
         if not fundamentos_dict:
             return []
