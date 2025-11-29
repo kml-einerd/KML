@@ -176,6 +176,56 @@ class AcaoDetalhadaResponse(BaseModel):
     score_geral: Optional[float] = None
 
 
+class AcaoInfoSchema(BaseModel):
+    """Modelo para a tabela 'acoes_info' - Informações extras das empresas via yfinance."""
+
+    id: Optional[int] = None
+    ticker: str  # Referência ao ticker da tabela acoes
+    symbol: Optional[str] = None  # Symbol usado no yfinance
+
+    # Informações Básicas da Empresa
+    nome_longo: Optional[str] = None
+    nome_curto: Optional[str] = None
+    descricao: Optional[str] = None
+
+    # Localização e Contato
+    pais: Optional[str] = None
+    estado: Optional[str] = None
+    cidade: Optional[str] = None
+    endereco: Optional[str] = None
+    cep: Optional[str] = None
+    telefone: Optional[str] = None
+    website: Optional[str] = None
+
+    # Classificação
+    setor: Optional[str] = None
+    industria: Optional[str] = None
+    industria_chave: Optional[str] = None
+
+    # Informações Corporativas
+    numero_funcionarios: Optional[int] = None
+
+    # Informações de Mercado (fixas)
+    moeda: Optional[str] = None
+    exchange: Optional[str] = None
+    tipo_ativo: Optional[str] = None
+
+    # Informações Fiscais
+    ano_fiscal_termina: Optional[str] = None
+    proximo_ano_fiscal: Optional[str] = None
+
+    # Governança
+    auditoria_risco: Optional[int] = None
+    conselho_risco: Optional[int] = None
+    compensacao_risco: Optional[int] = None
+    shareholders_risco: Optional[int] = None
+    risco_geral: Optional[int] = None
+
+    # Timestamps
+    created_at: Optional[datetime] = None
+    atualizado_em: Optional[datetime] = None
+
+
 class HealthResponse(BaseModel):
     """Resposta para o endpoint /health."""
 

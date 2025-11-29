@@ -10,6 +10,9 @@ supabase>=2.9.0
 # HTTP Client (para brapi.dev)
 httpx>=0.27.0
 
+# Yahoo Finance (para informações extras das empresas)
+yfinance>=0.2.36
+
 # Utilitários
 python-dotenv==1.0.0
 
