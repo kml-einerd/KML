@@ -44,14 +44,14 @@ async function renderCompactGrid() {
     });
 }
 
-// Load individual compact widget
+// Load individual compact widget - Ticker format (more compact, shows numbers clearly)
 function loadCompactWidget(wrapper, ticker) {
     return new Promise((resolve, reject) => {
         try {
             // Clear loading placeholder
             wrapper.innerHTML = '';
 
-            // Create TradingView Single Quote widget
+            // Create TradingView Ticker widget (horizontal compact format)
             const widgetContainer = document.createElement('div');
             widgetContainer.className = 'tradingview-widget-container';
             widgetContainer.dataset.ticker = ticker;
@@ -60,16 +60,26 @@ function loadCompactWidget(wrapper, ticker) {
             widgetContainer.style.width = '100%';
             widgetContainer.style.height = '100%';
 
+            const widgetDiv = document.createElement('div');
+            widgetDiv.className = 'tradingview-widget-container__widget';
+            widgetContainer.appendChild(widgetDiv);
+
             const script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-tickers.js';
             script.async = true;
             script.innerHTML = JSON.stringify({
-                "symbol": `BMFBOVESPA:${ticker}`,
-                "width": "100%",
-                "locale": "br",
+                "symbols": [
+                    {
+                        "proName": `BMFBOVESPA:${ticker}`,
+                        "title": ticker
+                    }
+                ],
                 "colorTheme": "dark",
-                "isTransparent": true
+                "locale": "br",
+                "largeChartUrl": "",
+                "isTransparent": true,
+                "showSymbolLogo": true
             });
 
             script.onload = () => resolve();
@@ -102,7 +112,7 @@ function loadCompactWidget(wrapper, ticker) {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                console.log('✅ Compact widget clicked:', ticker);
+                console.log('✅ Compact ticker widget clicked:', ticker);
                 openStockModal(ticker);
                 return false;
             }, { capture: true });
@@ -110,7 +120,7 @@ function loadCompactWidget(wrapper, ticker) {
             // Append overlay
             wrapper.appendChild(clickOverlay);
 
-            console.log(`🎯 Compact widget created for ${ticker}`);
+            console.log(`🎯 Compact ticker widget created for ${ticker}`);
 
         } catch (error) {
             console.error(`Exception loading compact widget for ${ticker}:`, error);
