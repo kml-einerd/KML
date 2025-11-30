@@ -77,13 +77,13 @@ body {
     gap: 15px;
 }
 
-/* Each row is a full TradingView widget */
+/* Each row is a Symbol Info widget (horizontal bar) */
 .stock-widget-row {
     width: 100%;
-    height: 180px;
+    min-height: 46px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -95,12 +95,12 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
     background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 1;
+    z-index: 10;
 }
 
 .stock-widget-row:hover::before {
@@ -114,16 +114,14 @@ body {
     box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
 }
 
-/* TradingView widget inside each row */
+/* TradingView Symbol Info widget inside each row */
 .stock-widget-item {
     width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    overflow: hidden;
+    min-height: 46px;
 }
 
 .stock-widget-item .tradingview-widget-container__widget {
-    height: 100% !important;
+    min-height: 46px !important;
 }
 
 /* Hide TradingView copyright in list items */
@@ -340,7 +338,7 @@ body {
     }
 
     .stock-widget-row {
-        height: 150px;
+        min-height: 46px;
     }
 
     .modal-container {

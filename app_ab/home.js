@@ -105,7 +105,7 @@ async function renderTradingViewWidget() {
 
 
 // ============================================================================
-// RENDER STOCK WIDGETS LIST (Creative Mask Solution)
+// RENDER STOCK WIDGETS LIST (Creative Photoshop-style Cut & Paste)
 // ============================================================================
 
 function renderStockCards() {
@@ -119,66 +119,31 @@ function renderStockCards() {
     // Clear container
     container.innerHTML = '';
 
-    // Create a widget for each stock (masked approach)
+    // Create Symbol Info widget for each stock (horizontal bars)
     stocks.forEach((stock, index) => {
         const widgetWrapper = document.createElement('div');
         widgetWrapper.className = 'stock-widget-row';
         widgetWrapper.onclick = () => openStockModal(stock.ticker);
 
-        // Create TradingView widget container
+        // Create TradingView Symbol Info widget (simple horizontal bar)
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container stock-widget-item';
-        widgetContainer.style.height = '100%';
-        widgetContainer.style.width = '100%';
 
         const widgetDiv = document.createElement('div');
         widgetDiv.className = 'tradingview-widget-container__widget';
-        widgetDiv.style.height = '100%';
-        widgetDiv.style.width = '100%';
-
         widgetContainer.appendChild(widgetDiv);
 
-        // Create script for Symbol Overview widget (single stock)
+        // Create script for Symbol Info widget (just the info bar, no chart)
         const script = document.createElement('script');
         script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
         script.async = true;
         script.innerHTML = JSON.stringify({
-            "symbols": [[stock.name, `BMFBOVESPA:${stock.ticker}|1D`]],
-            "chartOnly": false,
+            "symbol": `BMFBOVESPA:${stock.ticker}`,
             "width": "100%",
-            "height": "100%",
             "locale": "br",
             "colorTheme": "dark",
-            "autosize": true,
-            "showVolume": false,
-            "showMA": false,
-            "hideDateRanges": false,
-            "hideMarketStatus": false,
-            "hideSymbolLogo": false,
-            "scalePosition": "right",
-            "scaleMode": "Normal",
-            "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-            "fontSize": "10",
-            "noTimeScale": false,
-            "valuesTracking": "1",
-            "changeMode": "price-and-percent",
-            "chartType": "area",
-            "maLineColor": "#2962FF",
-            "maLineWidth": 1,
-            "maLength": 9,
-            "lineWidth": 2,
-            "lineType": 0,
-            "dateRanges": ["1d|1", "1m|30", "3m|60", "12m|1D", "all|1M"],
-            "upColor": "#22ab94",
-            "downColor": "#f7525f",
-            "borderUpColor": "#22ab94",
-            "borderDownColor": "#f7525f",
-            "wickUpColor": "#22ab94",
-            "wickDownColor": "#f7525f",
-            "isTransparent": true,
-            "backgroundColor": "rgba(0, 0, 0, 0)",
-            "largeChartUrl": ""
+            "isTransparent": true
         });
 
         widgetContainer.appendChild(script);
