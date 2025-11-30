@@ -13,77 +13,110 @@ let maxSimultaneousWidgets = 2; // Max widgets loading at once
 // RENDER TRADINGVIEW MARKET OVERVIEW WIDGET
 // ============================================================================
 
-async function renderTradingViewWidget() {
-    const container = document.getElementById('stockGrid');
-
+// Render compact grid - Market Overview style with individual clickable widgets
+async function renderCompactGrid() {
+    const container = document.getElementById('compactGrid');
     if (!container) return;
 
-    // Show loading state
-    container.innerHTML = '<div class="loading-state">Carregando mercado...</div>';
+    // Clear container
+    container.innerHTML = '';
 
-    try {
-        // Clear loading state
-        container.innerHTML = '';
+    // Create compact widget for each stock (all load immediately)
+    stocks.forEach((stock, index) => {
+        const widgetWrapper = document.createElement('div');
+        widgetWrapper.className = 'compact-widget-item';
+        widgetWrapper.dataset.ticker = stock.ticker;
 
-        // Create Widget Container
-        const widgetContainer = document.createElement('div');
-        widgetContainer.className = 'tradingview-widget-container market-overview-widget';
-        widgetContainer.id = 'market-overview-widget';
+        // Add loading placeholder
+        widgetWrapper.innerHTML = `
+            <div class="widget-loading">
+                <span class="loading-ticker">${stock.ticker}</span>
+                <span class="loading-spinner">...</span>
+            </div>
+        `;
 
-        const widgetDiv = document.createElement('div');
-        widgetDiv.className = 'tradingview-widget-container__widget';
-        widgetContainer.appendChild(widgetDiv);
+        container.appendChild(widgetWrapper);
 
-        const copyrightDiv = document.createElement('div');
-        copyrightDiv.className = 'tradingview-widget-copyright';
-        copyrightDiv.innerHTML = '<a href="https://br.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Acompanhe tudo no TradingView</span></a>';
-        widgetContainer.appendChild(copyrightDiv);
+        // Load widget with small delay for stagger effect
+        setTimeout(() => {
+            loadCompactWidget(widgetWrapper, stock.ticker);
+        }, index * 100); // 100ms delay between each
+    });
+}
 
-        container.appendChild(widgetContainer);
+// Load individual compact widget
+function loadCompactWidget(wrapper, ticker) {
+    return new Promise((resolve, reject) => {
+        try {
+            // Clear loading placeholder
+            wrapper.innerHTML = '';
 
-        // Map stocks to TradingView format
-        const symbols = stocks.map(stock => ({
-            "s": `BMFBOVESPA:${stock.ticker}`,
-            "d": stock.name
-        }));
+            // Create TradingView Single Quote widget
+            const widgetContainer = document.createElement('div');
+            widgetContainer.className = 'tradingview-widget-container';
+            widgetContainer.dataset.ticker = ticker;
+            widgetContainer.style.position = 'relative';
+            widgetContainer.style.zIndex = '1';
+            widgetContainer.style.width = '100%';
+            widgetContainer.style.height = '100%';
 
-        // Create Script
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js';
-        script.async = true;
-        script.innerHTML = JSON.stringify({
-            "colorTheme": "dark",
-            "dateRange": "12M",
-            "showChart": true,
-            "locale": "br",
-            "largeChartUrl": "",
-            "isTransparent": true,
-            "showSymbolLogo": true,
-            "showFloatingTooltip": false,
-            "width": "100%",
-            "height": "600",
-            "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
-            "plotLineColorFalling": "rgba(41, 98, 255, 1)",
-            "gridLineColor": "rgba(240, 243, 250, 0)",
-            "scaleFontColor": "#DBDBDB",
-            "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
-            "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
-            "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
-            "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
-            "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
-            "tabs": [{
-                "title": "Ações B3",
-                "symbols": symbols
-            }]
-        });
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "symbol": `BMFBOVESPA:${ticker}`,
+                "width": "100%",
+                "locale": "br",
+                "colorTheme": "dark",
+                "isTransparent": true
+            });
 
-        widgetContainer.appendChild(script);
+            script.onload = () => resolve();
+            script.onerror = (error) => {
+                console.error(`Error loading compact widget for ${ticker}:`, error);
+                reject(error);
+            };
 
-    } catch (error) {
-        console.error('Error loading widget:', error);
-        container.innerHTML = '<div class="error-state">Erro ao carregar o mercado. Tente novamente.</div>';
-    }
+            widgetContainer.appendChild(script);
+            wrapper.appendChild(widgetContainer);
+
+            // Create click overlay
+            const clickOverlay = document.createElement('div');
+            clickOverlay.className = 'widget-click-overlay';
+            clickOverlay.dataset.ticker = ticker;
+
+            // Set styles immediately
+            clickOverlay.style.position = 'absolute';
+            clickOverlay.style.top = '0';
+            clickOverlay.style.left = '0';
+            clickOverlay.style.width = '100%';
+            clickOverlay.style.height = '100%';
+            clickOverlay.style.zIndex = '9999';
+            clickOverlay.style.cursor = 'pointer';
+            clickOverlay.style.pointerEvents = 'all';
+            clickOverlay.style.display = 'block';
+
+            // Add click event
+            clickOverlay.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                console.log('✅ Compact widget clicked:', ticker);
+                openStockModal(ticker);
+                return false;
+            }, { capture: true });
+
+            // Append overlay
+            wrapper.appendChild(clickOverlay);
+
+            console.log(`🎯 Compact widget created for ${ticker}`);
+
+        } catch (error) {
+            console.error(`Exception loading compact widget for ${ticker}:`, error);
+            reject(error);
+        }
+    });
 }
 
 // ============================================================================
@@ -398,8 +431,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         stocks = await fetchStocksFromDatabase();
 
         if (stocks && stocks.length > 0) {
-            // Render Market Overview widget
-            renderTradingViewWidget();
+            // Render compact grid with real TradingView data
+            renderCompactGrid();
 
             // Render stock cards with lazy loading
             renderStockCards();

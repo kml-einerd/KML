@@ -55,6 +55,63 @@ body {
     margin-bottom: 50px;
 }
 
+/* Compact Grid - Market Overview Style */
+.compact-widget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+/* Each compact widget item */
+.compact-widget-item {
+    width: 100%;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative !important;
+    isolation: isolate;
+}
+
+.compact-widget-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+}
+
+.compact-widget-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.compact-widget-item:hover::before {
+    opacity: 1;
+}
+
+/* Responsive - mobile */
+@media (max-width: 768px) {
+    .compact-widget-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .compact-widget-item {
+        height: 45px;
+    }
+}
+
 /* ============================================================================
    STOCK WIDGETS LIST SECTION (Masked Widgets)
    ============================================================================ */
