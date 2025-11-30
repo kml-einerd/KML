@@ -1,0 +1,32 @@
+# Sistema operacional
+.DS_Store
+*.DS_Store
+
+# Arquivos de dados CSV
+posição_fundos/database/cvm_souce/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Arquivos de ambiente
+.env
+*.env
+!.env.example
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
