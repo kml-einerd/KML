@@ -195,8 +195,8 @@ async function processLoadQueue() {
         await loadSymbolInfoWidget(item.wrapper, item.ticker);
         widgetsLoaded.add(item.ticker);
 
-        // Small delay before next widget (300ms)
-        await new Promise(resolve => setTimeout(resolve, 300));
+        // Small delay before next widget (200ms - lighter widget)
+        await new Promise(resolve => setTimeout(resolve, 200));
     }
 
     // Unlock
@@ -209,7 +209,7 @@ async function processLoadQueue() {
 }
 
 // ============================================================================
-// LOAD INDIVIDUAL SYMBOL INFO WIDGET (with Promise)
+// LOAD INDIVIDUAL SINGLE QUOTE WIDGET (Lightweight - with Promise)
 // ============================================================================
 
 function loadSymbolInfoWidget(wrapper, ticker) {
@@ -219,7 +219,7 @@ function loadSymbolInfoWidget(wrapper, ticker) {
             wrapper.innerHTML = '';
             wrapper.dataset.loaded = 'true';
 
-            // Create TradingView Symbol Info widget
+            // Create TradingView Single Quote widget (much lighter)
             const widgetContainer = document.createElement('div');
             widgetContainer.className = 'tradingview-widget-container stock-widget-item';
             widgetContainer.dataset.ticker = ticker; // Track ticker
@@ -241,7 +241,7 @@ function loadSymbolInfoWidget(wrapper, ticker) {
             const script = document.createElement('script');
             script.id = scriptId;
             script.type = 'text/javascript';
-            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js';
             script.async = true;
             script.innerHTML = JSON.stringify({
                 "symbol": `BMFBOVESPA:${ticker}`,
@@ -271,10 +271,10 @@ function loadSymbolInfoWidget(wrapper, ticker) {
             widgetContainer.appendChild(script);
             wrapper.appendChild(widgetContainer);
 
-            // Timeout fallback (5 seconds)
+            // Timeout fallback (3 seconds - faster for lightweight widget)
             setTimeout(() => {
                 resolve();
-            }, 5000);
+            }, 3000);
 
         } catch (error) {
             console.error(`Exception loading widget for ${ticker}:`, error);
