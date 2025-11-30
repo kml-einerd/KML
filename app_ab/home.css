@@ -129,6 +129,45 @@ body {
     display: none !important;
 }
 
+/* Loading placeholder */
+.widget-loading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    min-height: 46px;
+}
+
+.loading-ticker {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.loading-spinner {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Widget error state */
+.widget-error {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    min-height: 46px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
 /* ============================================================================
    TICKER TAPE WIDGET
    ============================================================================ */

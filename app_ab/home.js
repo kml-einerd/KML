@@ -1,29 +1,31 @@
 // ============================================================================
 // DATA FETCHING - Simulates fetching from external database
-// Data is now in data.js to simulate separation of concerns
 // ============================================================================
 
 let stocks = []; // Will be populated from database
+let widgetsLoaded = new Set(); // Track loaded widgets
+let isInitialized = false; // Prevent multiple initializations
 
 // ============================================================================
-// RENDER TRADINGVIEW WIDGET
+// RENDER TRADINGVIEW MARKET OVERVIEW WIDGET
 // ============================================================================
 
 async function renderTradingViewWidget() {
     const container = document.getElementById('stockGrid');
 
+    if (!container) return;
+
     // Show loading state
     container.innerHTML = '<div class="loading-state">Carregando mercado...</div>';
 
     try {
-        // Stocks are already loaded by the main initialization
-
         // Clear loading state
         container.innerHTML = '';
 
         // Create Widget Container
         const widgetContainer = document.createElement('div');
         widgetContainer.className = 'tradingview-widget-container market-overview-widget';
+        widgetContainer.id = 'market-overview-widget';
 
         const widgetDiv = document.createElement('div');
         widgetDiv.className = 'tradingview-widget-container__widget';
@@ -52,7 +54,7 @@ async function renderTradingViewWidget() {
             "dateRange": "12M",
             "showChart": true,
             "locale": "br",
-            "largeChartUrl": "", // Empty to prevent navigation
+            "largeChartUrl": "",
             "isTransparent": true,
             "showSymbolLogo": true,
             "showFloatingTooltip": false,
@@ -67,33 +69,13 @@ async function renderTradingViewWidget() {
             "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
             "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
             "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
-            "tabs": [
-                {
-                    "title": "Ações B3",
-                    "symbols": symbols
-                }
-            ]
+            "tabs": [{
+                "title": "Ações B3",
+                "symbols": symbols
+            }]
         });
 
         widgetContainer.appendChild(script);
-
-        // Intercept clicks on the widget to open modal instead of navigating
-        setTimeout(() => {
-            const widgetIframe = widgetContainer.querySelector('iframe');
-            if (widgetIframe) {
-                // Add click listener to widget container as a fallback
-                widgetContainer.addEventListener('click', (e) => {
-                    // Try to detect which stock was clicked by checking the current URL
-                    // This is a workaround since we can't access iframe content
-                    const target = e.target;
-                    if (target && target.closest('.tradingview-widget-container')) {
-                        // Check if there's a symbol in the current context
-                        // Note: This may not work perfectly due to iframe restrictions
-                        console.log('Widget clicked - attempting to detect symbol');
-                    }
-                });
-            }
-        }, 2000); // Wait for widget to load
 
     } catch (error) {
         console.error('Error loading widget:', error);
@@ -101,11 +83,8 @@ async function renderTradingViewWidget() {
     }
 }
 
-
-
-
 // ============================================================================
-// RENDER STOCK WIDGETS LIST (Creative Photoshop-style Cut & Paste)
+// RENDER STOCK CARDS WITH LAZY LOADING (Optimized)
 // ============================================================================
 
 function renderStockCards() {
@@ -119,39 +98,115 @@ function renderStockCards() {
     // Clear container
     container.innerHTML = '';
 
-    // Create Symbol Info widget for each stock (horizontal bars)
+    // Create placeholder rows for lazy loading
     stocks.forEach((stock, index) => {
         const widgetWrapper = document.createElement('div');
         widgetWrapper.className = 'stock-widget-row';
-        widgetWrapper.onclick = () => openStockModal(stock.ticker);
+        widgetWrapper.dataset.ticker = stock.ticker;
+        widgetWrapper.dataset.loaded = 'false';
 
-        // Create TradingView Symbol Info widget (simple horizontal bar)
-        const widgetContainer = document.createElement('div');
-        widgetContainer.className = 'tradingview-widget-container stock-widget-item';
-
-        const widgetDiv = document.createElement('div');
-        widgetDiv.className = 'tradingview-widget-container__widget';
-        widgetContainer.appendChild(widgetDiv);
-
-        // Create script for Symbol Info widget (just the info bar, no chart)
-        const script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
-        script.async = true;
-        script.innerHTML = JSON.stringify({
-            "symbol": `BMFBOVESPA:${stock.ticker}`,
-            "width": "100%",
-            "locale": "br",
-            "colorTheme": "dark",
-            "isTransparent": true
+        // Add click handler
+        widgetWrapper.addEventListener('click', () => {
+            openStockModal(stock.ticker);
         });
 
-        widgetContainer.appendChild(script);
-        widgetWrapper.appendChild(widgetContainer);
+        // Add loading placeholder
+        widgetWrapper.innerHTML = `
+            <div class="widget-loading">
+                <span class="loading-ticker">${stock.ticker}</span>
+                <span class="loading-spinner">Carregando...</span>
+            </div>
+        `;
+
         container.appendChild(widgetWrapper);
     });
+
+    // Initialize Intersection Observer for lazy loading
+    initLazyLoading();
 }
 
+// ============================================================================
+// LAZY LOADING WITH INTERSECTION OBSERVER
+// ============================================================================
+
+let observer = null;
+
+function initLazyLoading() {
+    // Clean up existing observer
+    if (observer) {
+        observer.disconnect();
+    }
+
+    const options = {
+        root: null,
+        rootMargin: '100px',
+        threshold: 0.1
+    };
+
+    observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const wrapper = entry.target;
+                const ticker = wrapper.dataset.ticker;
+                const isLoaded = wrapper.dataset.loaded === 'true';
+
+                if (!isLoaded && !widgetsLoaded.has(ticker)) {
+                    loadSymbolInfoWidget(wrapper, ticker);
+                    widgetsLoaded.add(ticker);
+                    observer.unobserve(wrapper);
+                }
+            }
+        });
+    }, options);
+
+    // Observe all widget rows
+    const rows = document.querySelectorAll('.stock-widget-row');
+    rows.forEach(row => observer.observe(row));
+}
+
+// ============================================================================
+// LOAD INDIVIDUAL SYMBOL INFO WIDGET
+// ============================================================================
+
+function loadSymbolInfoWidget(wrapper, ticker) {
+    // Clear loading placeholder
+    wrapper.innerHTML = '';
+    wrapper.dataset.loaded = 'true';
+
+    // Create TradingView Symbol Info widget
+    const widgetContainer = document.createElement('div');
+    widgetContainer.className = 'tradingview-widget-container stock-widget-item';
+
+    const widgetDiv = document.createElement('div');
+    widgetDiv.className = 'tradingview-widget-container__widget';
+    widgetContainer.appendChild(widgetDiv);
+
+    // Create script
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+        "symbol": `BMFBOVESPA:${ticker}`,
+        "width": "100%",
+        "locale": "br",
+        "colorTheme": "dark",
+        "isTransparent": true
+    });
+
+    // Error handling
+    script.onerror = () => {
+        wrapper.innerHTML = `
+            <div class="widget-error">
+                <span>${ticker}</span>
+                <span style="color: #f7525f; font-size: 0.8rem;">Erro ao carregar</span>
+            </div>
+        `;
+    };
+
+    widgetContainer.appendChild(script);
+    wrapper.appendChild(widgetContainer);
+}
 
 // ============================================================================
 // MODAL MANAGEMENT
@@ -161,23 +216,26 @@ function openStockModal(ticker) {
     const modal = document.getElementById('stockModal');
     const iframe = document.getElementById('widgetFrame');
 
-    // Set iframe source with stock symbol parameter
-    // Ensure we strip any "BMFBOVESPA:" prefix if present in the ticker passed
+    if (!modal || !iframe) return;
+
+    // Clean ticker
     const cleanTicker = ticker.replace('BMFBOVESPA:', '');
     iframe.src = `index.html?symbol=${cleanTicker}`;
 
     // Show modal
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
     const modal = document.getElementById('stockModal');
     const iframe = document.getElementById('widgetFrame');
 
+    if (!modal || !iframe) return;
+
     // Hide modal
     modal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scroll
+    document.body.style.overflow = '';
 
     // Clear iframe after animation
     setTimeout(() => {
@@ -185,63 +243,91 @@ function closeModal() {
     }, 300);
 }
 
-// Close modal on ESC key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeModal();
+// ============================================================================
+// EVENT LISTENERS (with cleanup)
+// ============================================================================
+
+let escKeyHandler = null;
+
+function initEventListeners() {
+    // Remove existing listener if any
+    if (escKeyHandler) {
+        document.removeEventListener('keydown', escKeyHandler);
     }
-});
+
+    // Create new listener
+    escKeyHandler = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    };
+
+    document.addEventListener('keydown', escKeyHandler);
+}
 
 // ============================================================================
 // INITIALIZATION
 // ============================================================================
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // CHECK FOR URL PARAMETER FROM WIDGET CLICK (Run this immediately)
-    // The widget appends ?tvwidgetsymbol=BMFBOVESPA%3APETR4
+    // Prevent multiple initializations
+    if (isInitialized) return;
+    isInitialized = true;
+
+    // Check for URL parameter
     const urlParams = new URLSearchParams(window.location.search);
     const widgetSymbol = urlParams.get('tvwidgetsymbol');
 
     if (widgetSymbol) {
         console.log('Widget click detected:', widgetSymbol);
-
-        // Open the modal with this symbol
         openStockModal(widgetSymbol);
 
-        // Clean the URL (remove the ugly parameter) without reloading
+        // Clean URL
         const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
         window.history.replaceState({ path: newUrl }, '', newUrl);
     }
 
-    // Load data once
+    // Initialize event listeners
+    initEventListeners();
+
+    // Load data
     try {
         stocks = await fetchStocksFromDatabase();
 
-        // Render widgets and cards
-        renderTradingViewWidget();
-        renderStockCards();
+        if (stocks && stocks.length > 0) {
+            // Render Market Overview widget
+            renderTradingViewWidget();
+
+            // Render stock cards with lazy loading
+            renderStockCards();
+        } else {
+            console.error('No stocks data available');
+        }
 
     } catch (error) {
         console.error('Initialization error:', error);
+        const container = document.getElementById('stockCards');
+        if (container) {
+            container.innerHTML = '<div class="error-state">Erro ao carregar dados. Recarregue a página.</div>';
+        }
     }
 });
 
 // ============================================================================
-// FUTURE: SUPABASE INTEGRATION
+// CLEANUP ON PAGE UNLOAD
 // ============================================================================
 
-/*
-async function fetchStocksFromSupabase() {
-    const { data, error } = await supabase
-        .from('stocks')
-        .select('*')
-        .order('ticker', { ascending: true });
-
-    if (error) {
-        console.error('Error fetching stocks:', error);
-        return [];
+window.addEventListener('beforeunload', () => {
+    // Disconnect observer
+    if (observer) {
+        observer.disconnect();
     }
 
-    return data;
-}
-*/
+    // Clear loaded widgets set
+    widgetsLoaded.clear();
+
+    // Remove event listeners
+    if (escKeyHandler) {
+        document.removeEventListener('keydown', escKeyHandler);
+    }
+});
