@@ -116,18 +116,6 @@ function renderStockCards() {
             </div>
         `;
 
-        // Add click overlay (will be created after widget loads)
-        const clickOverlay = document.createElement('div');
-        clickOverlay.className = 'widget-click-overlay';
-        clickOverlay.dataset.ticker = stock.ticker;
-        clickOverlay.style.display = 'none'; // Hidden until widget loads
-        clickOverlay.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            openStockModal(stock.ticker);
-        });
-        widgetWrapper.appendChild(clickOverlay);
-
         container.appendChild(widgetWrapper);
     });
 
@@ -229,7 +217,9 @@ function loadSymbolInfoWidget(wrapper, ticker) {
             // Create TradingView Single Quote widget (much lighter)
             const widgetContainer = document.createElement('div');
             widgetContainer.className = 'tradingview-widget-container stock-widget-item';
-            widgetContainer.dataset.ticker = ticker; // Track ticker
+            widgetContainer.dataset.ticker = ticker;
+            widgetContainer.style.position = 'relative';
+            widgetContainer.style.zIndex = '1';
 
             const widgetDiv = document.createElement('div');
             widgetDiv.className = 'tradingview-widget-container__widget';
@@ -278,15 +268,38 @@ function loadSymbolInfoWidget(wrapper, ticker) {
             widgetContainer.appendChild(script);
             wrapper.appendChild(widgetContainer);
 
-            // Show click overlay after widget loads
-            setTimeout(() => {
-                const overlay = wrapper.querySelector('.widget-click-overlay');
-                if (overlay) {
-                    overlay.style.display = 'block';
-                }
-            }, 1500);
+            // Create click overlay AFTER widget (important for DOM stacking)
+            const clickOverlay = document.createElement('div');
+            clickOverlay.className = 'widget-click-overlay';
+            clickOverlay.dataset.ticker = ticker;
 
-            // Timeout fallback (3 seconds - faster for lightweight widget)
+            // Set styles immediately
+            clickOverlay.style.position = 'absolute';
+            clickOverlay.style.top = '0';
+            clickOverlay.style.left = '0';
+            clickOverlay.style.width = '100%';
+            clickOverlay.style.height = '100%';
+            clickOverlay.style.zIndex = '9999';
+            clickOverlay.style.cursor = 'pointer';
+            clickOverlay.style.pointerEvents = 'all';
+            clickOverlay.style.display = 'block';
+
+            // Add click event with capture phase
+            clickOverlay.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                console.log('✅ Overlay clicked for:', ticker);
+                openStockModal(ticker);
+                return false;
+            }, { capture: true });
+
+            // Append overlay as LAST child (renders on top)
+            wrapper.appendChild(clickOverlay);
+
+            console.log(`🎯 Overlay created for ${ticker} with z-index 9999`);
+
+            // Timeout fallback (3 seconds)
             setTimeout(() => {
                 resolve();
             }, 3000);
