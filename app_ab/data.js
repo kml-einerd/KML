@@ -111,6 +111,51 @@ const stocksDatabase = [
         sector: "Telecomunicações",
         volume: "8.9M",
         marketCap: "76.5B"
+    },
+    {
+        ticker: "COGN3",
+        name: "Cogna Educação ON",
+        price: 1.85,
+        change: -2.1,
+        sector: "Educação",
+        volume: "45.2M",
+        marketCap: "3.4B"
+    },
+    {
+        ticker: "USIM5",
+        name: "Usiminas PNA",
+        price: 4.58,
+        change: 1.8,
+        sector: "Siderurgia",
+        volume: "38.2M",
+        marketCap: "5.3B"
+    },
+    {
+        ticker: "BEEF3",
+        name: "Minerva ON",
+        price: 4.75,
+        change: 0.6,
+        sector: "Alimentos",
+        volume: "28.3M",
+        marketCap: "2.8B"
+    },
+    {
+        ticker: "GOAU4",
+        name: "Gerdau Metalúrgica PN",
+        price: 3.92,
+        change: -0.8,
+        sector: "Siderurgia",
+        volume: "22.5M",
+        marketCap: "4.7B"
+    },
+    {
+        ticker: "CMIN3",
+        name: "CSN Mineração ON",
+        price: 4.32,
+        change: -1.5,
+        sector: "Mineração",
+        volume: "52.4M",
+        marketCap: "6.1B"
     }
 ];
 
