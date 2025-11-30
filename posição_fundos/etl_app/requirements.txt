@@ -1,0 +1,33 @@
+# RADAR INSTITUCIONAL - ETL Dependencies
+
+# Core Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Supabase Client
+supabase==2.3.0
+postgrest-py==0.13.0
+
+# Environment & Configuration
+python-dotenv==1.0.0
+
+# Logging
+loguru==0.7.2
+
+# Terminal UI
+rich==13.7.0
+questionary==2.0.1
+
+# Encoding Detection
+chardet==5.2.0
+
+# Data Validation
+pydantic==2.5.3
+
+# Optional: APIs externas (comentadas para MVP básico)
+# yfinance==0.2.33
+# requests==2.31.0
+
+# Testing (comentado para produção)
+# pytest==7.4.3
+# pytest-cov==4.1.0
