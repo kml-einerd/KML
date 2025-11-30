@@ -105,7 +105,7 @@ async function renderTradingViewWidget() {
 
 
 // ============================================================================
-// RENDER STOCK CARDS (Interactive)
+// RENDER STOCK WIDGETS LIST (Creative Mask Solution)
 // ============================================================================
 
 function renderStockCards() {
@@ -119,44 +119,71 @@ function renderStockCards() {
     // Clear container
     container.innerHTML = '';
 
-    // Create cards for each stock
-    stocks.forEach(stock => {
-        const card = document.createElement('div');
-        card.className = 'stock-card';
-        card.onclick = () => openStockModal(stock.ticker);
+    // Create a widget for each stock (masked approach)
+    stocks.forEach((stock, index) => {
+        const widgetWrapper = document.createElement('div');
+        widgetWrapper.className = 'stock-widget-row';
+        widgetWrapper.onclick = () => openStockModal(stock.ticker);
 
-        const changeClass = stock.change >= 0 ? 'positive' : 'negative';
-        const changeIcon = stock.change >= 0 ? '▲' : '▼';
+        // Create TradingView widget container
+        const widgetContainer = document.createElement('div');
+        widgetContainer.className = 'tradingview-widget-container stock-widget-item';
+        widgetContainer.style.height = '100%';
+        widgetContainer.style.width = '100%';
 
-        card.innerHTML = `
-            <div class="stock-card-header">
-                <div class="stock-info">
-                    <div class="stock-ticker">${stock.ticker}</div>
-                    <div class="stock-name">${stock.name}</div>
-                </div>
-            </div>
+        const widgetDiv = document.createElement('div');
+        widgetDiv.className = 'tradingview-widget-container__widget';
+        widgetDiv.style.height = '100%';
+        widgetDiv.style.width = '100%';
 
-            <div class="stock-price">R$ ${stock.price.toFixed(2)}</div>
+        widgetContainer.appendChild(widgetDiv);
 
-            <span class="stock-change ${changeClass}">
-                ${changeIcon} ${Math.abs(stock.change)}%
-            </span>
+        // Create script for Symbol Overview widget (single stock)
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
+        script.async = true;
+        script.innerHTML = JSON.stringify({
+            "symbols": [[stock.name, `BMFBOVESPA:${stock.ticker}|1D`]],
+            "chartOnly": false,
+            "width": "100%",
+            "height": "100%",
+            "locale": "br",
+            "colorTheme": "dark",
+            "autosize": true,
+            "showVolume": false,
+            "showMA": false,
+            "hideDateRanges": false,
+            "hideMarketStatus": false,
+            "hideSymbolLogo": false,
+            "scalePosition": "right",
+            "scaleMode": "Normal",
+            "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+            "fontSize": "10",
+            "noTimeScale": false,
+            "valuesTracking": "1",
+            "changeMode": "price-and-percent",
+            "chartType": "area",
+            "maLineColor": "#2962FF",
+            "maLineWidth": 1,
+            "maLength": 9,
+            "lineWidth": 2,
+            "lineType": 0,
+            "dateRanges": ["1d|1", "1m|30", "3m|60", "12m|1D", "all|1M"],
+            "upColor": "#22ab94",
+            "downColor": "#f7525f",
+            "borderUpColor": "#22ab94",
+            "borderDownColor": "#f7525f",
+            "wickUpColor": "#22ab94",
+            "wickDownColor": "#f7525f",
+            "isTransparent": true,
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "largeChartUrl": ""
+        });
 
-            <div class="stock-meta">
-                <div class="stock-meta-item">
-                    <div class="meta-label">Volume</div>
-                    <div class="meta-value">${stock.volume}</div>
-                </div>
-                <div class="stock-meta-item">
-                    <div class="meta-label">Market Cap</div>
-                    <div class="meta-value">${stock.marketCap}</div>
-                </div>
-            </div>
-
-            <span class="stock-sector">${stock.sector}</span>
-        `;
-
-        container.appendChild(card);
+        widgetContainer.appendChild(script);
+        widgetWrapper.appendChild(widgetContainer);
+        container.appendChild(widgetWrapper);
     });
 }
 
