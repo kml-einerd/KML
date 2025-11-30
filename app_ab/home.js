@@ -5,6 +5,9 @@
 let stocks = []; // Will be populated from database
 let widgetsLoaded = new Set(); // Track loaded widgets
 let isInitialized = false; // Prevent multiple initializations
+let loadingQueue = []; // Queue for widgets to load
+let isLoadingWidget = false; // Loading lock
+let maxSimultaneousWidgets = 2; // Max widgets loading at once
 
 // ============================================================================
 // RENDER TRADINGVIEW MARKET OVERVIEW WIDGET
@@ -126,7 +129,7 @@ function renderStockCards() {
 }
 
 // ============================================================================
-// LAZY LOADING WITH INTERSECTION OBSERVER
+// LAZY LOADING WITH INTERSECTION OBSERVER (Optimized with Queue)
 // ============================================================================
 
 let observer = null;
@@ -139,7 +142,7 @@ function initLazyLoading() {
 
     const options = {
         root: null,
-        rootMargin: '100px',
+        rootMargin: '50px', // Reduced from 100px
         threshold: 0.1
     };
 
@@ -151,8 +154,8 @@ function initLazyLoading() {
                 const isLoaded = wrapper.dataset.loaded === 'true';
 
                 if (!isLoaded && !widgetsLoaded.has(ticker)) {
-                    loadSymbolInfoWidget(wrapper, ticker);
-                    widgetsLoaded.add(ticker);
+                    // Add to queue instead of loading immediately
+                    addToLoadQueue(wrapper, ticker);
                     observer.unobserve(wrapper);
                 }
             }
@@ -165,47 +168,119 @@ function initLazyLoading() {
 }
 
 // ============================================================================
-// LOAD INDIVIDUAL SYMBOL INFO WIDGET
+// WIDGET LOADING QUEUE SYSTEM
+// ============================================================================
+
+function addToLoadQueue(wrapper, ticker) {
+    // Add to queue if not already there
+    if (!loadingQueue.find(item => item.ticker === ticker)) {
+        loadingQueue.push({ wrapper, ticker });
+        processLoadQueue();
+    }
+}
+
+async function processLoadQueue() {
+    // If already processing or queue is empty, return
+    if (isLoadingWidget || loadingQueue.length === 0) {
+        return;
+    }
+
+    // Lock
+    isLoadingWidget = true;
+
+    // Get next widget from queue
+    const item = loadingQueue.shift();
+
+    if (item && !widgetsLoaded.has(item.ticker)) {
+        await loadSymbolInfoWidget(item.wrapper, item.ticker);
+        widgetsLoaded.add(item.ticker);
+
+        // Small delay before next widget (300ms)
+        await new Promise(resolve => setTimeout(resolve, 300));
+    }
+
+    // Unlock
+    isLoadingWidget = false;
+
+    // Process next in queue
+    if (loadingQueue.length > 0) {
+        processLoadQueue();
+    }
+}
+
+// ============================================================================
+// LOAD INDIVIDUAL SYMBOL INFO WIDGET (with Promise)
 // ============================================================================
 
 function loadSymbolInfoWidget(wrapper, ticker) {
-    // Clear loading placeholder
-    wrapper.innerHTML = '';
-    wrapper.dataset.loaded = 'true';
+    return new Promise((resolve, reject) => {
+        try {
+            // Clear loading placeholder
+            wrapper.innerHTML = '';
+            wrapper.dataset.loaded = 'true';
 
-    // Create TradingView Symbol Info widget
-    const widgetContainer = document.createElement('div');
-    widgetContainer.className = 'tradingview-widget-container stock-widget-item';
+            // Create TradingView Symbol Info widget
+            const widgetContainer = document.createElement('div');
+            widgetContainer.className = 'tradingview-widget-container stock-widget-item';
+            widgetContainer.dataset.ticker = ticker; // Track ticker
 
-    const widgetDiv = document.createElement('div');
-    widgetDiv.className = 'tradingview-widget-container__widget';
-    widgetContainer.appendChild(widgetDiv);
+            const widgetDiv = document.createElement('div');
+            widgetDiv.className = 'tradingview-widget-container__widget';
+            widgetContainer.appendChild(widgetDiv);
 
-    // Create script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-        "symbol": `BMFBOVESPA:${ticker}`,
-        "width": "100%",
-        "locale": "br",
-        "colorTheme": "dark",
-        "isTransparent": true
+            // Create script with unique ID to prevent duplicates
+            const scriptId = `widget-script-${ticker}`;
+
+            // Check if script already exists
+            if (document.getElementById(scriptId)) {
+                console.warn(`Widget script for ${ticker} already exists`);
+                resolve();
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.id = scriptId;
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "symbol": `BMFBOVESPA:${ticker}`,
+                "width": "100%",
+                "locale": "br",
+                "colorTheme": "dark",
+                "isTransparent": true
+            });
+
+            // Success handler
+            script.onload = () => {
+                resolve();
+            };
+
+            // Error handling
+            script.onerror = (error) => {
+                console.error(`Error loading widget for ${ticker}:`, error);
+                wrapper.innerHTML = `
+                    <div class="widget-error">
+                        <span>${ticker}</span>
+                        <span style="color: #f7525f; font-size: 0.8rem;">Erro ao carregar</span>
+                    </div>
+                `;
+                reject(error);
+            };
+
+            widgetContainer.appendChild(script);
+            wrapper.appendChild(widgetContainer);
+
+            // Timeout fallback (5 seconds)
+            setTimeout(() => {
+                resolve();
+            }, 5000);
+
+        } catch (error) {
+            console.error(`Exception loading widget for ${ticker}:`, error);
+            reject(error);
+        }
     });
-
-    // Error handling
-    script.onerror = () => {
-        wrapper.innerHTML = `
-            <div class="widget-error">
-                <span>${ticker}</span>
-                <span style="color: #f7525f; font-size: 0.8rem;">Erro ao carregar</span>
-            </div>
-        `;
-    };
-
-    widgetContainer.appendChild(script);
-    wrapper.appendChild(widgetContainer);
 }
 
 // ============================================================================
@@ -321,13 +396,23 @@ window.addEventListener('beforeunload', () => {
     // Disconnect observer
     if (observer) {
         observer.disconnect();
+        observer = null;
     }
 
     // Clear loaded widgets set
     widgetsLoaded.clear();
 
+    // Clear loading queue
+    loadingQueue = [];
+    isLoadingWidget = false;
+
     // Remove event listeners
     if (escKeyHandler) {
         document.removeEventListener('keydown', escKeyHandler);
+        escKeyHandler = null;
     }
+
+    // Remove all widget scripts
+    const scripts = document.querySelectorAll('[id^="widget-script-"]');
+    scripts.forEach(script => script.remove());
 });
