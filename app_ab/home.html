@@ -33,13 +33,21 @@
     <main class="main-content">
         <div class="container">
 
+            <!-- TradingView Widget Section -->
+            <section class="widget-section">
+                <div id="stockGrid" class="stock-grid">
+                    <!-- Widget will be injected here -->
+                </div>
+            </section>
 
+            <!-- Interactive Stock Cards -->
+            <section class="stocks-section">
+                <h2 class="section-title">Clique para análise detalhada</h2>
+                <div id="stockCards" class="stock-cards-grid">
+                    <!-- Cards will be injected here -->
+                </div>
+            </section>
 
-
-            <!-- Stock Grid -->
-            <div id="stockGrid" class="stock-grid">
-                <!-- Widget will be injected here -->
-            </div>
         </div>
     </main>
 
@@ -47,11 +55,10 @@
 
     <!-- Stock Detail Modal -->
     <div id="stockModal" class="modal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">×</button>
-            <div class="modal-body">
-                <iframe id="widgetFrame" src="" frameborder="0" width="100%" height="100%"></iframe>
-            </div>
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <iframe id="widgetFrame" src="" frameborder="0"></iframe>
         </div>
     </div>
 
