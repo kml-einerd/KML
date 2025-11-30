@@ -1,0 +1,6 @@
+Este é um arquivo de teste para verificar o fluxo de atualização!
+
+Criado em: 2025-11-30
+Branch: claude/rebuild-application-013qkA4ceBwBLfbyC9Kx2Akw
+
+Quando você fizer 'git pull', este arquivo aparecerá no seu computador! ✅
