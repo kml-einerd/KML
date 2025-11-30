@@ -105,14 +105,60 @@ async function renderTradingViewWidget() {
 
 
 // ============================================================================
-// RENDER TICKER TAPE WIDGET (Top 5 Stocks)
+// RENDER STOCK CARDS (Interactive)
 // ============================================================================
 
+function renderStockCards() {
+    const container = document.getElementById('stockCards');
 
+    if (!container || !stocks || stocks.length === 0) {
+        console.error('Container or stocks not found');
+        return;
+    }
 
-// ============================================================================
-// RENDER WIDGET OVERLAY (Interactive Layer)
-// ============================================================================
+    // Clear container
+    container.innerHTML = '';
+
+    // Create cards for each stock
+    stocks.forEach(stock => {
+        const card = document.createElement('div');
+        card.className = 'stock-card';
+        card.onclick = () => openStockModal(stock.ticker);
+
+        const changeClass = stock.change >= 0 ? 'positive' : 'negative';
+        const changeIcon = stock.change >= 0 ? '▲' : '▼';
+
+        card.innerHTML = `
+            <div class="stock-card-header">
+                <div class="stock-info">
+                    <div class="stock-ticker">${stock.ticker}</div>
+                    <div class="stock-name">${stock.name}</div>
+                </div>
+            </div>
+
+            <div class="stock-price">R$ ${stock.price.toFixed(2)}</div>
+
+            <span class="stock-change ${changeClass}">
+                ${changeIcon} ${Math.abs(stock.change)}%
+            </span>
+
+            <div class="stock-meta">
+                <div class="stock-meta-item">
+                    <div class="meta-label">Volume</div>
+                    <div class="meta-value">${stock.volume}</div>
+                </div>
+                <div class="stock-meta-item">
+                    <div class="meta-label">Market Cap</div>
+                    <div class="meta-value">${stock.marketCap}</div>
+                </div>
+            </div>
+
+            <span class="stock-sector">${stock.sector}</span>
+        `;
+
+        container.appendChild(card);
+    });
+}
 
 
 // ============================================================================
@@ -179,8 +225,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         stocks = await fetchStocksFromDatabase();
 
-        // Render widgets
+        // Render widgets and cards
         renderTradingViewWidget();
+        renderStockCards();
 
     } catch (error) {
         console.error('Initialization error:', error);
