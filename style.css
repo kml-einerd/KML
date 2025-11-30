@@ -1,0 +1,479 @@
+/* ============================================================================
+   RESET AND BASE STYLES
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #000000;
+    /* Pure black background like reference */
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    /* Slightly narrower for better readability */
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+/* ============================================================================
+   SEARCH SECTION
+   ============================================================================ */
+
+.search-section {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    /* Align search to right or center as preferred */
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 300px;
+    transition: background 0.3s ease;
+}
+
+.search-box:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#symbolInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+}
+
+#symbolInput:focus {
+    outline: none;
+}
+
+#searchBtn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+#searchBtn:hover {
+    color: #fff;
+}
+
+/* ============================================================================
+   WIDGETS CONTAINER & LAYOUT
+   ============================================================================ */
+
+.widgets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* Spacing between sections */
+}
+
+/* Widget Card - Removed "Box" Styling */
+.widget-card {
+    width: 100%;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.widget-full-width {
+    width: 100%;
+}
+
+/* Bottom Grid for Technical Analysis & Timeline */
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+@media (min-width: 1024px) {
+    .bottom-grid {
+        grid-template-columns: 1fr 1fr;
+        /* Side by side on desktop */
+        align-items: start;
+    }
+}
+
+/* ============================================================================
+   TRADINGVIEW WIDGET OVERRIDES
+   ============================================================================ */
+
+.tradingview-widget-container {
+    width: 100%;
+}
+
+/* Specific heights for widgets to match reference feel */
+#symbol-overview-widget {
+    height: 600px;
+}
+
+#symbol-info-widget {
+    /* Auto height */
+}
+
+/* ============================================================================
+   NEWS WIDGET STYLES
+   ============================================================================ */
+
+.news-widget-container {
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+
+.news-header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+}
+
+.news-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.news-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Custom Scrollbar */
+.news-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.news-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.news-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.news-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.news-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    align-items: flex-start;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 8px;
+    border-bottom-color: transparent;
+}
+
+/* News Image & Fallback */
+.news-image-container {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+}
+
+.news-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.news-img-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2a2e39 0%, #1e222d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* News Content */
+.news-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.news-meta-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.news-source {
+    font-weight: 600;
+    color: #667eea;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.news-date {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.news-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #e0e0e0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s ease;
+}
+
+.news-item:hover .news-title {
+    color: #ffffff;
+}
+
+/* Load More Button */
+.load-more-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: rgba(102, 126, 234, 0.1);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    color: #667eea;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.load-more-btn:hover {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+    color: #ffffff;
+}
+
+/* ============================================================================
+   SKELETON LOADING STATES
+   ============================================================================ */
+
+.loading .tradingview-widget-container {
+    display: none;
+}
+
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-header {
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    width: 30%;
+}
+
+.skeleton-body {
+    height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.skeleton-footer {
+    height: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    width: 60%;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* ============================================================================
+   ERROR STATES
+   ============================================================================ */
+
+.error-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+}
+
+.error-icon {
+    font-size: 3rem;
+    opacity: 0.8;
+}
+
+.error-state h3 {
+    font-size: 1.2rem;
+    color: #f7525f;
+    margin-bottom: 5px;
+}
+
+.error-state p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.retry-btn {
+    margin-top: 10px;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: #2962ff;
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.retry-btn:hover {
+    background: #1e53e5;
+}
+
+/* ============================================================================
+   NOTIFICATION SYSTEM
+   ============================================================================ */
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background: #1e222d;
+    border: 1px solid #2a2e39;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transform: translateX(120%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification-success {
+    border-left: 3px solid #22ab94;
+}
+
+.notification-warning {
+    border-left: 3px solid #f7b731;
+}
+
+.notification-error {
+    border-left: 3px solid #f7525f;
+}
+
+.notification-info {
+    border-left: 3px solid #2962ff;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding-bottom: 30px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .widgets-container {
+        gap: 20px;
+    }
+
+    .bottom-grid {
+        gap: 20px;
+    }
+
+    #symbol-overview-widget {
+        height: 400px;
+    }
+}
