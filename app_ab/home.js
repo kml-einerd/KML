@@ -108,11 +108,6 @@ function renderStockCards() {
         widgetWrapper.dataset.ticker = stock.ticker;
         widgetWrapper.dataset.loaded = 'false';
 
-        // Add click handler
-        widgetWrapper.addEventListener('click', () => {
-            openStockModal(stock.ticker);
-        });
-
         // Add loading placeholder
         widgetWrapper.innerHTML = `
             <div class="widget-loading">
@@ -120,6 +115,18 @@ function renderStockCards() {
                 <span class="loading-spinner">Carregando...</span>
             </div>
         `;
+
+        // Add click overlay (will be created after widget loads)
+        const clickOverlay = document.createElement('div');
+        clickOverlay.className = 'widget-click-overlay';
+        clickOverlay.dataset.ticker = stock.ticker;
+        clickOverlay.style.display = 'none'; // Hidden until widget loads
+        clickOverlay.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openStockModal(stock.ticker);
+        });
+        widgetWrapper.appendChild(clickOverlay);
 
         container.appendChild(widgetWrapper);
     });
@@ -270,6 +277,14 @@ function loadSymbolInfoWidget(wrapper, ticker) {
 
             widgetContainer.appendChild(script);
             wrapper.appendChild(widgetContainer);
+
+            // Show click overlay after widget loads
+            setTimeout(() => {
+                const overlay = wrapper.querySelector('.widget-click-overlay');
+                if (overlay) {
+                    overlay.style.display = 'block';
+                }
+            }, 1500);
 
             // Timeout fallback (3 seconds - faster for lightweight widget)
             setTimeout(() => {
