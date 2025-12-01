@@ -55,8 +55,65 @@ body {
     margin-bottom: 50px;
 }
 
+/* Compact Grid - Market Overview Style */
+.compact-widget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+/* Each compact widget item */
+.compact-widget-item {
+    width: 100%;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative !important;
+    isolation: isolate;
+}
+
+.compact-widget-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+}
+
+.compact-widget-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.compact-widget-item:hover::before {
+    opacity: 1;
+}
+
+/* Responsive - mobile */
+@media (max-width: 768px) {
+    .compact-widget-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .compact-widget-item {
+        height: 65px;
+    }
+}
+
 /* ============================================================================
-   STOCK CARDS SECTION
+   STOCK WIDGETS LIST SECTION (Masked Widgets)
    ============================================================================ */
 
 .stocks-section {
@@ -72,130 +129,119 @@ body {
 }
 
 .stock-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.stock-card {
-    background: rgba(255, 255, 255, 0.05);
+/* Each row is a Single Quote widget (horizontal bar - lightweight) */
+.stock-widget-row {
+    width: 100%;
+    min-height: 35px;
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 8px;
+    overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    position: relative !important;
+    isolation: isolate;
 }
 
-.stock-card::before {
+.stock-widget-row::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.stock-widget-row:hover::before {
+    opacity: 1;
+}
+
+.stock-widget-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(102, 126, 234, 0.4);
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.15);
+}
+
+/* TradingView Single Quote widget inside each row (compact) */
+.stock-widget-item {
     width: 100%;
-    height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+    min-height: 35px;
 }
 
-.stock-card:hover::before {
-    transform: scaleX(1);
+.stock-widget-item .tradingview-widget-container__widget {
+    min-height: 35px !important;
 }
 
-.stock-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(102, 126, 234, 0.5);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+/* Hide TradingView copyright in list items */
+.stock-widget-item .tradingview-widget-copyright {
+    display: none !important;
 }
 
-.stock-card-header {
+/* Click overlay - captures clicks on top of widget iframe */
+.widget-click-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    z-index: 9999 !important;
+    pointer-events: all !important;
+    transition: background 0.2s ease;
+}
+
+.widget-click-overlay:hover {
+    background: rgba(102, 126, 234, 0.05);
+}
+
+/* Loading placeholder */
+.widget-loading {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
+    align-items: center;
+    padding: 8px 16px;
+    min-height: 35px;
 }
 
-.stock-info {
-    flex: 1;
-}
-
-.stock-ticker {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 5px;
-}
-
-.stock-name {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 400;
-}
-
-.stock-price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 10px;
-}
-
-.stock-change {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 6px;
+.loading-ticker {
     font-size: 0.9rem;
     font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.stock-change.positive {
-    background: rgba(34, 171, 148, 0.2);
-    color: #22ab94;
+.loading-spinner {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    animation: pulse 1.5s ease-in-out infinite;
 }
 
-.stock-change.negative {
-    background: rgba(247, 82, 95, 0.2);
-    color: #f7525f;
-}
-
-.stock-meta {
+/* Widget error state */
+.widget-error {
     display: flex;
-    gap: 15px;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    min-height: 35px;
 }
 
-.stock-meta-item {
-    flex: 1;
-}
-
-.meta-label {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 3px;
-}
-
-.meta-value {
-    font-size: 0.85rem;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.stock-sector {
-    display: inline-block;
-    padding: 3px 10px;
-    background: rgba(102, 126, 234, 0.15);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    border-radius: 12px;
-    font-size: 0.75rem;
-    color: #667eea;
-    margin-top: 10px;
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 /* ============================================================================
@@ -402,13 +448,12 @@ body {
         gap: 15px;
     }
 
-    .stock-cards-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
     .section-title {
         font-size: 1.2rem;
+    }
+
+    .stock-widget-row {
+        min-height: 35px;
     }
 
     .modal-container {
@@ -422,23 +467,5 @@ body {
     .modal-close {
         top: 10px;
         right: 10px;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .stock-cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1025px) {
-    .stock-cards-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1400px) {
-    .stock-cards-grid {
-        grid-template-columns: repeat(4, 1fr);
     }
 }
