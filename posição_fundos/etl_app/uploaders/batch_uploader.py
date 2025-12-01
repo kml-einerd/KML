@@ -3,6 +3,7 @@ Upload em lotes para Supabase
 """
 
 from typing import List, Dict
+import pandas as pd
 from config import BATCH_SIZE
 from utils.logger import app_logger
 from utils.progress import ProgressTracker
@@ -14,6 +15,76 @@ class BatchUploader:
     def __init__(self, supabase_client: SupabaseClient):
         self.client = supabase_client
         self.batch_size = BATCH_SIZE
+
+    @staticmethod
+    def limpar_valores_nulos(data: List[Dict]) -> List[Dict]:
+        """
+        Remove valores None, NaN e infinitos dos dicionários
+
+        Args:
+            data: Lista de dicionários
+
+        Returns:
+            Lista de dicionários limpa
+        """
+        dados_limpos = []
+        for item in data:
+            item_limpo = {}
+            for key, value in item.items():
+                # Pular valores None
+                if value is None:
+                    continue
+
+                # Tratar valores pandas NaN/NaT
+                if pd.isna(value):
+                    continue
+
+                # Converter numpy types para tipos Python nativos
+                if hasattr(value, 'item'):  # numpy types
+                    value = value.item()
+
+                # Verificar infinitos em floats
+                if isinstance(value, float):
+                    if not (-1e308 < value < 1e308):  # Infinito ou muito grande
+                        continue
+
+                item_limpo[key] = value
+
+            if item_limpo:  # Só adicionar se não estiver vazio
+                dados_limpos.append(item_limpo)
+
+        return dados_limpos
+
+    @staticmethod
+    def normalizar_chaves(data: List[Dict]) -> List[Dict]:
+        """
+        Normaliza objetos para que todos tenham as mesmas chaves.
+        Necessário porque o PostgREST exige que todos os objetos em um lote
+        tenham exatamente os mesmos campos.
+
+        Args:
+            data: Lista de dicionários
+
+        Returns:
+            Lista normalizada
+        """
+        if not data:
+            return data
+
+        # Coletar todas as chaves únicas
+        todas_chaves = set()
+        for item in data:
+            todas_chaves.update(item.keys())
+
+        # Normalizar cada objeto para ter todas as chaves
+        dados_normalizados = []
+        for item in data:
+            item_normalizado = {}
+            for chave in todas_chaves:
+                item_normalizado[chave] = item.get(chave, None)
+            dados_normalizados.append(item_normalizado)
+
+        return dados_normalizados
 
     def dividir_em_lotes(self, data: List[Dict], batch_size: int = None) -> List[List[Dict]]:
         """
@@ -40,71 +111,97 @@ class BatchUploader:
         table: str,
         data: List[Dict],
         on_conflict: str = None,
-        descricao: str = None
+        descricao: str = None,
+        return_ids: bool = False
     ) -> Dict:
         """
         Faz upload em lotes com barra de progresso
-
+        
         Args:
             table: Nome da tabela
             data: Lista de registros
             on_conflict: Coluna de conflito para upsert
             descricao: Descrição para progress bar
-
+            return_ids: Se True, retorna lista de IDs inseridos/atualizados
+            
         Returns:
-            Estatísticas do upload
+            Dicionário com estatísticas e 'ids' (se solicitado)
         """
         if not data:
             app_logger.warning(f"Nenhum dado para upload em '{table}'")
-            return {'total': 0, 'sucesso': 0, 'erros': 0}
+            return {'total': 0, 'sucesso': 0, 'erros': 0, 'ids': []}
+
+        # Limpar valores nulos antes do upload
+        data = self.limpar_valores_nulos(data)
+
+        if not data:
+            app_logger.warning(f"Nenhum dado válido após limpeza em '{table}'")
+            return {'total': 0, 'sucesso': 0, 'erros': 0, 'ids': []}
+
+        # Normalizar chaves para que todos os objetos tenham os mesmos campos
+        data = self.normalizar_chaves(data)
 
         if descricao is None:
             descricao = f"Uploading {table}"
 
         # Dividir em lotes
         lotes = self.dividir_em_lotes(data)
-
+        
         app_logger.info(
             f"Iniciando upload para '{table}': "
             f"{len(data):,} registros em {len(lotes)} lotes"
         )
-
-        # Contadores
+        
+        # Contadores e resultados
         total = 0
         sucesso = 0
         erros = 0
-
+        ids_retornados = []
+        
         # Upload com progresso
         with ProgressTracker() as progress:
             task = progress.add_task(descricao, total=len(lotes))
-
+            
             for i, lote in enumerate(lotes, 1):
                 try:
-                    self.client.upsert(table, lote, on_conflict=on_conflict)
+                    # Fazer upsert - o upsert JÁ RETORNA os dados por padrão na versão 1.0.3
+                    response = self.client.client.table(table)\
+                        .upsert(lote, on_conflict=on_conflict)\
+                        .execute()
+
+                    # Se precisamos dos IDs, extrair da response que já tem os dados
+                    if return_ids and hasattr(response, 'data') and response.data:
+                        ids_retornados.extend([item.get('id') for item in response.data if 'id' in item])
+
                     sucesso += len(lote)
                 except Exception as e:
                     app_logger.error(f"Erro no lote {i}: {e}")
                     erros += len(lote)
-
+                    
                 total += len(lote)
                 progress.advance(task)
-
+                
         # Resumo
         taxa_sucesso = (sucesso / total * 100) if total > 0 else 0
-
+        
         app_logger.info(
             f"✓ Upload '{table}' concluído: "
             f"{sucesso:,}/{total:,} sucesso ({taxa_sucesso:.1f}%), "
             f"{erros:,} erros"
         )
-
-        return {
+        
+        result = {
             'table': table,
             'total': total,
             'sucesso': sucesso,
             'erros': erros,
             'taxa_sucesso': taxa_sucesso
         }
+        
+        if return_ids:
+            result['ids'] = ids_retornados
+            
+        return result
 
     def upload_multiplas_tabelas(
         self,

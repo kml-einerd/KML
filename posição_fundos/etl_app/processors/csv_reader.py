@@ -4,6 +4,7 @@ Leitor inteligente de arquivos CSV da CVM
 
 import pandas as pd
 import chardet
+import csv
 from pathlib import Path
 from typing import Optional, List
 from config import CVM_ENCODING, CVM_SEPARATOR, CHUNK_SIZE
@@ -77,9 +78,11 @@ class CVMReader:
                 filepath,
                 sep=self.separator,
                 encoding=encoding,
-                low_memory=False,
+                # low_memory=False,  # Removido: incompatível com engine='python'
                 na_values=['', 'NA', 'N/A', 'null', '#N/D'],
-                dtype=str  # Ler tudo como string primeiro
+                dtype=str,  # Ler tudo como string primeiro
+                on_bad_lines='skip',  # Pular linhas mal formatadas
+                engine='python'  # Engine Python é mais tolerante a erros
             )
 
             app_logger.success(f"✓ {len(df):,} linhas lidas de {filepath.name}")
@@ -103,8 +106,10 @@ class CVMReader:
                 filepath,
                 sep=self.separator,
                 encoding='latin1',
-                low_memory=False,
-                dtype=str
+                # low_memory=False,  # Removido: incompatível com engine='python'
+                dtype=str,
+                on_bad_lines='skip',
+                engine='python'
             )
 
         except Exception as e:
