@@ -27,8 +27,19 @@ class DataFilter:
             DataFrame filtrado
         """
         antes = len(df)
-
-        df_filtrado = df[df['TP_APLIC'].isin(TIPOS_APLICACAO_VALIDOS)].copy()
+        
+        # Debug: mostrar valores únicos
+        if 'TP_APLIC' in df.columns:
+            valores_unicos = df['TP_APLIC'].unique()[:10]  # Primeiros 10
+            app_logger.debug(f"Valores únicos em TP_APLIC (amostra): {valores_unicos}")
+        else:
+            app_logger.error("Coluna 'TP_APLIC' não encontrada no DataFrame!")
+            return pd.DataFrame()
+        
+        # Normalizar para comparação case-insensitive
+        df_filtrado = df[
+            df['TP_APLIC'].str.strip().str.lower().isin([v.lower() for v in TIPOS_APLICACAO_VALIDOS])
+        ].copy()
 
         depois = len(df_filtrado)
         reducao = (1 - depois/antes) * 100 if antes > 0 else 0

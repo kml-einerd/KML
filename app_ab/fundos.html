@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Radar Institucional - Análise de Fundos B3</title>
+    <meta name="description" content="Dashboard profissional para análise de movimentações de fundos institucionais na B3. Identifique tendências e oportunidades seguindo os grandes investidores.">
+    <meta name="keywords" content="fundos, B3, institucional, investimentos, análise, top movers, ativos populares">
+    <meta name="author" content="MindBill">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#000000">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/fundos.css">
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <h1 class="logo">🎯 Radar Institucional</h1>
+                <p class="tagline">Acompanhe os movimentos dos grandes fundos</p>
+            </div>
+
+            <!-- Month Selector -->
+            <div class="month-selector" id="monthSelector">
+                <button class="month-btn" data-loading="true">
+                    <span class="spinner"></span>
+                    Carregando...
+                </button>
+            </div>
+
+            <!-- Summary Metrics -->
+            <div class="summary-metrics" id="summaryMetrics">
+                <div class="metric-card">
+                    <div class="metric-label">Fundos Ativos</div>
+                    <div class="metric-value" id="totalFundos">-</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Patrimônio Total</div>
+                    <div class="metric-value" id="totalPL">-</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Ativos Negociados</div>
+                    <div class="metric-value" id="totalAtivos">-</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Top Movers Section -->
+            <section class="movers-section">
+                <h2 class="section-title">💰 Quem Está se Movendo</h2>
+
+                <div class="movers-grid">
+                    <!-- Top Compradores -->
+                    <div class="mover-column">
+                        <div class="column-header compradores">
+                            <h3>Top Compradores</h3>
+                            <span class="count" id="compradoresCount">0</span>
+                        </div>
+                        <div class="movers-list" id="topCompradores">
+                            <div class="loading-state">
+                                <div class="spinner"></div>
+                                <p>Carregando dados...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Vendedores -->
+                    <div class="mover-column">
+                        <div class="column-header vendedores">
+                            <h3>Top Vendedores</h3>
+                            <span class="count" id="vendedoresCount">0</span>
+                        </div>
+                        <div class="movers-list" id="topVendedores">
+                            <div class="loading-state">
+                                <div class="spinner"></div>
+                                <p>Carregando dados...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patrimônio Section (substitui Fresh Bets) -->
+            <section class="patrimonio-section">
+                <h2 class="section-title">📈 Evolução do Patrimônio</h2>
+                <div class="patrimonio-card">
+                    <div class="patrimonio-header">
+                        <div class="patrimonio-info">
+                            <p class="patrimonio-description">
+                                Acompanhe a evolução do patrimônio líquido agregado dos fundos ao longo do tempo
+                            </p>
+                        </div>
+                    </div>
+                    <div class="patrimonio-content" id="patrimonioContent">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Carregando evolução...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ativos Populares Section -->
+            <section class="populares-section">
+                <h2 class="section-title">🏆 Ativos Mais Populares</h2>
+                <div class="populares-card">
+                    <p class="populares-description">
+                        Ativos com maior número de fundos investidos
+                    </p>
+                    <div class="populares-list" id="ativosPopulares">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Carregando ativos...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Fundo Detail Modal -->
+    <div id="fundoModal" class="modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-content" id="modalContent">
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Carregando detalhes...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty State Template -->
+    <template id="emptyStateTemplate">
+        <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p class="empty-text">Nenhum dado disponível para este período</p>
+        </div>
+    </template>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/fundos.js"></script>
+</body>
+
+</html>

@@ -7,9 +7,13 @@ import re
 from decimal import Decimal
 from typing import Optional
 from utils.logger import app_logger
+from processors.text_corrector import TextCorrector
 
 class DataCleaner:
     """Limpeza e normalização de dados"""
+
+    def __init__(self):
+        self.text_corrector = TextCorrector()
 
     @staticmethod
     def limpar_cnpj(cnpj: str) -> str:
@@ -219,6 +223,32 @@ class DataCleaner:
         app_logger.success(f"✓ PL limpo: {len(df_limpo):,} linhas")
 
         return df_limpo
+
+    def aplicar_correcao_texto(self, df):
+        """
+        Aplica correção ortográfica em colunas de texto
+        
+        Args:
+            df: DataFrame a ser corrigido
+            
+        Returns:
+            DataFrame com textos corrigidos
+        """
+        df_corrigido = df.copy()
+        
+        # Corrigir nome do fundo
+        if 'DENOM_SOCIAL' in df_corrigido.columns:
+            df_corrigido['DENOM_SOCIAL'] = df_corrigido['DENOM_SOCIAL'].apply(
+                self.text_corrector.corrigir_nome_fundo
+            )
+        
+        # Corrigir nome do emissor
+        if 'EMISSOR' in df_corrigido.columns:
+            df_corrigido['EMISSOR'] = df_corrigido['EMISSOR'].apply(
+                self.text_corrector.corrigir_nome_emissor
+            )
+        
+        return df_corrigido
 
 if __name__ == '__main__':
     # Testes
