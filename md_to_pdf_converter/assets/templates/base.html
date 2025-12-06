@@ -11,12 +11,13 @@
 
     <!-- Mermaid.js for Diagrams -->
     <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.12.2/dist/mermaid.esm.min.mjs';
 
         // Expose mermaid to window for Puppeteer to access
         window.mermaid = mermaid;
 
         // Initialize Mermaid with NEO look
+        // Docs: https://mermaid.js.org/config/theming.html
         mermaid.initialize({
             startOnLoad: false, // We will manually run it with Puppeteer
             look: 'neo',  // Enable the sleek, modern NEO look
@@ -264,11 +265,13 @@
             border: 0;
             border-top: 2px solid var(--color-border);
             margin: 2em 0;
+            page-break-after: avoid;
         }
 
         /* PAGED.JS SPECIFIC */
         @page {
             margin: 20mm;
+            size: A4;
 
             @bottom-center {
                 content: counter(page);
@@ -276,6 +279,11 @@
                 font-size: 0.9em;
                 color: #718096;
             }
+        }
+
+        /* Avoid breaking inside important elements */
+        h1, h2, h3, h4, h5, h6, table, figure, .mermaid, pre {
+            page-break-inside: avoid;
         }
 
         /* COVER PAGE */

@@ -60,14 +60,21 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
     await page.evaluate(async () => {
         if (typeof window.mermaid !== 'undefined') {
             try {
+                // Initialize if not already (safeguard)
+                // window.mermaid.initialize({...}) should be done in HTML, but we can double check
+
                 // We use await here because mermaid.run is usually fast enough
+                // But we wrap it to catch individual failures if possible, though .run() is batch.
                 await window.mermaid.run({
-                    querySelector: '.mermaid'
+                    querySelector: '.mermaid',
+                    suppressErrors: false // We want to see errors
                 });
                 window.mermaidRenderComplete = true;
                 console.log('Mermaid run finished.');
             } catch (error) {
-                console.error('Mermaid rendering error:', error.toString());
+                console.error('Mermaid rendering error object:', error);
+                console.error('Mermaid rendering error message:', error.message);
+                console.error('Mermaid rendering error stack:', error.stack);
                 window.mermaidRenderComplete = false;
                 window.mermaidError = error.message;
             }
@@ -83,7 +90,7 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
         await page.waitForFunction(() => window.mermaidRenderComplete === true, { timeout: 30000 });
         console.log('✅ Mermaid rendering complete.');
     } catch (e) {
-        console.warn('⚠️ Mermaid rendering timed out or failed (might be no diagrams).');
+        console.warn('⚠️ Mermaid rendering timed out or failed (might be no diagrams). Check page logs.');
     }
 
     // Give a little extra time for layout to settle after diagrams appear
@@ -93,15 +100,22 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
     const mermaidStatus = await page.evaluate(() => {
         const diagrams = document.querySelectorAll('.mermaid');
         const svgs = document.querySelectorAll('.mermaid svg');
+        // Check for error syntax in diagrams
+        const errors = document.querySelectorAll('.mermaid .error-icon, .mermaid .error-text, parser-error');
 
         return {
             total: diagrams.length,
             rendered: svgs.length,
+            errors: errors.length,
             complete: window.mermaidRenderComplete
         };
     });
 
-    console.log(`🎨 Mermaid status: ${mermaidStatus.rendered}/${mermaidStatus.total} diagrams rendered`);
+    console.log(`🎨 Mermaid status: ${mermaidStatus.rendered}/${mermaidStatus.total} diagrams rendered. ${mermaidStatus.errors} visible errors.`);
+
+    // DEBUG: Dump HTML body length before pagedjs
+    const bodyLength = await page.evaluate(() => document.body.innerText.length);
+    console.log(`📄 Document length before pagination: ${bodyLength} chars`);
 
     // Manually trigger Paged.js
     console.log('📖 Triggering Paged.js...');
@@ -109,7 +123,17 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
         // Fire and forget - do NOT await here to avoid protocol timeout if Paged.js is slow
         if (window.PagedPolyfill) {
             console.log("Starting Paged.js preview...");
-            window.PagedPolyfill.preview();
+
+            // Hook into Paged.js to detect completion more reliably?
+            // Paged.js emits events.
+
+            window.PagedPolyfill.preview().then(() => {
+                console.log("Paged.js promise resolved in browser.");
+                window.pagedJsFinished = true;
+            }).catch(e => {
+                console.error("Paged.js failed:", e);
+                window.pagedJsFinished = true; // finish anyway to unblock
+            });
         } else {
             console.error('Paged.js polyfill not found on window');
         }
@@ -118,8 +142,10 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
     // Wait for Paged.js to finish rendering
     try {
         console.log('⏳ Waiting for Paged.js...');
-        // Wait for the pagedjs hook or selector
-        await page.waitForSelector('.pagedjs_pages', { timeout: 120000 });
+
+        // Wait for the pagedjs hook or selector, OR our custom flag
+        // Increase timeout significantly
+        await page.waitForFunction(() => window.pagedJsFinished === true || document.querySelectorAll('.pagedjs_pages').length > 0, { timeout: 120000 });
 
         // Extra wait for Paged.js to complete all page breaks
         // For large documents, this needs to be significant
@@ -131,6 +157,16 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
             return document.querySelectorAll('.pagedjs_page').length;
         });
         console.log(`📖 Generated ${pageCount} pages`);
+
+        // DEBUG: Check content of pages
+        const lastPageContent = await page.evaluate(() => {
+             const pages = document.querySelectorAll('.pagedjs_page');
+             if (pages.length > 0) {
+                 return pages[pages.length - 1].innerText.substring(0, 100) + '...';
+             }
+             return 'No pages';
+        });
+        console.log(`📄 Last page content start: ${lastPageContent}`);
 
         // Wait for all images to load with better error handling
         console.log('⏳ Waiting for external images to load...');

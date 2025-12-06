@@ -1,21 +1,4 @@
 ```mermaid
-timeline
-    title JORNADA DAS SALAS VIP
-    ANO 1 : **Básico**
-          : *Objetivo:* Score e Histórico
-          : *Ex:* Nubank, C6 Básico
-    ANO 2 : **Primeiro VIP**
-          : *Objetivo:* Degustar benefícios
-          : *Ex:* XP Visa Infinite, Rico
-    ANO 3 : **Elite (Black)**
-          : *Objetivo:* Acesso Ilimitado
-          : *Ex:* Sicoob Merit, Sicredi
-    ANO 4 : **Estrategista**
-          : *Objetivo:* Combo (LK + DP)
-          : *Ex:* Visa + Mastercard
-```
-
-```mermaid
 graph TD
     A[VOCÊ TEM R$ 1.000 PARA INVESTIR?]
     

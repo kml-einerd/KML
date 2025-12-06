@@ -117,10 +117,12 @@ async function localFileToBase64(filePath, basePath) {
  */
 export async function embedImagesInHtml(html, basePath = process.cwd()) {
     // Find all img tags with src
-    const imgRegex = /<img[^>]+src="([^"]+)"[^>]*>/gi;
+    // Improved regex to handle attributes in any order and single/double quotes
+    const imgRegex = /<img\s+[^>]*src=["']([^"']+)["'][^>]*>/gi;
     const matches = [...html.matchAll(imgRegex)];
 
     if (matches.length === 0) {
+        console.log('🖼️  No images found to embed.');
         return html;
     }
 
@@ -128,33 +130,39 @@ export async function embedImagesInHtml(html, basePath = process.cwd()) {
 
     let processedHtml = html;
 
-    // Process each image
-    for (const match of matches) {
+    // Optimization: Parallelize downloads
+    const promises = matches.map(async (match) => {
         const fullTag = match[0];
         const imageUrl = match[1];
 
-        // Skip data URIs (already embedded)
-        if (imageUrl.startsWith('data:')) {
-            continue;
-        }
+        // Skip data URIs
+        if (imageUrl.startsWith('data:')) return null;
 
         let base64Data = null;
-
-        // Check if it's a URL or local file
         if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-            // Download and convert to base64
             base64Data = await downloadImageAsBase64(imageUrl);
         } else {
-            // Local file - convert to base64
             base64Data = await localFileToBase64(imageUrl, basePath);
         }
 
         if (base64Data) {
-            // Replace the URL with base64 data URI
-            const newTag = fullTag.replace(imageUrl, base64Data);
-            processedHtml = processedHtml.replace(fullTag, newTag);
+            return { imageUrl, base64Data };
         }
-    }
+        return null;
+    });
+
+    const results = await Promise.all(promises);
+
+    // Apply replacements
+    results.forEach(result => {
+        if (result) {
+            // Escape special regex chars in URL
+            const escapedUrl = result.imageUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            // Regex to match src="url" or src='url'
+            const regex = new RegExp(`src=["']${escapedUrl}["']`, 'g');
+            processedHtml = processedHtml.replace(regex, `src="${result.base64Data}"`);
+        }
+    });
 
     return processedHtml;
 }

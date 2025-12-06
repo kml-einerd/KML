@@ -7,8 +7,8 @@
 /**
  * Aplica melhorias tipográficas profissionais
  */
-function enhanceTypography(markdown) {
-    let enhanced = markdown;
+function enhanceTypography(text) {
+    let enhanced = text;
 
     // Substituir aspas retas por aspas curvas (smart quotes)
     enhanced = enhanced.replace(/"([^"]*)"/g, '“$1”');
@@ -38,7 +38,23 @@ function enhanceTypography(markdown) {
     enhanced = enhanced.replace(/\.\.\./g, '…');
 
     // Travessões corretos (em dash para ranges, em dash para dialogue)
-    enhanced = enhanced.replace(/(\d+)\s*-\s*(\d+)/g, '$1–$2'); // en-dash para ranges numéricos
+    // PROTEÇÃO CONTRA DATAS (YYYY-MM-DD): Não substituir se parecer uma data ISO
+    // Regex melhorada: exige que NÃO seja precedido por dígito (para evitar 2025-12)
+    // e exige espaços ao redor OU que não pareça parte de uma data.
+    // Simplificação: apenas substituir se houver espaços ao redor, ou se for algo óbvio como paginação.
+    // enhanced = enhanced.replace(/(\d+)\s*-\s*(\d+)/g, '$1–$2');
+
+    // Substituir apenas se houver espaço antes ou depois, ou se não parecer formato de data
+    // Data format: 4 digits - 2 digits - 2 digits.
+    // Vamos ser conservadores: substituir apenas ' - ' (espaço hífen espaço) por em-dash,
+    // ou ranges explícitos que não pareçam datas.
+
+    // Para ranges numéricos (10-20), é arriscado globalmente. Vamos desativar para números grudados (10-20)
+    // para evitar quebrar datas e códigos, e ativar apenas para ' - '.
+    enhanced = enhanced.replace(/(\d+)\s+-\s+(\d+)/g, '$1–$2');
+
+    // Para diálogo (travessão no início)
+    enhanced = enhanced.replace(/^-\s+/gm, '—\u00A0');
 
     return enhanced;
 }
@@ -100,8 +116,10 @@ function enhanceMermaidDiagrams(markdown) {
         const firstLine = lines[0].trim();
 
         // Verificar se tem tipo de diagrama
-        if (!firstLine.match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|erDiagram|journey|gantt|pie|gitGraph)/)) {
+        if (!firstLine.match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|stateDiagram-v2|erDiagram|journey|gantt|pie|gitGraph|timeline|mindmap|quadrantChart|sankey-beta)/)) {
             // Se não tem tipo, assumir flowchart TD
+            // Cuidado: alguns diagramas (como timeline) podem ter título na primeira linha em algumas versões?
+            // Mas timeline começa com 'timeline'.
             optimized = 'flowchart TD\n' + optimized;
         }
 
@@ -118,6 +136,7 @@ function addSemanticMarkers(markdown) {
     let enhanced = markdown;
 
     // Marcar blocos de destaque (texto que começa com emoji ou símbolos especiais)
+    // Cuidado para não quebrar código
     enhanced = enhanced.replace(/^(> )?([🎯✨💡📌🚀⚠️🔥]+)\s+\*\*(.+?)\*\*/gm,
         (match, quote, emoji, text) => {
             const q = quote || '';
@@ -139,12 +158,8 @@ function addSemanticMarkers(markdown) {
 
 /**
  * Processa imagens para melhor apresentação
- * NOTA: Não convertemos para HTML aqui - deixamos o processador Markdown fazer isso
- * Apenas preservamos as imagens como estão
  */
 function enhanceImages(markdown) {
-    // Apenas retornar o markdown sem modificação
-    // O processador Markdown e os plugins Rehype cuidarão das imagens
     return markdown;
 }
 
@@ -167,15 +182,36 @@ function enhanceLists(markdown) {
 export function enhanceMarkdown(markdown) {
     console.log('🎨 Enhancing Markdown with professional improvements...');
 
-    let enhanced = markdown;
+    // PROTECT CODE BLOCKS
+    // We split the markdown by code blocks and only apply text enhancements to non-code parts
+    const codeBlockRegex = /(```[\s\S]*?```|`[^`]*`)/g;
+    const parts = markdown.split(codeBlockRegex);
 
-    // Aplicar melhorias em ordem
-    enhanced = enhanceTypography(enhanced);
-    enhanced = enhanceStructure(enhanced);
-    enhanced = enhanceMermaidDiagrams(enhanced);
-    enhanced = addSemanticMarkers(enhanced);
-    enhanced = enhanceImages(enhanced);
-    enhanced = enhanceLists(enhanced);
+    // We also need to know which parts are code blocks
+    // split captures the delimiters if using capturing group, which we are.
+
+    let enhanced = parts.map((part, index) => {
+        // If it looks like a code block, return as is (but maybe apply enhanceMermaidDiagrams if it's mermaid?)
+        // Actually enhanceMermaidDiagrams IS specifically for code blocks.
+
+        if (part.startsWith('```') || part.startsWith('`')) {
+            // It's a code block.
+            // Apply ONLY mermaid enhancement if it's a mermaid block
+            if (part.startsWith('```mermaid')) {
+                return enhanceMermaidDiagrams(part);
+            }
+            return part;
+        } else {
+            // It's text. Apply text enhancements.
+            let text = part;
+            text = enhanceTypography(text);
+            text = enhanceStructure(text);
+            text = addSemanticMarkers(text);
+            text = enhanceImages(text);
+            text = enhanceLists(text);
+            return text;
+        }
+    }).join('');
 
     console.log('✅ Markdown enhancement complete');
 
