@@ -17,7 +17,7 @@
     @bottom-center {
         content: counter(page);
         font-family: var(--serif-body);
-        font-size: 10pt;
+        font-size: 20pt;
     }
 }
 
@@ -41,12 +41,12 @@
 }
 
 .cover-subtitle { font-size: 20pt; font-style: italic; margin-bottom: 50px; }
-.cover-author { font-size: 16pt; font-weight: 600; margin-top: 80px; }
-.cover-date { font-size: 12pt; opacity: 0.6; margin-top: 15px; }
+.cover-author { font-size: 20pt; font-weight: 600; margin-top: 80px; }
+.cover-date { font-size: 20pt; opacity: 0.6; margin-top: 15px; }
 
 .content-body {
     font-family: var(--serif-body);
-    font-size: 12pt;
+    font-size: 20pt;
     line-height: 1.8;
     color: var(--ink);
     text-align: justify;
@@ -69,7 +69,7 @@ h2 {
     page-break-after: avoid;
 }
 
-h3 { font-size: 18pt; margin: 30px 0 15px; font-weight: 500; }
+h3 { font-size: 20pt; margin: 30px 0 15px; font-weight: 500; }
 p { margin-bottom: 18px; text-indent: 1.5em; }
 p:first-of-type { text-indent: 0; }
 
@@ -100,7 +100,7 @@ table {
     width: 100%;
     margin: 25px 0;
     border-collapse: collapse;
-    font-size: 11pt;
+    font-size: 13pt;
 }
 
 th, td {

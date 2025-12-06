@@ -1,0 +1,187 @@
+/* TEMA: Obsidian Pro - Clean, Professional, Dark */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    /* Obsidian Dark Palette */
+    --bg-primary: #1e1e1e;
+    --bg-secondary: #252526;
+    --text-normal: #dcddde;
+    --text-muted: #858585;
+    --text-accent: #7f6df2;
+    /* Obsidian Purple */
+    --text-accent-hover: #8e7bf4;
+
+    --h1-color: #ffffff;
+    --h2-color: #dcddde;
+    --h3-color: #dcddde;
+
+    --border-color: #3e3e42;
+    --code-bg: #1e1e1e;
+    --blockquote-border: #7f6df2;
+
+    --table-header-bg: #2d2d2d;
+    --table-row-alt: #252526;
+}
+
+/* Page Setup */
+@page {
+    size: A4;
+    margin: 20mm;
+    background: var(--bg-primary);
+
+    @bottom-right {
+        content: counter(page);
+        font-family: 'Inter', sans-serif;
+        color: var(--text-muted);
+        font-size: 10pt;
+    }
+}
+
+/* Base Styles */
+.content-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: var(--text-normal);
+    background-color: var(--bg-primary);
+}
+
+/* Typography */
+h1 {
+    font-size: 2.2em;
+    color: var(--h1-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3em;
+    margin-top: 1.5em;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: var(--h2-color);
+    margin-top: 1.4em;
+}
+
+h3 {
+    font-size: 1.4em;
+    color: var(--h3-color);
+    margin-top: 1.3em;
+}
+
+strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Links */
+a {
+    color: var(--text-accent);
+    text-decoration: none;
+}
+
+/* Blockquotes (Callouts) */
+blockquote {
+    border-left: 4px solid var(--blockquote-border);
+    background: var(--bg-secondary);
+    color: var(--text-normal);
+    padding: 1em;
+    margin: 1.5em 0;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Code */
+code {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #2d2d2d;
+    color: #e06c75;
+    /* Reddish for inline code */
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: #1e1e1e;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.2em;
+    margin: 1.5em 0;
+}
+
+pre code {
+    background-color: transparent;
+    color: #dcddde;
+    padding: 0;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    border: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--table-header-bg);
+    color: #ffffff;
+    font-weight: 600;
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-normal);
+}
+
+tr:nth-child(even) {
+    background-color: var(--table-row-alt);
+}
+
+/* Images */
+img {
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    margin: 2em auto;
+    display: block;
+}
+
+/* Lists */
+ul,
+ol {
+    padding-left: 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+li::marker {
+    color: var(--text-muted);
+}
+
+/* Horizontal Rule */
+hr {
+    border: none;
+    border-top: 2px solid var(--border-color);
+    margin: 2.5em 0;
+}
+
+/* Cover Page */
+.cover-page {
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    color: var(--text-normal);
+}
+
+.cover-title {
+    color: var(--text-accent);
+    border-bottom: none;
+    font-size: 3.5em;
+}
+
+.cover-subtitle {
+    color: var(--text-muted);
+    font-size: 1.5em;
+}

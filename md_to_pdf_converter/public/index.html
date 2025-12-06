@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MD to PDF Pro - Conversor Web</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
             <div class="logo">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect width="40" height="40" rx="8" fill="url(#gradient)"/>
-                    <path d="M12 12h16v16H12z" stroke="white" stroke-width="2" fill="none"/>
+                    <rect width="40" height="40" rx="8" fill="url(#gradient)" />
+                    <path d="M12 12h16v16H12z" stroke="white" stroke-width="2" fill="none" />
                     <defs>
                         <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
-                            <stop offset="0%" stop-color="#667eea"/>
-                            <stop offset="100%" stop-color="#764ba2"/>
+                            <stop offset="0%" stop-color="#667eea" />
+                            <stop offset="100%" stop-color="#764ba2" />
                         </linearGradient>
                     </defs>
                 </svg>
@@ -36,10 +38,11 @@
                 </div>
 
                 <div class="upload-area" id="dropzone">
-                    <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                        <polyline points="17 8 12 3 7 8"/>
-                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    <svg class="upload-icon" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
                     </svg>
                     <p class="upload-text">Arraste e solte seu arquivo .md aqui</p>
                     <p class="upload-subtext">ou</p>
@@ -50,9 +53,10 @@
 
                 <div class="file-info" id="fileInfo" style="display: none;">
                     <div class="file-details">
-                        <svg class="file-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
-                            <polyline points="13 2 13 9 20 9"/>
+                        <svg class="file-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor">
+                            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                            <polyline points="13 2 13 9 20 9" />
                         </svg>
                         <div class="file-meta">
                             <p class="file-name" id="fileName"></p>
@@ -61,8 +65,8 @@
                     </div>
                     <button class="remove-btn" id="removeBtn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
                     </button>
                 </div>
@@ -95,14 +99,23 @@
                     <p class="generate-info" id="generateInfo">
                         Faça upload de um arquivo e selecione um tema para gerar seu PDF
                     </p>
-                    <button class="generate-btn" id="generateBtn" disabled>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="7 10 12 15 17 10"/>
-                            <line x1="12" y1="15" x2="12" y2="3"/>
-                        </svg>
-                        <span id="generateBtnText">Gerar PDF Profissional</span>
-                    </button>
+                    <div class="button-group">
+                        <button class="generate-btn" id="generateBtn" disabled>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <span id="generateBtnText">Gerar PDF Profissional</span>
+                        </button>
+                        <button class="generate-btn secondary-btn" id="previewBtn" disabled>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <span>Pré-visualizar HTML</span>
+                        </button>
+                    </div>
                 </div>
             </section>
         </main>
@@ -116,11 +129,12 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <svg class="toast-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <polyline points="20 6 9 17 4 12"/>
+            <polyline points="20 6 9 17 4 12" />
         </svg>
         <span id="toastMessage"></span>
     </div>
 
     <script src="app.js"></script>
 </body>
+
 </html>

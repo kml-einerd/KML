@@ -63,20 +63,20 @@
 }
 
 .cover-subtitle {
-    font-size: 18pt;
+    font-size: 20pt;
     font-weight: 400;
     opacity: 0.9;
     margin-bottom: 40px;
 }
 
 .cover-author {
-    font-size: 14pt;
+    font-size: 20pt;
     font-weight: 500;
     margin-top: 60px;
 }
 
 .cover-date {
-    font-size: 11pt;
+    font-size: 13pt;
     opacity: 0.7;
     margin-top: 10px;
 }
@@ -84,44 +84,46 @@
 /* === CORPO DO CONTEÚDO === */
 .content-body {
     font-family: var(--font-sans);
-    font-size: 11pt;
-    line-height: 1.7;
+    font-size: 11.5pt; /* Reduzido para melhor leitura */
+    line-height: 1.6;  /* Ajuste fino para espaçamento ideal */
     color: var(--gray-900);
 }
 
 h1 {
-    font-size: 32pt;
+    font-size: 28pt;   /* Escala tipográfica ajustada */
     font-weight: 700;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 25px;
     color: var(--dark-bg);
     letter-spacing: -0.03em;
+    page-break-before: always; /* Iniciar sempre em nova página */
     page-break-after: avoid;
-    border-bottom: 3px solid var(--primary-blue);
-    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
 }
 
 h2 {
-    font-size: 24pt;
+    font-size: 22pt;
     font-weight: 600;
-    margin-top: 35px;
-    margin-bottom: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
     color: var(--gray-900);
     letter-spacing: -0.02em;
+    page-break-before: auto; /* Evitar quebras estranhas antes */
     page-break-after: avoid;
 }
 
 h3 {
-    font-size: 18pt;
+    font-size: 17pt;
     font-weight: 600;
     margin-top: 25px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     color: var(--primary-blue);
     page-break-after: avoid;
 }
 
 h4, h5, h6 {
-    font-size: 14pt;
+    font-size: 14pt; /* Reduzido para hierarquia clara */
     font-weight: 600;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -129,7 +131,7 @@ h4, h5, h6 {
 }
 
 p {
-    margin-bottom: 15px;
+    margin-bottom: 12px; /* Espaçamento de parágrafo refinado */
     font-weight: 400;
 }
 
@@ -153,22 +155,23 @@ li {
 
 /* === CITAÇÕES === */
 blockquote {
-    border-left: 4px solid var(--primary-blue);
+    border-left: 3px solid var(--primary-blue);
     background: var(--gray-100);
-    padding: 20px 25px;
+    padding: 15px 25px;
     margin: 25px 0;
-    font-style: italic;
     color: var(--gray-800);
     border-radius: 0 8px 8px 0;
+    font-size: 11pt; /* Manter consistência com o corpo */
+    font-style: italic;
 }
 
 /* === CÓDIGO === */
 code {
     font-family: var(--font-mono);
     background: var(--gray-100);
-    padding: 3px 6px;
+    padding: 2px 5px;
     border-radius: 4px;
-    font-size: 10pt;
+    font-size: 0.85em; /* Tamanho relativo ao texto ao redor */
     color: var(--accent-purple);
     border: 1px solid var(--gray-300);
 }
@@ -177,7 +180,7 @@ pre {
     background: var(--dark-bg);
     color: #E6EDF3;
     border-radius: 8px;
-    padding: 20px;
+    padding: 15px; /* Padding ajustado */
     overflow-x: auto;
     margin: 20px 0;
     page-break-inside: avoid;
@@ -189,8 +192,8 @@ pre code {
     padding: 0;
     color: #E6EDF3;
     border: none;
-    font-size: 9.5pt;
-    line-height: 1.5;
+    font-size: 9pt;    /* Tamanho de fonte para código legível */
+    line-height: 1.6; /* Melhorar espaçamento entre linhas */
 }
 
 /* === TABELAS === */
@@ -199,7 +202,7 @@ table {
     border-collapse: collapse;
     margin: 25px 0;
     page-break-inside: avoid;
-    font-size: 10pt;
+    font-size: 10pt; /* Reduzido drasticamente para caber na página */
 }
 
 th, td {

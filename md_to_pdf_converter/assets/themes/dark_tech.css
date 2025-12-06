@@ -46,9 +46,9 @@
 }
 
 .cover-title::before { content: '> '; color: var(--accent-green); }
-.cover-subtitle { font-size: 16pt; color: var(--accent-purple); margin-bottom: 40px; }
-.cover-author { font-size: 14pt; margin-top: 60px; }
-.cover-date { font-size: 11pt; opacity: 0.5; margin-top: 10px; }
+.cover-subtitle { font-size: 20pt; color: var(--accent-purple); margin-bottom: 40px; }
+.cover-author { font-size: 20pt; margin-top: 60px; }
+.cover-date { font-size: 13pt; opacity: 0.5; margin-top: 10px; }
 
 .content-body {
     font-family: 'Inter', sans-serif;
@@ -77,7 +77,7 @@ h2 {
     margin: 30px 0 15px;
 }
 
-h3 { font-size: 16pt; color: var(--accent-green); margin: 25px 0 12px; }
+h3 { font-size: 20pt; color: var(--accent-green); margin: 25px 0 12px; }
 
 blockquote {
     border-left: 4px solid var(--accent-cyan);

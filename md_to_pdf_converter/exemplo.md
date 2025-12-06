@@ -7,6 +7,7 @@ Este é um **exemplo completo** de documento Markdown que demonstra *todas as fu
 ---
 
 ## Capítulo 1: Formatação de Texto
+![Capa do Ebook](https://viagemeturismo.abril.com.br/wp-content/uploads/2023/12/FCA_5633.jpg)
 
 ### Texto Básico
 

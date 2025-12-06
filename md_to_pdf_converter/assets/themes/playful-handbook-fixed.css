@@ -1,0 +1,347 @@
+/* TEMA: Playful Handbook - Educativo/Jovem (VERSÃO CORRIGIDA) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Comic+Neue:wght@400;700&display=swap');
+
+:root {
+    --blue: #4A90E2;
+    --orange: #FF6B35;
+    --green: #50C878;
+    --purple: #9B59B6;
+    --bg: #FFF9F0;
+    --text: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@page {
+    size: A4;
+    margin: 20mm;
+    background: var(--bg);
+}
+
+/* ===========================
+   COVER PAGE - NÃO SOBRESCREVE MAIS O TEMPLATE
+   =========================== */
+.cover-page {
+    /* Removido height: 100vh que causava o retângulo gigante */
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: white !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 60px 40px;
+    margin-bottom: 30px;
+    page-break-after: always;
+    min-height: 400px;
+    /* Altura mínima ao invés de 100vh */
+}
+
+.cover-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36pt !important;
+    font-weight: 700 !important;
+    margin-bottom: 20px !important;
+    color: white !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.cover-subtitle {
+    font-size: 16pt !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 400 !important;
+    margin-bottom: 30px !important;
+}
+
+.cover-author,
+.cover-date {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 12pt !important;
+}
+
+/* ===========================
+   BODY & TYPOGRAPHY
+   =========================== */
+.content-body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13pt;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0;
+}
+
+body {
+    background: var(--bg);
+}
+
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 30px 0 15px;
+    border-left: 6px solid var(--orange);
+    padding-left: 15px;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18pt;
+    font-weight: 600;
+    color: var(--green);
+    margin: 25px 0 12px;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--purple);
+    margin: 20px 0 10px;
+    page-break-after: avoid;
+}
+
+h4,
+h5,
+h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+    margin: 15px 0 8px;
+    page-break-after: avoid;
+}
+
+p {
+    margin-bottom: 1em;
+    text-align: justify;
+}
+
+/* ===========================
+   BLOCKQUOTES
+   =========================== */
+blockquote {
+    background: linear-gradient(to right, #FFE5B4, #FFD580);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    border-left: 5px solid var(--orange);
+    font-style: italic;
+    color: #5a4a2a;
+    page-break-inside: avoid;
+}
+
+/* ===========================
+   CODE BLOCKS
+   =========================== */
+code {
+    background: rgba(155, 89, 182, 0.15);
+    color: var(--purple);
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+pre {
+    background: #2C3E50;
+    color: #ECF0F1;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 3px solid var(--blue);
+    overflow-x: auto;
+    page-break-inside: avoid;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-weight: 400;
+}
+
+/* ===========================
+   TABLES
+   =========================== */
+table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+    border-collapse: collapse;
+    page-break-inside: avoid;
+}
+
+th {
+    background: var(--blue);
+    color: white;
+    padding: 12px 15px;
+    font-weight: 700;
+    text-align: left;
+    border: none;
+}
+
+td {
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    padding: 10px 15px;
+    background: white;
+}
+
+tr:nth-child(even) td {
+    background: #E8F4F8;
+}
+
+/* ===========================
+   LISTS
+   =========================== */
+ul,
+ol {
+    margin: 15px 0;
+    padding-left: 30px;
+}
+
+li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* Checkbox lists */
+li input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* ===========================
+   IMAGES & FIGURES
+   =========================== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    page-break-inside: avoid;
+}
+
+figure {
+    margin: 25px 0;
+    text-align: center;
+    page-break-inside: avoid;
+}
+
+figcaption {
+    font-size: 0.9em;
+    color: #666;
+    font-style: italic;
+    margin-top: 8px;
+}
+
+/* ===========================
+   MERMAID DIAGRAMS
+   =========================== */
+.mermaid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+    page-break-inside: avoid;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.diagram-container {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+    page-break-inside: avoid;
+}
+
+.diagram-container img {
+    max-width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===========================
+   LINKS
+   =========================== */
+a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   HORIZONTAL RULES
+   =========================== */
+hr {
+    border: 0;
+    border-top: 3px solid var(--orange);
+    margin: 30px 0;
+    opacity: 0.5;
+}
+
+/* ===========================
+   UTILITIES
+   =========================== */
+.page-break {
+    page-break-before: always;
+}
+
+/* Definition lists */
+dt {
+    font-weight: 700;
+    color: var(--blue);
+    margin-top: 10px;
+}
+
+dd {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* ===========================
+   PRINT OPTIMIZATIONS
+   =========================== */
+@media print {
+    .cover-page {
+        page-break-after: always;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        page-break-after: avoid;
+    }
+
+    pre,
+    blockquote,
+    table,
+    figure,
+    .mermaid {
+        page-break-inside: avoid;
+    }
+}

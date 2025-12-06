@@ -11,6 +11,7 @@ import fs from 'fs-extra';
 import { fileURLToPath } from 'url';
 import { processMarkdown } from './src/html-processor.js';
 import { generatePdf } from './src/pdf-generator.js';
+import { downloadAndReplaceImages, cleanupTempImages } from './src/image-downloader.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,6 +23,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+
+// Explicitly serve index.html for root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Configure Multer for file uploads (no file size limit)
 const upload = multer({
@@ -77,6 +83,7 @@ app.get('/api/themes', async (req, res) => {
 app.post('/api/generate', upload.single('markdown'), async (req, res) => {
     let uploadedFilePath = null;
     let outputPdfPath = null;
+    let tempDir = null;
 
     try {
         if (!req.file) {
@@ -108,9 +115,16 @@ app.post('/api/generate', upload.single('markdown'), async (req, res) => {
         const themePath = path.join(__dirname, 'assets/themes', `${theme}.css`);
         const cssContent = await fs.readFile(themePath, 'utf-8');
 
-        // Read base template
-        const templatePath = path.join(__dirname, 'assets/templates/base.html');
+        // Choose template based on content size
+        // Use simple template (no Paged.js) for large documents (> 50KB or > 1000 lines)
+        const isLargeDocument = markdownContent.length > 50000 ||
+                                markdownContent.split('\n').length > 1000;
+
+        const templateName = isLargeDocument ? 'base-simple.html' : 'base.html';
+        const templatePath = path.join(__dirname, 'assets/templates', templateName);
         let htmlTemplate = await fs.readFile(templatePath, 'utf-8');
+
+        console.log(`📄 Using template: ${templateName} (size: ${(markdownContent.length / 1024).toFixed(2)}KB)`);
 
         // Simple template replacement (Jinja2-like syntax)
         const templateData = {
@@ -129,8 +143,11 @@ app.post('/api/generate', upload.single('markdown'), async (req, res) => {
             return templateData[key] || '';
         });
 
-        // Special handling for css_content (has curly braces in template)
-        htmlTemplate = htmlTemplate.replace(/\{\s*\{\s*css_content\s*\}\s*\}/g, cssContent);
+        // Download images to local files (NEW APPROACH - FIXED!)
+        console.log('🖼️  Downloading external images...');
+        const result = await downloadAndReplaceImages(htmlTemplate, __dirname);
+        htmlTemplate = result.html;
+        tempDir = result.tempDir;
 
         // Generate unique output filename
         const timestamp = Date.now();
@@ -146,6 +163,7 @@ app.post('/api/generate', upload.single('markdown'), async (req, res) => {
             try {
                 if (uploadedFilePath) await fs.remove(uploadedFilePath);
                 if (outputPdfPath) await fs.remove(outputPdfPath);
+                if (tempDir) await cleanupTempImages(tempDir);
             } catch (cleanupError) {
                 console.error('Cleanup error:', cleanupError);
             }
@@ -162,6 +180,7 @@ app.post('/api/generate', upload.single('markdown'), async (req, res) => {
         try {
             if (uploadedFilePath) await fs.remove(uploadedFilePath);
             if (outputPdfPath) await fs.remove(outputPdfPath);
+            if (tempDir) await cleanupTempImages(tempDir);
         } catch (cleanupError) {
             console.error('Cleanup error:', cleanupError);
         }
@@ -176,7 +195,7 @@ app.post('/api/generate', upload.single('markdown'), async (req, res) => {
 
 /**
  * POST /api/preview
- * Returns rendered HTML preview (optional endpoint for future use)
+ * Returns rendered HTML preview
  */
 app.post('/api/preview', upload.single('markdown'), async (req, res) => {
     try {
@@ -190,20 +209,46 @@ app.post('/api/preview', upload.single('markdown'), async (req, res) => {
         const markdownContent = await fs.readFile(req.file.path, 'utf-8');
         const { html, metadata } = await processMarkdown(markdownContent);
 
+        // Read theme CSS
+        const theme = req.body.theme || 'obsidian';
+        const themePath = path.join(__dirname, 'assets/themes', `${theme}.css`);
+        let cssContent = '';
+        try {
+            cssContent = await fs.readFile(themePath, 'utf-8');
+        } catch (e) {
+            console.warn(`Theme ${theme} not found, using default.`);
+        }
+
+        // Choose template based on content size
+        const isLargeDocument = markdownContent.length > 50000 ||
+                                markdownContent.split('\n').length > 1000;
+
+        const templateName = isLargeDocument ? 'base-simple.html' : 'base.html';
+        const templatePath = path.join(__dirname, 'assets/templates', templateName);
+        let htmlTemplate = await fs.readFile(templatePath, 'utf-8');
+
+        const templateData = {
+            title: metadata.title || 'Preview',
+            subtitle: metadata.subtitle || '',
+            author: metadata.author || '',
+            date: metadata.date || new Date().toLocaleDateString('pt-BR'),
+            css_content: cssContent,
+            content: html,
+            layoutClass: metadata.layout || 'default-layout'
+        };
+
+        // Replace template variables
+        htmlTemplate = htmlTemplate.replace(/\{\{\s*(\w+)\s*\}\}/g, (match, key) => {
+            return templateData[key] || '';
+        });
+
         // Cleanup uploaded file
         await fs.remove(req.file.path);
 
-        res.json({
-            success: true,
-            html,
-            metadata
-        });
+        res.send(htmlTemplate);
     } catch (error) {
         console.error('Preview error:', error);
-        res.status(500).json({
-            success: false,
-            error: 'Failed to generate preview'
-        });
+        res.status(500).send(`Error: ${error.message}`);
     }
 });
 

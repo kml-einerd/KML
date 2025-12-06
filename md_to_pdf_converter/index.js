@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url';
 import { analyzeContent } from './src/content-analyzer.js';
 import { processMarkdown } from './src/html-processor.js';
 import { generatePdf } from './src/pdf-generator.js';
+import { embedImagesInHtml } from './src/image-embedder.js';
 
 // ESM equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -73,7 +74,7 @@ async function main() {
     }
 
     // 4. Inject Data into Template
-    const finalHtml = template
+    let finalHtml = template
         .replace('{{ title }}', metadata.title || 'Untitled')
         .replace('{{ subtitle }}', metadata.subtitle || '')
         .replace('{{ author }}', metadata.author || '')
@@ -82,6 +83,10 @@ async function main() {
         .replace('{{ css_content }}', themeCss)
         .replace('{{ layoutClass }}', stats.layoutClass)
         .replace('{{ mermaidTheme }}', themeName.includes('dark') || themeName.includes('retro') ? 'dark' : 'default');
+
+    // 4.5. Embed external images as base64
+    console.log('🖼️  Embedding external images...');
+    finalHtml = await embedImagesInHtml(finalHtml);
 
     // 5. Generate PDF
     const outputPath = path.basename(inputFile, '.md') + '.pdf';
