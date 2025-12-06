@@ -29,22 +29,31 @@ jobs:
         working-directory: ./md_to_pdf_converter
         run: npm ci
 
-      - name: Create output directory
-        working-directory: ./md_to_pdf_converter
-        run: mkdir -p output
+      - name: Install Puppeteer Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
 
       - name: Convert Markdown to PDF
         working-directory: ./md_to_pdf_converter
         run: |
           # Executa o conversor
-          # Ajuste o nome do arquivo de entrada conforme necessário
+          # O PDF é gerado na raiz da pasta md_to_pdf_converter
           node index.js convert exemplo.md --theme modern_blue
           
+          # Verificar se o arquivo foi gerado
+          ls -la *.pdf
+
           # Prepara arquivos para publicação no GitHub Pages
-          # Movemos para uma pasta na raiz do workspace do runner para facilitar o upload
           mkdir -p ../public
-          cp output/*.pdf ../public/
-          # Se quiser indexar, crie um index.html simples ou copie um existente
+
+          # Copia o PDF gerado para a pasta public
+          cp exemplo.pdf ../public/
+
+          # Se houver outros PDFs (do teste.md por exemplo se fosse rodado), copia também
+          # cp *.pdf ../public/ 2>/dev/null || true
+
+          # Cria index.html simples
           echo "<h1>PDFs Gerados</h1><ul><li><a href='exemplo.pdf'>exemplo.pdf</a></li></ul>" > ../public/index.html
 
       - name: Upload PDF Artifact
