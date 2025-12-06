@@ -13,9 +13,12 @@
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
+        // Expose mermaid to window for Puppeteer to access
+        window.mermaid = mermaid;
+
         // Initialize Mermaid with NEO look
         mermaid.initialize({
-            startOnLoad: false, // We will manually run it with Paged.js
+            startOnLoad: false, // We will manually run it with Puppeteer
             look: 'neo',  // Enable the sleek, modern NEO look
             theme: '{{ mermaidTheme }}',  // Dynamic theme based on PDF theme
             securityLevel: 'loose',
@@ -37,6 +40,11 @@
     </script>
 
     <!-- Paged.js for Print Layout -->
+    <script>
+        window.PagedConfig = {
+            auto: false
+        };
+    </script>
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
 
     <style>

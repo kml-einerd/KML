@@ -58,8 +58,23 @@ async function main() {
 
     // Check if theme exists in assets/themes
     // Handle both hyphen and underscore naming if needed, or just trust input
-    const themeCssPath = path.join(__dirname, 'assets', 'themes', `${themeName}.css`);
+    let themeCssPath = path.join(__dirname, 'assets', 'themes', `${themeName}.css`);
     let themeCss = '';
+
+    if (!fs.existsSync(themeCssPath)) {
+        // Try underscore version
+        const underscoreName = themeName.replace(/-/g, '_');
+        const underscorePath = path.join(__dirname, 'assets', 'themes', `${underscoreName}.css`);
+        if (fs.existsSync(underscorePath)) {
+             themeCssPath = underscorePath;
+        } else {
+             // Try check if user provided .css
+             if (!themeName.endsWith('.css')) {
+                 const cssPath = path.join(__dirname, 'assets', 'themes', `${themeName}.css`);
+                 if (fs.existsSync(cssPath)) themeCssPath = cssPath;
+             }
+        }
+    }
 
     if (fs.existsSync(themeCssPath)) {
         themeCss = await fs.readFile(themeCssPath, 'utf-8');
