@@ -44,6 +44,7 @@ async function main() {
 
     console.log(`🔍 Analyzing ${inputFile}...`);
     const markdown = await fs.readFile(inputFile, 'utf-8');
+    console.log(`📏 Input Markdown length: ${markdown.length} chars`);
 
     // 1. Analyze Content
     const stats = analyzeContent(markdown);
@@ -51,6 +52,7 @@ async function main() {
 
     // 2. Process Markdown to HTML
     const { html, metadata } = await processMarkdown(markdown);
+    console.log(`📏 Processed HTML length: ${html.length} chars`);
 
     // 3. Load Resources
     const templatePath = path.join(__dirname, 'assets', 'templates', 'base.html');
@@ -99,9 +101,12 @@ async function main() {
         .replace('{{ layoutClass }}', stats.layoutClass)
         .replace('{{ mermaidTheme }}', themeName.includes('dark') || themeName.includes('retro') ? 'dark' : 'default');
 
+    console.log(`📏 Final HTML length before embedding: ${finalHtml.length} chars`);
+
     // 4.5. Embed external images as base64
     console.log('🖼️  Embedding external images...');
     finalHtml = await embedImagesInHtml(finalHtml);
+    console.log(`📏 Final HTML length after embedding: ${finalHtml.length} chars`);
 
     // 5. Generate PDF
     const outputPath = path.basename(inputFile, '.md') + '.pdf';
