@@ -1,0 +1,245 @@
+/* ===================================================================
+   TEMA: Modern Blue (Profissional) - Inspirado em Stripe/Linear/Vercel
+   Contexto: SaaS Moderna do Vale do Silício
+   =================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+    /* Paleta Moderna - Blues e Neutros */
+    --primary-blue: #0070F3;
+    --secondary-blue: #3291FF;
+    --dark-bg: #111111;
+    --gray-900: #1A1A1A;
+    --gray-800: #2A2A2A;
+    --gray-700: #3F3F3F;
+    --gray-300: #CCCCCC;
+    --gray-100: #F5F5F5;
+    --accent-purple: #7928CA;
+    
+    /* Tipografia */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@page {
+    size: A4;
+    margin: 2.5cm;
+    
+    @bottom-right {
+        content: counter(page);
+        font-family: var(--font-sans);
+        font-size: 9pt;
+        color: var(--gray-700);
+    }
+}
+
+/* === CAPA === */
+.cover-page {
+    page-break-after: always;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-purple) 100%);
+    color: white;
+    text-align: center;
+    padding: 60px;
+}
+
+.cover-title {
+    font-family: var(--font-sans);
+    font-size: 48pt;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.cover-subtitle {
+    font-size: 18pt;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.cover-author {
+    font-size: 14pt;
+    font-weight: 500;
+    margin-top: 60px;
+}
+
+.cover-date {
+    font-size: 11pt;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+/* === CORPO DO CONTEÚDO === */
+.content-body {
+    font-family: var(--font-sans);
+    font-size: 11pt;
+    line-height: 1.7;
+    color: var(--gray-900);
+}
+
+h1 {
+    font-size: 32pt;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    color: var(--dark-bg);
+    letter-spacing: -0.03em;
+    page-break-after: avoid;
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 15px;
+}
+
+h2 {
+    font-size: 24pt;
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    color: var(--gray-900);
+    letter-spacing: -0.02em;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 18pt;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    color: var(--primary-blue);
+    page-break-after: avoid;
+}
+
+h4, h5, h6 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--gray-800);
+}
+
+p {
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    border-bottom: 1px solid var(--secondary-blue);
+    transition: all 0.2s;
+}
+
+/* === LISTAS === */
+ul, ol {
+    margin-left: 25px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+/* === CITAÇÕES === */
+blockquote {
+    border-left: 4px solid var(--primary-blue);
+    background: var(--gray-100);
+    padding: 20px 25px;
+    margin: 25px 0;
+    font-style: italic;
+    color: var(--gray-800);
+    border-radius: 0 8px 8px 0;
+}
+
+/* === CÓDIGO === */
+code {
+    font-family: var(--font-mono);
+    background: var(--gray-100);
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 10pt;
+    color: var(--accent-purple);
+    border: 1px solid var(--gray-300);
+}
+
+pre {
+    background: var(--dark-bg);
+    color: #E6EDF3;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 20px 0;
+    page-break-inside: avoid;
+    border: 1px solid var(--gray-800);
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    color: #E6EDF3;
+    border: none;
+    font-size: 9.5pt;
+    line-height: 1.5;
+}
+
+/* === TABELAS === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    page-break-inside: avoid;
+    font-size: 10pt;
+}
+
+th, td {
+    border: 1px solid var(--gray-300);
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background: var(--primary-blue);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: 9pt;
+}
+
+tr:nth-child(even) {
+    background: var(--gray-100);
+}
+
+/* === IMAGENS === */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 25px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* === DIVISORES === */
+hr {
+    border: none;
+    border-top: 2px solid var(--gray-300);
+    margin: 35px 0;
+}
+
+/* === CHECKBOXES === */
+li:has(> :first-child:is(☐, ☑)) {
+    list-style: none;
+    margin-left: -25px;
+}

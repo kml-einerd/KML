@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+
+    <!-- Highlight.js for Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+
+    <!-- Paged.js for Print Layout -->
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+
+    <!-- Mermaid.js for Diagrams -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: '{{ mermaidTheme }}',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#764ba2',
+                lineColor: '#94a3b8',
+                secondaryColor: '#10b981',
+                tertiaryColor: '#f59e0b',
+                fontSize: '16px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            },
+            flowchart: {
+                htmlLabels: true,
+                curve: 'basis',
+                useMaxWidth: true,
+                padding: 15
+            },
+            sequence: {
+                diagramMarginX: 50,
+                diagramMarginY: 10,
+                actorMargin: 50,
+                width: 150,
+                height: 65,
+                boxMargin: 10,
+                boxTextMargin: 5,
+                noteMargin: 10,
+                messageMargin: 35
+            },
+            gantt: {
+                titleTopMargin: 25,
+                barHeight: 20,
+                barGap: 4,
+                topPadding: 50,
+                leftPadding: 75,
+                gridLineStartPadding: 35,
+                fontSize: 12
+            }
+        });
+
+        // Ensure Mermaid renders before PDF generation
+        window.mermaidReady = mermaid.run();
+    </script>
+
+    <style>
+        /* Base styles for better rendering */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Mermaid diagram container */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            page-break-inside: avoid;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95em;
+            page-break-inside: avoid;
+        }
+
+        thead {
+            background: #f1f5f9;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #cbd5e1;
+        }
+
+        th {
+            font-weight: 600;
+            color: #1e293b;
+            background: #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tr:hover {
+            background: #f1f5f9;
+        }
+
+        /* Code blocks */
+        pre {
+            margin: 1.5rem 0;
+            padding: 1.25rem;
+            background: #1e293b;
+            border-radius: 6px;
+            overflow-x: auto;
+            page-break-inside: avoid;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #e2e8f0;
+        }
+
+        p code, li code {
+            background: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            color: #e11d48;
+            font-size: 0.9em;
+        }
+
+        /* Task lists */
+        input[type="checkbox"] {
+            margin-right: 0.5em;
+        }
+
+        ul.contains-task-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul.contains-task-list li {
+            padding-left: 1.5em;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid #667eea;
+            background: #f8fafc;
+            font-style: italic;
+            color: #475569;
+        }
+
+        /* Horizontal rules */
+        hr {
+            margin: 2rem 0;
+            border: none;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        /* Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: 6px;
+            page-break-inside: avoid;
+        }
+
+        /* Links */
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Injected Theme CSS Below */
+    </style>
+
+    <style>
+        {{ css_content }}
+    </style>
+</head>
+
+<body class="{{ layoutClass }}">
+
+    <!-- Cover Page -->
+    <div class="cover-page">
+        <div class="cover-content">
+            <h1 class="cover-title">{{ title }}</h1>
+            <p class="cover-subtitle">{{ subtitle }}</p>
+            <p class="cover-author">{{ author }}</p>
+            <p class="cover-date">{{ date }}</p>
+        </div>
+    </div>
+
+    <!-- Content Body -->
+    <div class="content-body">
+        {{ content }}
+    </div>
+
+</body>
+
+</html>

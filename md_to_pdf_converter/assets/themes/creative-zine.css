@@ -1,0 +1,15 @@
+/* TEMA 6: Creative Zine - Arte/Moda/Brutalismo */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono:wght@400;700&display=swap');
+:root{--neon:#FF006E;--black:#000;--yellow:#FFBE0B}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:1.5cm}
+.cover-page{page-break-after:always;height:100vh;background:var(--black);color:var(--neon);display:flex;align-items:center;justify-content:center;transform:rotate(-2deg)}
+.cover-title{font-family:'Space Grotesk',sans-serif;font-size:64pt;font-weight:700;text-transform:uppercase;line-height:0.9}
+.content-body{font-family:'Space Mono',monospace;font-size:10pt;line-height:1.6;color:var(--black)}
+h1{font-family:'Space Grotesk',sans-serif;font-size:42pt;font-weight:700;margin:30px 0 15px;text-transform:uppercase;color:var(--neon);letter-spacing:-0.02em}
+h2{font-size:28pt;margin:25px 0 12px;background:var(--yellow);padding:10px;display:inline-block}
+blockquote{border:4px solid var(--black);padding:20px;margin:25px 0;background:var(--yellow);font-weight:700}
+code{background:var(--black);color:var(--neon);padding:4px 8px;font-family:'Space Mono',monospace}
+pre{background:var(--black);color:var(--yellow);padding:20px;border:3px solid var(--neon);margin:20px 0}
+table{width:100%;border:3px solid var(--black);margin:20px 0}
+th{background:var(--black);color:var(--neon);padding:15px;font-family:'Space Grotesk',sans-serif;font-size:12pt}

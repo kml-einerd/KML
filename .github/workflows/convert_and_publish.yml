@@ -1,0 +1,66 @@
+name: Convert MD to PDF and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: md_to_pdf_converter/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./md_to_pdf_converter
+        run: npm ci
+
+      - name: Create output directory
+        working-directory: ./md_to_pdf_converter
+        run: mkdir -p output
+
+      - name: Convert Markdown to PDF
+        working-directory: ./md_to_pdf_converter
+        run: |
+          # Executa o conversor
+          # Ajuste o nome do arquivo de entrada conforme necessário
+          node index.js convert exemplo.md --theme modern_blue
+          
+          # Prepara arquivos para publicação no GitHub Pages
+          # Movemos para uma pasta na raiz do workspace do runner para facilitar o upload
+          mkdir -p ../public
+          cp output/*.pdf ../public/
+          # Se quiser indexar, crie um index.html simples ou copie um existente
+          echo "<h1>PDFs Gerados</h1><ul><li><a href='exemplo.pdf'>exemplo.pdf</a></li></ul>" > ../public/index.html
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF-Output
+          path: public/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'public'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,1546 @@
+2025-11-30 22:14:04 | INFO     | Logger configurado com sucesso
+2025-11-30 22:20:37 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-11-30 22:20:37 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-11-30 22:22:32 | INFO     | Lendo cda_fi_BLC_1_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:22:36 | SUCCESS  | ✓ 27,311 linhas lidas de cda_fi_BLC_1_202510.csv
+2025-11-30 22:22:42 | INFO     | Lendo cda_fi_BLC_2_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:22:43 | SUCCESS  | ✓ 38,274 linhas lidas de cda_fi_BLC_2_202510.csv
+2025-11-30 22:22:45 | INFO     | Lendo cda_fi_BLC_3_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:22:45 | SUCCESS  | ✓ 132 linhas lidas de cda_fi_BLC_3_202510.csv
+2025-11-30 22:22:51 | INFO     | Lendo cda_fi_BLC_4_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:22:52 | SUCCESS  | ✓ 108,791 linhas lidas de cda_fi_BLC_4_202510.csv
+2025-11-30 22:22:55 | INFO     | Lendo cda_fi_BLC_5_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:22:55 | SUCCESS  | ✓ 33,278 linhas lidas de cda_fi_BLC_5_202510.csv
+2025-11-30 22:22:58 | INFO     | Lendo cda_fi_BLC_6_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:22:58 | SUCCESS  | ✓ 2,819 linhas lidas de cda_fi_BLC_6_202510.csv
+2025-11-30 22:23:03 | INFO     | Lendo cda_fi_BLC_7_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:23:03 | SUCCESS  | ✓ 53,606 linhas lidas de cda_fi_BLC_7_202510.csv
+2025-11-30 22:23:12 | INFO     | Lendo cda_fi_BLC_8_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:23:13 | SUCCESS  | ✓ 188,972 linhas lidas de cda_fi_BLC_8_202510.csv
+2025-11-30 22:23:13 | INFO     | Total após concatenação: 453,183 linhas
+2025-11-30 22:23:16 | INFO     | Lendo cda_fi_PL_202510.csv (encoding: ISO-8859-1)
+2025-11-30 22:23:16 | SUCCESS  | ✓ 25,235 linhas lidas de cda_fi_PL_202510.csv
+2025-11-30 22:23:16 | INFO     | Total após concatenação: 25,235 linhas
+2025-11-30 22:23:16 | INFO     | Limpando balancete (453,183 linhas)...
+2025-11-30 22:23:29 | SUCCESS  | ✓ Balancete limpo: 453,183 linhas
+2025-11-30 22:23:29 | INFO     | Limpando PL (25,235 linhas)...
+2025-11-30 22:23:30 | WARNING  | Removidos 138 fundos com PL <= 0
+2025-11-30 22:23:30 | SUCCESS  | ✓ PL limpo: 25,097 linhas
+2025-11-30 22:23:30 | INFO     | Iniciando pipeline de filtros...
+2025-11-30 22:23:30 | INFO     | Filtro 'Apenas Ações': 453,183 → 0 (redução: 100.0%)
+2025-11-30 22:23:30 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-11-30 22:23:30 | INFO     | Identificados 12,223 grandes fundos (PL > R$ 50,000,000)
+2025-11-30 22:23:30 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-11-30 22:23:30 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-11-30 22:23:30 | SUCCESS  | ✓ Pipeline concluído: 453,183 → 0 (redução total: 100.0%)
+2025-11-30 22:23:30 | INFO     | Calculando Top Movers...
+2025-11-30 22:23:30 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-11-30 22:23:30 | INFO     | Calculando Ativos Populares...
+2025-11-30 22:23:30 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-11-30 22:24:20 | INFO     | Cliente Supabase inicializado
+2025-11-30 22:24:21 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-11-30 22:26:34 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-11-30 22:30:26 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-11-30 22:33:47 | INFO     | Logger configurado com sucesso
+2025-11-30 23:08:40 | INFO     | Logger configurado com sucesso
+2025-12-01 00:35:15 | INFO     | Logger configurado com sucesso
+2025-12-01 00:38:07 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 00:38:07 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 00:38:11 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:38:12 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 00:38:12 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:38:13 | ERROR    | Erro ao ler cda_fi_BLC_2_202508.csv: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 00:38:13 | ERROR    | Error tokenizing data. C error: EOF inside string starting at row 49452
+Traceback (most recent call last):
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 363, in <module>
+    main()
+    └ <function main at 0x115af68e0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 360, in main
+    app.executar()
+    │   └ <function RadarETL.executar at 0x116822ac0>
+    └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 353, in executar
+    continuar = self.menu_principal()
+                │    └ <function RadarETL.menu_principal at 0x115c163e0>
+                └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 71, in menu_principal
+    self.processar_arquivos()
+    │    └ <function RadarETL.processar_arquivos at 0x116822480>
+    └ <__main__.RadarETL object at 0x10cd693d0>
+
+> File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 130, in processar_arquivos
+    df_blc_raw = self.reader.ler_multiplos_csvs(arquivos_blc)
+                 │    │      │                  └ [PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.cs...
+                 │    │      └ <function CVMReader.ler_multiplos_csvs at 0x115c15760>
+                 │    └ <processors.csv_reader.CVMReader object at 0x10e80c610>
+                 └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 132, in ler_multiplos_csvs
+    df = self.ler_csv(filepath, colunas_obrigatorias)
+         │    │       │         └ None
+         │    │       └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_2_202508.csv')
+         │    └ <function CVMReader.ler_csv at 0x115c156c0>
+         └ <processors.csv_reader.CVMReader object at 0x10e80c610>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 76, in ler_csv
+    df = pd.read_csv(
+         │  └ <function read_csv at 0x11564f920>
+         └ <module 'pandas' from '/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/__...
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           │     │                   └ {'delimiter': ';', 'header': 'infer', 'names': None, 'index_col': None, 'usecols': None, 'dtype': <class 'str'>, 'engine': 'c...
+           │     └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_2_202508.csv')
+           └ <function _read at 0x11564f560>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 626, in _read
+    return parser.read(nrows)
+           │      │    └ None
+           │      └ <function TextFileReader.read at 0x115670680>
+           └ <pandas.io.parsers.readers.TextFileReader object at 0x10e5a9c90>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1923, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        │    │       └ <function CParserWrapper.read at 0x11564cfe0>
+        │    └ <pandas.io.parsers.c_parser_wrapper.CParserWrapper object at 0x115b00550>
+        └ <pandas.io.parsers.readers.TextFileReader object at 0x10e5a9c90>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 239, in read
+    data = self._reader.read(nrows)
+           │    │       │    └ None
+           │    │       └ <cyfunction TextReader.read at 0x115606680>
+           │    └ <pandas._libs.parsers.TextReader object at 0x116143640>
+           └ <pandas.io.parsers.c_parser_wrapper.CParserWrapper object at 0x115b00550>
+  File "pandas/_libs/parsers.pyx", line 820, in pandas._libs.parsers.TextReader.read
+  File "pandas/_libs/parsers.pyx", line 914, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2061, in pandas._libs.parsers.raise_parser_error
+
+pandas.errors.ParserError: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 00:39:05 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 00:39:05 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 00:39:07 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:39:07 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 00:39:08 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:39:08 | ERROR    | Erro ao ler cda_fi_BLC_2_202508.csv: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 00:39:08 | ERROR    | Error tokenizing data. C error: EOF inside string starting at row 49452
+Traceback (most recent call last):
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 363, in <module>
+    main()
+    └ <function main at 0x115af68e0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 360, in main
+    app.executar()
+    │   └ <function RadarETL.executar at 0x116822ac0>
+    └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 353, in executar
+    continuar = self.menu_principal()
+                │    └ <function RadarETL.menu_principal at 0x115c163e0>
+                └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 71, in menu_principal
+    self.processar_arquivos()
+    │    └ <function RadarETL.processar_arquivos at 0x116822480>
+    └ <__main__.RadarETL object at 0x10cd693d0>
+
+> File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 130, in processar_arquivos
+    df_blc_raw = self.reader.ler_multiplos_csvs(arquivos_blc)
+                 │    │      │                  └ [PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.cs...
+                 │    │      └ <function CVMReader.ler_multiplos_csvs at 0x115c15760>
+                 │    └ <processors.csv_reader.CVMReader object at 0x10e80c610>
+                 └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 132, in ler_multiplos_csvs
+    df = self.ler_csv(filepath, colunas_obrigatorias)
+         │    │       │         └ None
+         │    │       └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_2_202508.csv')
+         │    └ <function CVMReader.ler_csv at 0x115c156c0>
+         └ <processors.csv_reader.CVMReader object at 0x10e80c610>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 76, in ler_csv
+    df = pd.read_csv(
+         │  └ <function read_csv at 0x11564f920>
+         └ <module 'pandas' from '/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/__...
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           │     │                   └ {'delimiter': ';', 'header': 'infer', 'names': None, 'index_col': None, 'usecols': None, 'dtype': <class 'str'>, 'engine': 'c...
+           │     └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_2_202508.csv')
+           └ <function _read at 0x11564f560>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 626, in _read
+    return parser.read(nrows)
+           │      │    └ None
+           │      └ <function TextFileReader.read at 0x115670680>
+           └ <pandas.io.parsers.readers.TextFileReader object at 0x117014750>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1923, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        │    │       └ <function CParserWrapper.read at 0x11564cfe0>
+        │    └ <pandas.io.parsers.c_parser_wrapper.CParserWrapper object at 0x117439f50>
+        └ <pandas.io.parsers.readers.TextFileReader object at 0x117014750>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 239, in read
+    data = self._reader.read(nrows)
+           │    │       │    └ None
+           │    │       └ <cyfunction TextReader.read at 0x115606680>
+           │    └ <pandas._libs.parsers.TextReader object at 0x1172583a0>
+           └ <pandas.io.parsers.c_parser_wrapper.CParserWrapper object at 0x117439f50>
+  File "pandas/_libs/parsers.pyx", line 820, in pandas._libs.parsers.TextReader.read
+  File "pandas/_libs/parsers.pyx", line 914, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2061, in pandas._libs.parsers.raise_parser_error
+
+pandas.errors.ParserError: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 00:43:58 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 00:43:58 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 00:44:01 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:44:01 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 00:44:02 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:44:02 | ERROR    | Erro ao ler cda_fi_BLC_2_202508.csv: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 00:44:02 | ERROR    | Error tokenizing data. C error: EOF inside string starting at row 49452
+Traceback (most recent call last):
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 363, in <module>
+    main()
+    └ <function main at 0x115af68e0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 360, in main
+    app.executar()
+    │   └ <function RadarETL.executar at 0x116822ac0>
+    └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 353, in executar
+    continuar = self.menu_principal()
+                │    └ <function RadarETL.menu_principal at 0x115c163e0>
+                └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 71, in menu_principal
+    self.processar_arquivos()
+    │    └ <function RadarETL.processar_arquivos at 0x116822480>
+    └ <__main__.RadarETL object at 0x10cd693d0>
+
+> File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 130, in processar_arquivos
+    df_blc_raw = self.reader.ler_multiplos_csvs(arquivos_blc)
+                 │    │      │                  └ [PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.cs...
+                 │    │      └ <function CVMReader.ler_multiplos_csvs at 0x115c15760>
+                 │    └ <processors.csv_reader.CVMReader object at 0x10e80c610>
+                 └ <__main__.RadarETL object at 0x10cd693d0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 132, in ler_multiplos_csvs
+    df = self.ler_csv(filepath, colunas_obrigatorias)
+         │    │       │         └ None
+         │    │       └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_2_202508.csv')
+         │    └ <function CVMReader.ler_csv at 0x115c156c0>
+         └ <processors.csv_reader.CVMReader object at 0x10e80c610>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 76, in ler_csv
+    df = pd.read_csv(
+         │  └ <function read_csv at 0x11564f920>
+         └ <module 'pandas' from '/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/__...
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           │     │                   └ {'delimiter': ';', 'header': 'infer', 'names': None, 'index_col': None, 'usecols': None, 'dtype': <class 'str'>, 'engine': 'c...
+           │     └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_2_202508.csv')
+           └ <function _read at 0x11564f560>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 626, in _read
+    return parser.read(nrows)
+           │      │    └ None
+           │      └ <function TextFileReader.read at 0x115670680>
+           └ <pandas.io.parsers.readers.TextFileReader object at 0x1176a4890>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1923, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+        │    │       └ <function CParserWrapper.read at 0x11564cfe0>
+        │    └ <pandas.io.parsers.c_parser_wrapper.CParserWrapper object at 0x117412610>
+        └ <pandas.io.parsers.readers.TextFileReader object at 0x1176a4890>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 239, in read
+    data = self._reader.read(nrows)
+           │    │       │    └ None
+           │    │       └ <cyfunction TextReader.read at 0x115606680>
+           │    └ <pandas._libs.parsers.TextReader object at 0x116143880>
+           └ <pandas.io.parsers.c_parser_wrapper.CParserWrapper object at 0x117412610>
+  File "pandas/_libs/parsers.pyx", line 820, in pandas._libs.parsers.TextReader.read
+  File "pandas/_libs/parsers.pyx", line 914, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 891, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2061, in pandas._libs.parsers.raise_parser_error
+
+pandas.errors.ParserError: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 00:50:40 | INFO     | Logger configurado com sucesso
+2025-12-01 00:50:50 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 00:50:50 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 00:50:51 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:50:51 | ERROR    | Erro ao ler cda_fi_BLC_1_202508.csv: The 'low_memory' option is not supported with the 'python' engine
+2025-12-01 00:50:51 | ERROR    | The 'low_memory' option is not supported with the 'python' engine
+Traceback (most recent call last):
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 375, in <module>
+    main()
+    └ <function main at 0x10fb528e0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 372, in main
+    app.executar()
+    │   └ <function RadarETL.executar at 0x110922ac0>
+    └ <__main__.RadarETL object at 0x106dc1090>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 365, in executar
+    continuar = self.menu_principal()
+                │    └ <function RadarETL.menu_principal at 0x10fc7a3e0>
+                └ <__main__.RadarETL object at 0x106dc1090>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 71, in menu_principal
+    self.processar_arquivos()
+    │    └ <function RadarETL.processar_arquivos at 0x110922480>
+    └ <__main__.RadarETL object at 0x106dc1090>
+
+> File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 142, in processar_arquivos
+    df_blc_raw = self.reader.ler_multiplos_csvs(arquivos_blc)
+                 │    │      │                  └ [PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.cs...
+                 │    │      └ <function CVMReader.ler_multiplos_csvs at 0x10fc79760>
+                 │    └ <processors.csv_reader.CVMReader object at 0x106dc1110>
+                 └ <__main__.RadarETL object at 0x106dc1090>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 137, in ler_multiplos_csvs
+    df = self.ler_csv(filepath, colunas_obrigatorias)
+         │    │       │         └ None
+         │    │       └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.csv')
+         │    └ <function CVMReader.ler_csv at 0x10fc796c0>
+         └ <processors.csv_reader.CVMReader object at 0x106dc1110>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/processors/csv_reader.py", line 77, in ler_csv
+    df = pd.read_csv(
+         │  └ <function read_csv at 0x10f6ab920>
+         └ <module 'pandas' from '/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/__...
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           │     │                   └ {'delimiter': ';', 'header': 'infer', 'names': None, 'index_col': None, 'usecols': None, 'dtype': <class 'str'>, 'engine': 'p...
+           │     └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.csv')
+           └ <function _read at 0x10f6ab560>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             │              │                     └ {'delimiter': ';', 'header': 'infer', 'names': None, 'index_col': None, 'usecols': None, 'dtype': <class 'str'>, 'engine': 'p...
+             │              └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago/cda_fi_BLC_1_202508.csv')
+             └ <class 'pandas.io.parsers.readers.TextFileReader'>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1607, in __init__
+    options = self._get_options_with_defaults(engine)
+              │    │                          └ 'python'
+              │    └ <function TextFileReader._get_options_with_defaults at 0x10f6cc2c0>
+              └ <pandas.io.parsers.readers.TextFileReader object at 0x110aaab10>
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1660, in _get_options_with_defaults
+    raise ValueError(
+
+ValueError: The 'low_memory' option is not supported with the 'python' engine
+2025-12-01 00:56:03 | INFO     | Logger configurado com sucesso
+2025-12-01 00:57:16 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 00:57:16 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 00:57:18 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:18 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 00:57:19 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:20 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 00:57:20 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:20 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 00:57:21 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:22 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 00:57:22 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:23 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 00:57:23 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:23 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 00:57:24 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:25 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 00:57:25 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:28 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 00:57:28 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 00:57:29 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 00:57:29 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 00:57:29 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 00:57:29 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 00:57:42 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 00:57:42 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 00:57:42 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 00:57:42 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 00:57:42 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 00:57:42 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 00:57:42 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 00:57:42 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 00:57:42 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 00:57:42 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 00:57:42 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 00:57:42 | INFO     | Calculando Top Movers...
+2025-12-01 00:57:42 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 00:57:42 | INFO     | Calculando Ativos Populares...
+2025-12-01 00:57:42 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 00:59:49 | INFO     | Cliente Supabase inicializado
+2025-12-01 00:59:51 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 01:17:28 | INFO     | Logger configurado com sucesso
+2025-12-01 01:17:34 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 01:17:34 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 01:17:36 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:36 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 01:17:37 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:38 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 01:17:38 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:38 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 01:17:39 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:40 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 01:17:41 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:41 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 01:17:41 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:41 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 01:17:42 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:43 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 01:17:44 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:46 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 01:17:46 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 01:17:47 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:17:47 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 01:17:47 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 01:17:47 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 01:18:00 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 01:18:00 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 01:18:00 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 01:18:00 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 01:18:00 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 01:18:00 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 01:18:00 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:18:00 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 01:18:00 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:18:00 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 01:18:00 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 01:18:00 | INFO     | Calculando Top Movers...
+2025-12-01 01:18:01 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 01:18:01 | INFO     | Calculando Ativos Populares...
+2025-12-01 01:18:01 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 01:18:33 | INFO     | Cliente Supabase inicializado
+2025-12-01 01:18:35 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 01:22:30 | INFO     | Logger configurado com sucesso
+2025-12-01 01:22:48 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 01:22:48 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 01:22:58 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:22:58 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 01:22:59 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:00 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 01:23:00 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:00 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 01:23:00 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:02 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 01:23:02 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:02 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 01:23:03 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:03 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 01:23:04 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:05 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 01:23:05 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:07 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 01:23:08 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 01:23:09 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:23:09 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 01:23:09 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 01:23:09 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 01:23:21 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 01:23:21 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 01:23:22 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 01:23:22 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 01:23:22 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 01:23:22 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 01:23:22 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:23:22 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 01:23:22 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:23:22 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 01:23:22 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 01:23:22 | INFO     | Calculando Top Movers...
+2025-12-01 01:23:22 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 01:23:22 | INFO     | Calculando Ativos Populares...
+2025-12-01 01:23:22 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 01:34:44 | INFO     | Cliente Supabase inicializado
+2025-12-01 01:34:45 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 01:34:55 | INFO     | Logger configurado com sucesso
+2025-12-01 01:35:12 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 01:35:12 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 01:35:14 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:15 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 01:35:16 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:17 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 01:35:17 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:17 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 01:35:17 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:19 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 01:35:19 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:19 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 01:35:20 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:20 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 01:35:20 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:21 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 01:35:22 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:24 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 01:35:25 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 01:35:26 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:35:26 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 01:35:26 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 01:35:26 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 01:35:39 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 01:35:39 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 01:35:39 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 01:35:39 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 01:35:39 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 01:35:39 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 01:35:39 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:35:39 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 01:35:39 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:35:39 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 01:35:39 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 01:35:39 | INFO     | Calculando Top Movers...
+2025-12-01 01:35:40 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 01:35:40 | INFO     | Calculando Ativos Populares...
+2025-12-01 01:35:40 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 01:35:52 | INFO     | Cliente Supabase inicializado
+2025-12-01 01:35:52 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 01:38:10 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 01:38:23 | INFO     | Logger configurado com sucesso
+2025-12-01 01:38:27 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 01:38:27 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 01:38:29 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:29 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 01:38:30 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:31 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 01:38:31 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:31 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 01:38:32 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:33 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 01:38:34 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:34 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 01:38:34 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:34 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 01:38:35 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:36 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 01:38:37 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:39 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 01:38:40 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 01:38:41 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:38:41 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 01:38:41 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 01:38:41 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 01:38:55 | INFO     | Logger configurado com sucesso
+2025-12-01 01:38:58 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 01:38:58 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 01:39:00 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:00 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 01:39:01 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:02 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 01:39:02 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:02 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 01:39:02 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:04 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 01:39:04 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:04 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 01:39:05 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:05 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 01:39:06 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:06 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 01:39:07 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:09 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 01:39:10 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 01:39:10 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:39:10 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 01:39:10 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 01:39:10 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 01:39:23 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 01:39:23 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 01:39:24 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 01:39:24 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 01:39:24 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 01:39:24 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 01:39:24 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:39:24 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 01:39:24 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:39:24 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 01:39:24 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 01:39:24 | INFO     | Calculando Top Movers...
+2025-12-01 01:39:24 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 01:39:24 | INFO     | Calculando Ativos Populares...
+2025-12-01 01:39:24 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 01:39:31 | INFO     | Cliente Supabase inicializado
+2025-12-01 01:39:32 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 01:39:37 | WARNING  | Nenhum dado para upload em 'fundos'
+2025-12-01 01:39:37 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 01:39:38 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:41 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:45 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:45 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:39:45 | ERROR    | Erro no lote 1: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:46 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:48 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:53 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:53 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:39:53 | ERROR    | Erro no lote 2: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:54 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:39:56 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:00 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:00 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:40:00 | ERROR    | Erro no lote 3: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:01 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:03 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:08 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:08 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:40:08 | ERROR    | Erro no lote 4: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:08 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:11 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:15 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:15 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:40:15 | ERROR    | Erro no lote 5: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:15 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:40:18 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:42:49 | INFO     | Logger configurado com sucesso
+2025-12-01 01:42:53 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 01:42:53 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 01:42:54 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:42:55 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 01:42:55 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:42:56 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 01:42:57 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:42:57 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 01:42:57 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:42:59 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 01:42:59 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:42:59 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 01:43:00 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:43:00 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 01:43:00 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:43:01 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 01:43:02 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:43:04 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 01:43:05 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 01:43:05 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 01:43:05 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 01:43:05 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 01:43:05 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 01:43:18 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 01:43:18 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 01:43:18 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 01:43:18 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 01:43:18 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 01:43:19 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 01:43:19 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:43:19 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 01:43:19 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 01:43:19 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 01:43:19 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 01:43:19 | INFO     | Calculando Top Movers...
+2025-12-01 01:43:19 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 01:43:19 | INFO     | Calculando Ativos Populares...
+2025-12-01 01:43:19 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 01:43:29 | INFO     | Cliente Supabase inicializado
+2025-12-01 01:43:30 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 01:44:39 | WARNING  | Nenhum dado para upload em 'fundos'
+2025-12-01 01:44:39 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 01:44:40 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:43 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:47 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:47 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:44:47 | ERROR    | Erro no lote 1: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:48 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:50 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:55 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:55 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 01:44:55 | ERROR    | Erro no lote 2: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 01:44:55 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 02:22:40 | INFO     | Logger configurado com sucesso
+2025-12-01 02:22:44 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 02:22:44 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 02:22:47 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:48 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 02:22:48 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:49 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 02:22:50 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:50 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 02:22:50 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:52 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 02:22:52 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:53 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 02:22:53 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:53 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 02:22:54 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:54 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 02:22:55 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:57 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 02:22:58 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 02:22:59 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:22:59 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 02:22:59 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 02:22:59 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 02:23:11 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 02:23:11 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 02:23:12 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 02:23:12 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 02:23:12 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 02:23:12 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 02:23:12 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:23:12 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 02:23:12 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:23:12 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 02:23:12 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 02:23:12 | INFO     | Calculando Top Movers...
+2025-12-01 02:23:12 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 02:23:12 | INFO     | Calculando Ativos Populares...
+2025-12-01 02:23:12 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 02:23:22 | INFO     | Cliente Supabase inicializado
+2025-12-01 02:23:24 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 02:26:51 | INFO     | Logger configurado com sucesso
+2025-12-01 02:27:11 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 02:27:11 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 02:27:13 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:13 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 02:27:14 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:15 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 02:27:15 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:15 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 02:27:16 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:17 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 02:27:17 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:18 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 02:27:18 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:18 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 02:27:19 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:20 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 02:27:20 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:23 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 02:27:23 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 02:27:24 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:27:24 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 02:27:24 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 02:27:24 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 02:27:37 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 02:27:37 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 02:27:37 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 02:27:37 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 02:27:37 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 02:27:38 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 02:27:38 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:27:38 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 02:27:38 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:27:38 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 02:27:38 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 02:27:38 | INFO     | Calculando Top Movers...
+2025-12-01 02:27:38 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 02:27:38 | INFO     | Calculando Ativos Populares...
+2025-12-01 02:27:38 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 02:27:43 | INFO     | Cliente Supabase inicializado
+2025-12-01 02:27:44 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 02:38:58 | INFO     | Logger configurado com sucesso
+2025-12-01 02:39:02 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 02:39:02 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 02:39:03 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:04 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 02:39:04 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:05 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 02:39:06 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:06 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 02:39:06 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:08 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 02:39:08 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:09 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 02:39:09 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:09 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 02:39:10 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:11 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 02:39:11 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:14 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 02:39:14 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 02:39:15 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:39:15 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 02:39:15 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 02:39:15 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 02:39:28 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 02:39:28 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 02:39:28 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 02:39:28 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 02:39:28 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 02:39:29 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 02:39:29 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:39:29 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 02:39:29 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:39:29 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 02:39:29 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 02:39:29 | INFO     | Calculando Top Movers...
+2025-12-01 02:39:29 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 02:39:29 | INFO     | Calculando Ativos Populares...
+2025-12-01 02:39:29 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 02:40:43 | INFO     | Logger configurado com sucesso
+2025-12-01 02:40:49 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 02:40:49 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 02:40:51 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:51 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 02:40:51 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:53 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 02:40:53 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:53 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 02:40:53 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:55 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 02:40:55 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:55 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 02:40:56 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:56 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 02:40:56 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:40:57 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 02:40:58 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:41:00 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 02:41:01 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 02:41:01 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:41:01 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 02:41:01 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 02:41:01 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 02:41:17 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 02:41:17 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 02:41:17 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 02:41:17 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 02:41:17 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 02:41:17 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 02:41:17 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:41:17 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 02:41:17 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:41:17 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 02:41:17 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 02:41:17 | INFO     | Calculando Top Movers...
+2025-12-01 02:41:17 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 02:41:17 | INFO     | Calculando Ativos Populares...
+2025-12-01 02:41:17 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 02:41:23 | INFO     | Cliente Supabase inicializado
+2025-12-01 02:41:23 | ERROR    | ✗ Erro ao conectar com Supabase: {'message': 'Invalid API key', 'hint': 'Double check your Supabase `anon` or `service_role` API key.'}
+2025-12-01 02:42:44 | INFO     | Logger configurado com sucesso
+2025-12-01 02:42:50 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 02:42:50 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 02:42:51 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:51 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 02:42:52 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:53 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 02:42:53 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:53 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 02:42:54 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:55 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 02:42:56 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:56 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 02:42:56 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:56 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 02:42:57 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:42:58 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 02:42:58 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:43:01 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 02:43:01 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 02:43:02 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:43:02 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 02:43:02 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 02:43:02 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 02:43:15 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 02:43:15 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 02:43:15 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 02:43:15 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 02:43:15 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 02:43:16 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 02:43:16 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:43:16 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 02:43:16 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:43:16 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 02:43:16 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 02:43:16 | INFO     | Calculando Top Movers...
+2025-12-01 02:43:16 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 02:43:16 | INFO     | Calculando Ativos Populares...
+2025-12-01 02:43:16 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 02:43:57 | INFO     | Cliente Supabase inicializado
+2025-12-01 02:43:58 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 02:48:16 | INFO     | Logger configurado com sucesso
+2025-12-01 02:48:21 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 02:48:21 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 02:51:16 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:17 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 02:51:17 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:19 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 02:51:19 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:19 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 02:51:19 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:21 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 02:51:22 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:22 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 02:51:22 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:22 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 02:51:23 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:24 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 02:51:24 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:27 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 02:51:27 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 02:51:28 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 02:51:28 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 02:51:28 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 02:51:28 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 02:51:41 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 02:51:41 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 02:51:41 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 02:51:41 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 02:51:41 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 02:51:42 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 02:51:42 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:51:42 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 02:51:42 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 02:51:42 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 02:51:42 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 02:51:42 | INFO     | Calculando Top Movers...
+2025-12-01 02:51:42 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 02:51:42 | INFO     | Calculando Ativos Populares...
+2025-12-01 02:51:42 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 02:54:45 | INFO     | Cliente Supabase inicializado
+2025-12-01 02:54:47 | ERROR    | ✗ Erro ao conectar com Supabase: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for table fundos'}
+2025-12-01 03:18:59 | INFO     | Logger configurado com sucesso
+2025-12-01 03:19:08 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 03:19:08 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 03:19:10 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:10 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 03:19:10 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:11 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 03:19:12 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:12 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 03:19:12 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:13 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 03:19:14 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:14 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 03:19:15 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:15 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 03:19:15 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:16 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 03:19:17 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:19 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 03:19:19 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 03:19:20 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:19:20 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 03:19:20 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 03:19:20 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 03:19:32 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 03:19:32 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 03:19:33 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 03:19:33 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 03:19:33 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 03:19:33 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 03:19:33 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:19:33 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 03:19:33 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:19:33 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 03:19:33 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 03:19:33 | INFO     | Calculando Top Movers...
+2025-12-01 03:19:33 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 03:19:33 | INFO     | Calculando Ativos Populares...
+2025-12-01 03:19:33 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 03:19:46 | INFO     | Cliente Supabase inicializado
+2025-12-01 03:19:47 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 03:19:53 | WARNING  | Nenhum dado para upload em 'fundos'
+2025-12-01 03:19:53 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 03:19:55 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:19:58 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:02 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:02 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 03:20:02 | ERROR    | Erro no lote 1: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:03 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:05 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:10 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:10 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 03:20:10 | ERROR    | Erro no lote 2: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:10 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:12 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:17 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:17 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 03:20:17 | ERROR    | Erro no lote 3: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:17 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:20 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:24 | WARNING  | Tentativa 3 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:24 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 03:20:24 | ERROR    | Erro no lote 4: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:24 | WARNING  | Tentativa 1 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:20:27 | WARNING  | Tentativa 2 falhou: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'DENOM_SOCIAL' column of 'patrimonio_liquido_mensal' in the schema cache"}
+2025-12-01 03:30:34 | INFO     | Logger configurado com sucesso
+2025-12-01 03:30:37 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 03:30:37 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 03:30:39 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:40 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 03:30:40 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:41 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 03:30:41 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:41 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 03:30:42 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:43 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 03:30:44 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:44 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 03:30:44 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:44 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 03:30:45 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:46 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 03:30:46 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:49 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 03:30:49 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 03:30:50 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:30:50 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 03:30:50 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 03:30:50 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 03:31:02 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 03:31:02 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 03:31:03 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 03:31:03 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 03:31:03 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 03:31:03 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 03:31:03 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:31:03 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 03:31:03 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:31:03 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 03:31:03 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 03:31:03 | INFO     | Calculando Top Movers...
+2025-12-01 03:31:03 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 03:31:03 | INFO     | Calculando Ativos Populares...
+2025-12-01 03:31:03 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 03:31:11 | INFO     | Cliente Supabase inicializado
+2025-12-01 03:31:12 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 03:31:14 | WARNING  | Nenhum dado para upload em 'fundos'
+2025-12-01 03:31:14 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 03:31:16 | WARNING  | Tentativa 1 falhou: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for sequence patrimonio_liquido_mensal_id_seq'}
+2025-12-01 03:31:19 | WARNING  | Tentativa 2 falhou: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for sequence patrimonio_liquido_mensal_id_seq'}
+2025-12-01 03:31:23 | WARNING  | Tentativa 3 falhou: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for sequence patrimonio_liquido_mensal_id_seq'}
+2025-12-01 03:31:23 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 03:31:23 | ERROR    | Erro no lote 1: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for sequence patrimonio_liquido_mensal_id_seq'}
+2025-12-01 03:31:23 | WARNING  | Tentativa 1 falhou: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for sequence patrimonio_liquido_mensal_id_seq'}
+2025-12-01 03:31:26 | WARNING  | Tentativa 2 falhou: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for sequence patrimonio_liquido_mensal_id_seq'}
+2025-12-01 03:33:43 | INFO     | Logger configurado com sucesso
+2025-12-01 03:33:47 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 03:33:47 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 03:33:49 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:50 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 03:33:50 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:51 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 03:33:51 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:51 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 03:33:52 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:53 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 03:33:54 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:54 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 03:33:54 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:54 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 03:33:55 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:56 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 03:33:56 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:33:59 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 03:33:59 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 03:34:00 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:34:00 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 03:34:00 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 03:34:00 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 03:34:12 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 03:34:12 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 03:34:12 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 03:34:12 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 03:34:12 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 03:34:13 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 03:34:13 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:34:13 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 03:34:13 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:34:13 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 03:34:13 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 03:34:13 | INFO     | Calculando Top Movers...
+2025-12-01 03:34:13 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 03:34:13 | INFO     | Calculando Ativos Populares...
+2025-12-01 03:34:13 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 03:34:29 | INFO     | Cliente Supabase inicializado
+2025-12-01 03:34:31 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 03:34:33 | WARNING  | Nenhum dado para upload em 'fundos'
+2025-12-01 03:34:33 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 03:34:34 | WARNING  | Tentativa 1 falhou: {'code': '23503', 'details': 'Key (cnpj_fundo)=(00017024000153) is not present in table "fundos".', 'hint': None, 'message': 'insert or update on table "patrimonio_liquido_mensal" violates foreign key constraint "patrimonio_liquido_mensal_cnpj_fundo_fkey"'}
+2025-12-01 03:34:37 | WARNING  | Tentativa 2 falhou: {'code': '23503', 'details': 'Key (cnpj_fundo)=(00017024000153) is not present in table "fundos".', 'hint': None, 'message': 'insert or update on table "patrimonio_liquido_mensal" violates foreign key constraint "patrimonio_liquido_mensal_cnpj_fundo_fkey"'}
+2025-12-01 03:34:41 | WARNING  | Tentativa 3 falhou: {'code': '23503', 'details': 'Key (cnpj_fundo)=(00017024000153) is not present in table "fundos".', 'hint': None, 'message': 'insert or update on table "patrimonio_liquido_mensal" violates foreign key constraint "patrimonio_liquido_mensal_cnpj_fundo_fkey"'}
+2025-12-01 03:34:41 | ERROR    | ✗ Falha ao fazer upsert em 'patrimonio_liquido_mensal' após 3 tentativas
+2025-12-01 03:34:41 | ERROR    | Erro no lote 1: {'code': '23503', 'details': 'Key (cnpj_fundo)=(00017024000153) is not present in table "fundos".', 'hint': None, 'message': 'insert or update on table "patrimonio_liquido_mensal" violates foreign key constraint "patrimonio_liquido_mensal_cnpj_fundo_fkey"'}
+2025-12-01 03:34:41 | WARNING  | Tentativa 1 falhou: {'code': '23503', 'details': 'Key (cnpj_fundo)=(05018037000160) is not present in table "fundos".', 'hint': None, 'message': 'insert or update on table "patrimonio_liquido_mensal" violates foreign key constraint "patrimonio_liquido_mensal_cnpj_fundo_fkey"'}
+2025-12-01 03:38:44 | INFO     | Logger configurado com sucesso
+2025-12-01 03:39:14 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 03:39:14 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 03:39:15 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:16 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 03:39:16 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:17 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 03:39:18 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:18 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 03:39:18 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:20 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 03:39:20 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:21 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 03:39:21 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:21 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 03:39:22 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:22 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 03:39:23 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:25 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 03:39:26 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 03:39:26 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 03:39:26 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 03:39:26 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 03:39:26 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 03:39:39 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 03:39:39 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 03:39:39 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 03:39:39 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 03:39:39 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 03:39:39 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 03:39:39 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:39:40 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 03:39:40 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 03:39:40 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 03:39:40 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 03:39:40 | INFO     | Calculando Top Movers...
+2025-12-01 03:39:40 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 03:39:40 | INFO     | Calculando Ativos Populares...
+2025-12-01 03:39:40 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 03:39:43 | INFO     | Cliente Supabase inicializado
+2025-12-01 03:39:44 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 03:39:47 | INFO     | Iniciando upload para 'fundos': 25,161 registros em 26 lotes
+2025-12-01 03:40:02 | INFO     | ✓ Upload 'fundos' concluído: 25,161/25,161 sucesso (100.0%), 0 erros
+2025-12-01 03:40:02 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 03:40:11 | INFO     | ✓ Upload 'patrimonio_liquido_mensal' concluído: 25,161/25,161 sucesso (100.0%), 0 erros
+2025-12-01 03:40:11 | WARNING  | Nenhum dado para upload em 'posicoes_acoes'
+2025-12-01 03:40:11 | WARNING  | Nenhum dado para upload em 'top_movers'
+2025-12-01 03:40:11 | SUCCESS  | \n✓ Upload completo: 50,322/50,322 registros enviados, 0 erros
+2025-12-01 03:40:11 | ERROR    | 'table'
+Traceback (most recent call last):
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 383, in <module>
+    main()
+    └ <function main at 0x114057920>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 380, in main
+    app.executar()
+    │   └ <function RadarETL.executar at 0x114de6c00>
+    └ <__main__.RadarETL object at 0x113f6d790>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 373, in executar
+    continuar = self.menu_principal()
+                │    └ <function RadarETL.menu_principal at 0x114176480>
+                └ <__main__.RadarETL object at 0x113f6d790>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 74, in menu_principal
+    self.upload_supabase()
+    │    └ <function RadarETL.upload_supabase at 0x114de68e0>
+    └ <__main__.RadarETL object at 0x113f6d790>
+
+> File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 294, in upload_supabase
+    resumo = {
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 295, in <dictcomp>
+    res['table']: f"{res['sucesso']:,}/{res['total']:,} ({res['taxa_sucesso']:.1f}%)"
+    └ {'total': 0, 'sucesso': 0, 'erros': 0}
+
+KeyError: 'table'
+2025-12-01 04:01:03 | INFO     | Logger configurado com sucesso
+2025-12-01 04:01:06 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 04:01:06 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 04:01:09 | INFO     | Lendo cda_fi_BLC_1_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:09 | SUCCESS  | ✓ 27,341 linhas lidas de cda_fi_BLC_1_202508.csv
+2025-12-01 04:01:10 | INFO     | Lendo cda_fi_BLC_2_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:12 | SUCCESS  | ✓ 79,947 linhas lidas de cda_fi_BLC_2_202508.csv
+2025-12-01 04:01:12 | INFO     | Lendo cda_fi_BLC_3_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:12 | SUCCESS  | ✓ 133 linhas lidas de cda_fi_BLC_3_202508.csv
+2025-12-01 04:01:12 | INFO     | Lendo cda_fi_BLC_4_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:14 | SUCCESS  | ✓ 105,434 linhas lidas de cda_fi_BLC_4_202508.csv
+2025-12-01 04:01:14 | INFO     | Lendo cda_fi_BLC_5_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:15 | SUCCESS  | ✓ 29,675 linhas lidas de cda_fi_BLC_5_202508.csv
+2025-12-01 04:01:15 | INFO     | Lendo cda_fi_BLC_6_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:15 | SUCCESS  | ✓ 2,987 linhas lidas de cda_fi_BLC_6_202508.csv
+2025-12-01 04:01:17 | INFO     | Lendo cda_fi_BLC_7_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:18 | SUCCESS  | ✓ 48,115 linhas lidas de cda_fi_BLC_7_202508.csv
+2025-12-01 04:01:19 | INFO     | Lendo cda_fi_BLC_8_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:22 | SUCCESS  | ✓ 178,710 linhas lidas de cda_fi_BLC_8_202508.csv
+2025-12-01 04:01:23 | INFO     | Total após concatenação: 472,342 linhas
+2025-12-01 04:01:24 | INFO     | Lendo cda_fi_PL_202508.csv (encoding: ISO-8859-1)
+2025-12-01 04:01:24 | SUCCESS  | ✓ 25,275 linhas lidas de cda_fi_PL_202508.csv
+2025-12-01 04:01:24 | INFO     | Total após concatenação: 25,275 linhas
+2025-12-01 04:01:24 | INFO     | Limpando balancete (472,342 linhas)...
+2025-12-01 04:01:39 | SUCCESS  | ✓ Balancete limpo: 472,342 linhas
+2025-12-01 04:01:39 | INFO     | Limpando PL (25,275 linhas)...
+2025-12-01 04:01:40 | WARNING  | Removidos 114 fundos com PL <= 0
+2025-12-01 04:01:40 | SUCCESS  | ✓ PL limpo: 25,161 linhas
+2025-12-01 04:01:40 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 04:01:40 | INFO     | Filtro 'Apenas Ações': 472,342 → 0 (redução: 100.0%)
+2025-12-01 04:01:40 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 04:01:40 | INFO     | Identificados 12,105 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 04:01:40 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 04:01:40 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 04:01:40 | SUCCESS  | ✓ Pipeline concluído: 472,342 → 0 (redução total: 100.0%)
+2025-12-01 04:01:40 | INFO     | Calculando Top Movers...
+2025-12-01 04:01:40 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 04:01:40 | INFO     | Calculando Ativos Populares...
+2025-12-01 04:01:40 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 04:01:45 | INFO     | Cliente Supabase inicializado
+2025-12-01 04:01:47 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 04:01:49 | INFO     | Iniciando upload para 'fundos': 25,161 registros em 26 lotes
+2025-12-01 04:02:08 | INFO     | ✓ Upload 'fundos' concluído: 25,161/25,161 sucesso (100.0%), 0 erros
+2025-12-01 04:02:08 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,161 registros em 26 lotes
+2025-12-01 04:02:17 | INFO     | ✓ Upload 'patrimonio_liquido_mensal' concluído: 25,161/25,161 sucesso (100.0%), 0 erros
+2025-12-01 04:02:17 | WARNING  | Nenhum dado para upload em 'posicoes_acoes'
+2025-12-01 04:02:17 | WARNING  | Nenhum dado para upload em 'top_movers'
+2025-12-01 04:02:17 | SUCCESS  | \n✓ Upload completo: 50,322/50,322 registros enviados, 0 erros
+2025-12-01 04:03:11 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 04:03:11 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 04:03:14 | INFO     | Lendo cda_fi_BLC_1_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:14 | SUCCESS  | ✓ 27,311 linhas lidas de cda_fi_BLC_1_202510.csv
+2025-12-01 04:03:14 | INFO     | Lendo cda_fi_BLC_2_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:15 | SUCCESS  | ✓ 80,062 linhas lidas de cda_fi_BLC_2_202510.csv
+2025-12-01 04:03:16 | INFO     | Lendo cda_fi_BLC_3_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:16 | SUCCESS  | ✓ 132 linhas lidas de cda_fi_BLC_3_202510.csv
+2025-12-01 04:03:16 | INFO     | Lendo cda_fi_BLC_4_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:18 | SUCCESS  | ✓ 108,791 linhas lidas de cda_fi_BLC_4_202510.csv
+2025-12-01 04:03:18 | INFO     | Lendo cda_fi_BLC_5_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:18 | SUCCESS  | ✓ 33,278 linhas lidas de cda_fi_BLC_5_202510.csv
+2025-12-01 04:03:19 | INFO     | Lendo cda_fi_BLC_6_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:19 | SUCCESS  | ✓ 2,819 linhas lidas de cda_fi_BLC_6_202510.csv
+2025-12-01 04:03:19 | INFO     | Lendo cda_fi_BLC_7_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:21 | SUCCESS  | ✓ 53,606 linhas lidas de cda_fi_BLC_7_202510.csv
+2025-12-01 04:03:21 | INFO     | Lendo cda_fi_BLC_8_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:23 | SUCCESS  | ✓ 188,972 linhas lidas de cda_fi_BLC_8_202510.csv
+2025-12-01 04:03:24 | INFO     | Total após concatenação: 494,971 linhas
+2025-12-01 04:03:24 | INFO     | Lendo cda_fi_PL_202510.csv (encoding: ISO-8859-1)
+2025-12-01 04:03:25 | SUCCESS  | ✓ 25,235 linhas lidas de cda_fi_PL_202510.csv
+2025-12-01 04:03:25 | INFO     | Total após concatenação: 25,235 linhas
+2025-12-01 04:03:25 | INFO     | Limpando balancete (494,971 linhas)...
+2025-12-01 04:03:37 | SUCCESS  | ✓ Balancete limpo: 494,971 linhas
+2025-12-01 04:03:37 | INFO     | Limpando PL (25,235 linhas)...
+2025-12-01 04:03:37 | WARNING  | Removidos 138 fundos com PL <= 0
+2025-12-01 04:03:37 | SUCCESS  | ✓ PL limpo: 25,097 linhas
+2025-12-01 04:03:37 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 04:03:38 | INFO     | Filtro 'Apenas Ações': 494,971 → 0 (redução: 100.0%)
+2025-12-01 04:03:38 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 04:03:38 | INFO     | Identificados 12,223 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 04:03:38 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 04:03:38 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 04:03:38 | SUCCESS  | ✓ Pipeline concluído: 494,971 → 0 (redução total: 100.0%)
+2025-12-01 04:03:38 | INFO     | Calculando Top Movers...
+2025-12-01 04:03:38 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 04:03:38 | INFO     | Calculando Ativos Populares...
+2025-12-01 04:03:38 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 04:03:42 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 04:03:44 | INFO     | Iniciando upload para 'fundos': 25,097 registros em 26 lotes
+2025-12-01 04:04:03 | INFO     | ✓ Upload 'fundos' concluído: 25,097/25,097 sucesso (100.0%), 0 erros
+2025-12-01 04:04:03 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,097 registros em 26 lotes
+2025-12-01 04:04:12 | INFO     | ✓ Upload 'patrimonio_liquido_mensal' concluído: 25,097/25,097 sucesso (100.0%), 0 erros
+2025-12-01 04:04:12 | WARNING  | Nenhum dado para upload em 'posicoes_acoes'
+2025-12-01 04:04:12 | WARNING  | Nenhum dado para upload em 'top_movers'
+2025-12-01 04:04:12 | SUCCESS  | \n✓ Upload completo: 50,194/50,194 registros enviados, 0 erros
+2025-12-01 04:04:51 | INFO     | Encontrados 8 arquivos com padrão 'cda_fi_BLC_*.csv'
+2025-12-01 04:04:51 | INFO     | Encontrados 1 arquivos com padrão 'cda_fi_PL_*.csv'
+2025-12-01 04:04:53 | INFO     | Lendo cda_fi_BLC_1_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:04:54 | SUCCESS  | ✓ 27,766 linhas lidas de cda_fi_BLC_1_202509.csv
+2025-12-01 04:04:54 | INFO     | Lendo cda_fi_BLC_2_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:04:55 | SUCCESS  | ✓ 81,739 linhas lidas de cda_fi_BLC_2_202509.csv
+2025-12-01 04:04:55 | INFO     | Lendo cda_fi_BLC_3_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:04:55 | SUCCESS  | ✓ 130 linhas lidas de cda_fi_BLC_3_202509.csv
+2025-12-01 04:04:56 | INFO     | Lendo cda_fi_BLC_4_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:04:57 | SUCCESS  | ✓ 112,610 linhas lidas de cda_fi_BLC_4_202509.csv
+2025-12-01 04:04:58 | INFO     | Lendo cda_fi_BLC_5_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:04:58 | SUCCESS  | ✓ 34,179 linhas lidas de cda_fi_BLC_5_202509.csv
+2025-12-01 04:04:58 | INFO     | Lendo cda_fi_BLC_6_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:04:59 | SUCCESS  | ✓ 4,202 linhas lidas de cda_fi_BLC_6_202509.csv
+2025-12-01 04:04:59 | INFO     | Lendo cda_fi_BLC_7_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:05:00 | SUCCESS  | ✓ 44,926 linhas lidas de cda_fi_BLC_7_202509.csv
+2025-12-01 04:05:00 | INFO     | Lendo cda_fi_BLC_8_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:05:03 | SUCCESS  | ✓ 184,299 linhas lidas de cda_fi_BLC_8_202509.csv
+2025-12-01 04:05:03 | INFO     | Total após concatenação: 489,851 linhas
+2025-12-01 04:05:04 | INFO     | Lendo cda_fi_PL_202509.csv (encoding: ISO-8859-1)
+2025-12-01 04:05:04 | SUCCESS  | ✓ 25,217 linhas lidas de cda_fi_PL_202509.csv
+2025-12-01 04:05:04 | INFO     | Total após concatenação: 25,217 linhas
+2025-12-01 04:05:04 | INFO     | Limpando balancete (489,851 linhas)...
+2025-12-01 04:05:16 | SUCCESS  | ✓ Balancete limpo: 489,851 linhas
+2025-12-01 04:05:16 | INFO     | Limpando PL (25,217 linhas)...
+2025-12-01 04:05:17 | WARNING  | Removidos 110 fundos com PL <= 0
+2025-12-01 04:05:17 | SUCCESS  | ✓ PL limpo: 25,107 linhas
+2025-12-01 04:05:17 | INFO     | Iniciando pipeline de filtros...
+2025-12-01 04:05:17 | INFO     | Filtro 'Apenas Ações': 489,851 → 0 (redução: 100.0%)
+2025-12-01 04:05:17 | INFO     | Filtro 'Tipos Válidos': 0 → 0 (redução: 0.0%)
+2025-12-01 04:05:17 | INFO     | Identificados 12,185 grandes fundos (PL > R$ 50,000,000)
+2025-12-01 04:05:17 | INFO     | Filtro 'Grandes Fundos': 0 → 0 (redução: 0.0%)
+2025-12-01 04:05:17 | INFO     | Filtro 'Posições Relevantes': 0 → 0 (redução: 0.0%)
+2025-12-01 04:05:17 | SUCCESS  | ✓ Pipeline concluído: 489,851 → 0 (redução total: 100.0%)
+2025-12-01 04:05:17 | INFO     | Calculando Top Movers...
+2025-12-01 04:05:17 | SUCCESS  | ✓ Top Movers calculado: 0 fundos
+2025-12-01 04:05:17 | INFO     | Calculando Ativos Populares...
+2025-12-01 04:05:17 | SUCCESS  | ✓ Ativos Populares calculado: 0 ativos
+2025-12-01 04:05:21 | SUCCESS  | ✓ Conexão com Supabase OK
+2025-12-01 04:05:25 | INFO     | Iniciando upload para 'fundos': 25,107 registros em 26 lotes
+2025-12-01 04:05:46 | INFO     | ✓ Upload 'fundos' concluído: 25,107/25,107 sucesso (100.0%), 0 erros
+2025-12-01 04:05:46 | INFO     | Iniciando upload para 'patrimonio_liquido_mensal': 25,107 registros em 26 lotes
+2025-12-01 04:05:55 | INFO     | ✓ Upload 'patrimonio_liquido_mensal' concluído: 25,107/25,107 sucesso (100.0%), 0 erros
+2025-12-01 04:05:55 | WARNING  | Nenhum dado para upload em 'posicoes_acoes'
+2025-12-01 04:05:55 | WARNING  | Nenhum dado para upload em 'top_movers'
+2025-12-01 04:05:55 | SUCCESS  | \n✓ Upload completo: 50,214/50,214 registros enviados, 0 erros
+2025-12-01 05:55:22 | INFO     | Logger configurado com sucesso
+2025-12-01 05:56:43 | INFO     | Logger configurado com sucesso
+2025-12-01 06:17:19 | INFO     | Logger configurado com sucesso
+2025-12-01 06:17:49 | INFO     | Logger configurado com sucesso
+2025-12-01 06:17:54 | INFO     | Logger configurado com sucesso
+2025-12-01 06:18:07 | INFO     | Logger configurado com sucesso
+2025-12-01 06:18:10 | INFO     | Logger configurado com sucesso
+2025-12-01 06:20:52 | INFO     | Logger configurado com sucesso
+2025-12-01 06:21:03 | INFO     | Lendo 12 arquivos em /Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago...
+2025-12-01 06:21:04 | ERROR    | Erro ao ler cda_fi_BLC_2_202508.csv: Error tokenizing data. C error: EOF inside string starting at row 49452
+2025-12-01 06:21:06 | INFO     | Concatenando DataFrames...
+2025-12-01 06:21:07 | INFO     | Limpando dados...
+2025-12-01 06:21:12 | INFO     | Aplicando correção ortográfica em nomes de fundos...
+2025-12-01 06:21:13 | INFO     | Aplicando correção ortográfica em emissores...
+2025-12-01 06:21:13 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:21:13 | INFO     | Processando 25782 fundos únicos...
+2025-12-01 06:21:13 | INFO     | Iniciando upload para 'fundos': 25,782 registros em 26 lotes
+2025-12-01 06:21:13 | ERROR    | Erro no lote 1: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 2: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 3: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 4: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 5: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 6: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 7: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 8: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 9: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 10: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 11: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 12: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 13: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 14: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 15: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 16: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 17: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 18: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 19: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 20: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 21: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 22: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 23: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 24: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 25: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | ERROR    | Erro no lote 26: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:21:13 | INFO     | ✓ Upload 'fundos' concluído: 0/25,782 sucesso (0.0%), 25,782 erros
+2025-12-01 06:21:13 | INFO     | Atualizando mapa de IDs de fundos...
+2025-12-01 06:21:15 | INFO     | Processando 2112 emissores únicos...
+2025-12-01 06:21:15 | INFO     | Iniciando upload para 'emissores': 2,112 registros em 3 lotes
+2025-12-01 06:21:16 | ERROR    | Erro no lote 1: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'Empty or invalid json'}
+2025-12-01 06:21:17 | ERROR    | Erro no lote 2: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'Empty or invalid json'}
+2025-12-01 06:21:17 | INFO     | ✓ Upload 'emissores' concluído: 112/2,112 sucesso (5.3%), 2,000 erros
+2025-12-01 06:21:17 | INFO     | Atualizando mapa de IDs de emissores...
+2025-12-01 06:21:19 | INFO     | Processando 10213 ativos únicos...
+2025-12-01 06:21:19 | INFO     | Iniciando upload para 'ativos': 10,213 registros em 11 lotes
+2025-12-01 06:21:19 | ERROR    | Erro no lote 1: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'Empty or invalid json'}
+2025-12-01 06:21:24 | ERROR    | Erro no lote 11: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'Empty or invalid json'}
+2025-12-01 06:21:24 | INFO     | ✓ Upload 'ativos' concluído: 9,000/10,213 sucesso (88.1%), 1,213 erros
+2025-12-01 06:21:24 | INFO     | Atualizando mapa de IDs de ativos...
+2025-12-01 06:21:24 | INFO     | Identificados 200 grandes fundos.
+2025-12-01 06:21:25 | INFO     | Filtrado para 46160 registros de grandes fundos.
+2025-12-01 06:24:03 | INFO     | Logger configurado com sucesso
+2025-12-01 06:24:17 | INFO     | Logger configurado com sucesso
+2025-12-01 06:26:22 | INFO     | Logger configurado com sucesso
+2025-12-01 06:26:27 | INFO     | Lendo 12 arquivos em /Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago...
+2025-12-01 06:26:28 | INFO     | ✓ cda_fie_CONFID_202508.csv: 594 registros
+2025-12-01 06:26:28 | INFO     | ✓ cda_fi_PL_202508.csv: 25,275 registros
+2025-12-01 06:26:29 | INFO     | ✓ cda_fi_BLC_8_202508.csv: 178,710 registros
+2025-12-01 06:26:29 | INFO     | ✓ cda_fi_BLC_5_202508.csv: 29,675 registros
+2025-12-01 06:26:30 | WARNING  | Erro na primeira tentativa para cda_fi_BLC_2_202508.csv, tentando modo robusto...
+2025-12-01 06:26:30 | ERROR    | Falha ao ler cda_fi_BLC_2_202508.csv mesmo em modo robusto: The 'low_memory' option is not supported with the 'python' engine
+2025-12-01 06:26:30 | INFO     | ✓ cda_fie_202508.csv: 9,810 registros
+2025-12-01 06:26:30 | INFO     | ✓ cda_fi_BLC_7_202508.csv: 48,115 registros
+2025-12-01 06:26:30 | INFO     | ✓ cda_fi_CONFID_202508.csv: 55,396 registros
+2025-12-01 06:26:31 | INFO     | ✓ cda_fi_BLC_4_202508.csv: 105,434 registros
+2025-12-01 06:26:31 | INFO     | ✓ cda_fi_BLC_1_202508.csv: 27,341 registros
+2025-12-01 06:26:31 | INFO     | ✓ cda_fi_BLC_6_202508.csv: 2,987 registros
+2025-12-01 06:26:31 | INFO     | ✓ cda_fi_BLC_3_202508.csv: 133 registros
+2025-12-01 06:26:31 | INFO     | Concatenando DataFrames...
+2025-12-01 06:26:32 | INFO     | Limpando dados...
+2025-12-01 06:26:38 | INFO     | Aplicando correção ortográfica em nomes de fundos...
+2025-12-01 06:26:38 | INFO     | Aplicando correção ortográfica em emissores...
+2025-12-01 06:26:39 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:26:39 | INFO     | Processando 25782 fundos únicos...
+2025-12-01 06:26:39 | INFO     | Iniciando upload para 'fundos': 25,782 registros em 26 lotes
+2025-12-01 06:26:39 | ERROR    | Erro no lote 1: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 2: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 3: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 4: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 5: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 6: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 7: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 8: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 9: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 10: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 11: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 12: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 13: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 14: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 15: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 16: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 17: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 18: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 19: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 20: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 21: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 22: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 23: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 24: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 25: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | ERROR    | Erro no lote 26: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:26:39 | INFO     | ✓ Upload 'fundos' concluído: 0/25,782 sucesso (0.0%), 25,782 erros
+2025-12-01 06:26:39 | INFO     | Atualizando mapa de IDs de fundos...
+2025-12-01 06:26:41 | ERROR    | Erro fatal no ETL: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for schema public'}
+Traceback (most recent call last):
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 464, in <module>
+    main()
+    └ <function main at 0x108801ee0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 461, in main
+    app.executar()
+    │   └ <function RadarETL.executar at 0x1111984a0>
+    └ <__main__.RadarETL object at 0x10fc7dbd0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 454, in executar
+    continuar = self.menu_principal()
+                │    └ <function RadarETL.menu_principal at 0x10fedbb00>
+                └ <__main__.RadarETL object at 0x10fc7dbd0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 75, in menu_principal
+    self.processar_arquivos()
+    │    └ <function RadarETL.processar_arquivos at 0x111167f60>
+    └ <__main__.RadarETL object at 0x10fc7dbd0>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/main.py", line 152, in processar_arquivos
+    etl.executar(pasta_path)
+    │   │        └ PosixPath('/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago')
+    │   └ <function NormalizedETL.executar at 0x11155ade0>
+    └ <run_etl.NormalizedETL object at 0x1114ffa50>
+
+> File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/run_etl.py", line 71, in executar
+    mapa_fundos = self._criar_mapa_fundos()
+                  │    └ <function NormalizedETL._criar_mapa_fundos at 0x11155b240>
+                  └ <run_etl.NormalizedETL object at 0x1114ffa50>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/etl_app/run_etl.py", line 171, in _criar_mapa_fundos
+    res = self.supabase.client.table('fundos').select('id, cnpj').execute()
+          │    │        │      └ <function Client.table at 0x1111674c0>
+          │    │        └ <supabase.client.Client object at 0x1134cc150>
+          │    └ <uploaders.supabase_client.SupabaseClient object at 0x114a3f310>
+          └ <run_etl.NormalizedETL object at 0x1114ffa50>
+
+  File "/Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/.venv/lib/python3.11/site-packages/postgrest/_sync/request_builder.py", line 68, in execute
+    raise APIError(r.json())
+          │        │ └ <function Response.json at 0x110481260>
+          │        └ <Response [403 Forbidden]>
+          └ <class 'postgrest.exceptions.APIError'>
+
+postgrest.exceptions.APIError: {'code': '42501', 'details': None, 'hint': None, 'message': 'permission denied for schema public'}
+2025-12-01 06:30:43 | INFO     | Logger configurado com sucesso
+2025-12-01 06:30:44 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:34:51 | INFO     | Logger configurado com sucesso
+2025-12-01 06:34:57 | INFO     | Lendo 12 arquivos em /Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago...
+2025-12-01 06:34:57 | INFO     | ✓ cda_fie_CONFID_202508.csv: 594 registros
+2025-12-01 06:34:57 | INFO     | ✓ cda_fi_PL_202508.csv: 25,275 registros
+2025-12-01 06:34:59 | INFO     | ✓ cda_fi_BLC_8_202508.csv: 178,710 registros
+2025-12-01 06:34:59 | INFO     | ✓ cda_fi_BLC_5_202508.csv: 29,675 registros
+2025-12-01 06:34:59 | WARNING  | Erro na primeira tentativa para cda_fi_BLC_2_202508.csv, tentando modo robusto...
+2025-12-01 06:35:00 | WARNING  | ✓ Arquivo cda_fi_BLC_2_202508.csv lido com modo robusto (algumas linhas podem ter sido ignoradas)
+2025-12-01 06:35:00 | INFO     | ✓ cda_fi_BLC_2_202508.csv: 79,947 registros
+2025-12-01 06:35:00 | INFO     | ✓ cda_fie_202508.csv: 9,810 registros
+2025-12-01 06:35:01 | INFO     | ✓ cda_fi_BLC_7_202508.csv: 48,115 registros
+2025-12-01 06:35:01 | INFO     | ✓ cda_fi_CONFID_202508.csv: 55,396 registros
+2025-12-01 06:35:02 | INFO     | ✓ cda_fi_BLC_4_202508.csv: 105,434 registros
+2025-12-01 06:35:02 | INFO     | ✓ cda_fi_BLC_1_202508.csv: 27,341 registros
+2025-12-01 06:35:02 | INFO     | ✓ cda_fi_BLC_6_202508.csv: 2,987 registros
+2025-12-01 06:35:02 | INFO     | ✓ cda_fi_BLC_3_202508.csv: 133 registros
+2025-12-01 06:35:02 | INFO     | Concatenando DataFrames...
+2025-12-01 06:35:03 | INFO     | Limpando dados...
+2025-12-01 06:35:10 | INFO     | Aplicando correção ortográfica em nomes de fundos...
+2025-12-01 06:35:10 | INFO     | Aplicando correção ortográfica em emissores...
+2025-12-01 06:35:11 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:35:11 | INFO     | Processando 25782 fundos únicos...
+2025-12-01 06:35:11 | INFO     | Iniciando upload para 'fundos': 25,782 registros em 26 lotes
+2025-12-01 06:35:11 | ERROR    | Erro no lote 1: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 2: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 3: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 4: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 5: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 6: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 7: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 8: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 9: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 10: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 11: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 12: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 13: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 14: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 15: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 16: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 17: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 18: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 19: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 20: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 21: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 22: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 23: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 24: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 25: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | ERROR    | Erro no lote 26: 'SyncQueryRequestBuilder' object has no attribute 'select'
+2025-12-01 06:35:11 | INFO     | ✓ Upload 'fundos' concluído: 0/25,782 sucesso (0.0%), 25,782 erros
+2025-12-01 06:35:11 | INFO     | Atualizando mapa de IDs de fundos...
+2025-12-01 06:35:12 | INFO     | Processando 2112 emissores únicos...
+2025-12-01 06:35:12 | INFO     | Iniciando upload para 'emissores': 2,112 registros em 3 lotes
+2025-12-01 06:35:13 | ERROR    | Erro no lote 1: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'All object keys must match'}
+2025-12-01 06:35:14 | ERROR    | Erro no lote 2: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'All object keys must match'}
+2025-12-01 06:35:14 | INFO     | ✓ Upload 'emissores' concluído: 112/2,112 sucesso (5.3%), 2,000 erros
+2025-12-01 06:35:14 | INFO     | Atualizando mapa de IDs de emissores...
+2025-12-01 06:35:15 | INFO     | Processando 10153 ativos únicos...
+2025-12-01 06:35:15 | INFO     | Iniciando upload para 'ativos': 10,153 registros em 11 lotes
+2025-12-01 06:35:15 | ERROR    | Erro no lote 1: {'code': 'PGRST102', 'details': None, 'hint': None, 'message': 'All object keys must match'}
+2025-12-01 06:35:20 | INFO     | ✓ Upload 'ativos' concluído: 9,153/10,153 sucesso (90.2%), 1,000 erros
+2025-12-01 06:35:20 | INFO     | Atualizando mapa de IDs de ativos...
+2025-12-01 06:35:20 | INFO     | Identificados 200 grandes fundos.
+2025-12-01 06:35:21 | INFO     | Filtrado para 46837 registros de grandes fundos.
+2025-12-01 06:41:23 | INFO     | Logger configurado com sucesso
+2025-12-01 06:42:05 | INFO     | Logger configurado com sucesso
+2025-12-01 06:42:05 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:42:06 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:44:37 | INFO     | Logger configurado com sucesso
+2025-12-01 06:44:37 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:44:37 | INFO     | Iniciando upload para 'fundos': 4 registros em 1 lotes
+2025-12-01 06:44:38 | INFO     | ✓ Upload 'fundos' concluído: 4/4 sucesso (100.0%), 0 erros
+2025-12-01 06:44:39 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:44:39 | INFO     | Iniciando upload para 'fundos': 2 registros em 1 lotes
+2025-12-01 06:44:40 | INFO     | ✓ Upload 'fundos' concluído: 2/2 sucesso (100.0%), 0 erros
+2025-12-01 06:47:18 | INFO     | Logger configurado com sucesso
+2025-12-01 06:47:26 | INFO     | Lendo 12 arquivos em /Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/source/cda_fi_ago...
+2025-12-01 06:47:26 | INFO     | ✓ cda_fie_CONFID_202508.csv: 594 registros
+2025-12-01 06:47:26 | INFO     | ✓ cda_fi_PL_202508.csv: 25,275 registros
+2025-12-01 06:47:27 | INFO     | ✓ cda_fi_BLC_8_202508.csv: 178,710 registros
+2025-12-01 06:47:27 | INFO     | ✓ cda_fi_BLC_5_202508.csv: 29,675 registros
+2025-12-01 06:47:28 | WARNING  | Erro na primeira tentativa para cda_fi_BLC_2_202508.csv, tentando modo robusto...
+2025-12-01 06:47:29 | WARNING  | ✓ Arquivo cda_fi_BLC_2_202508.csv lido com modo robusto (algumas linhas podem ter sido ignoradas)
+2025-12-01 06:47:29 | INFO     | ✓ cda_fi_BLC_2_202508.csv: 79,947 registros
+2025-12-01 06:47:29 | INFO     | ✓ cda_fie_202508.csv: 9,810 registros
+2025-12-01 06:47:29 | INFO     | ✓ cda_fi_BLC_7_202508.csv: 48,115 registros
+2025-12-01 06:47:30 | INFO     | ✓ cda_fi_CONFID_202508.csv: 55,396 registros
+2025-12-01 06:47:30 | INFO     | ✓ cda_fi_BLC_4_202508.csv: 105,434 registros
+2025-12-01 06:47:30 | INFO     | ✓ cda_fi_BLC_1_202508.csv: 27,341 registros
+2025-12-01 06:47:30 | INFO     | ✓ cda_fi_BLC_6_202508.csv: 2,987 registros
+2025-12-01 06:47:30 | INFO     | ✓ cda_fi_BLC_3_202508.csv: 133 registros
+2025-12-01 06:47:30 | INFO     | Concatenando DataFrames...
+2025-12-01 06:47:31 | INFO     | Limpando dados...
+2025-12-01 06:47:38 | INFO     | Aplicando correção ortográfica em nomes de fundos...
+2025-12-01 06:47:38 | INFO     | Aplicando correção ortográfica em emissores...
+2025-12-01 06:47:39 | INFO     | Cliente Supabase inicializado
+2025-12-01 06:47:39 | INFO     | Processando 25782 fundos únicos...
+2025-12-01 06:47:39 | INFO     | Iniciando upload para 'fundos': 25,782 registros em 26 lotes
+2025-12-01 06:47:58 | INFO     | ✓ Upload 'fundos' concluído: 25,782/25,782 sucesso (100.0%), 0 erros
+2025-12-01 06:47:58 | INFO     | Atualizando mapa de IDs de fundos...
+2025-12-01 06:47:59 | INFO     | Processando 2112 emissores únicos...
+2025-12-01 06:47:59 | INFO     | Iniciando upload para 'emissores': 2,112 registros em 3 lotes
+2025-12-01 06:48:01 | INFO     | ✓ Upload 'emissores' concluído: 2,112/2,112 sucesso (100.0%), 0 erros
+2025-12-01 06:48:01 | INFO     | Atualizando mapa de IDs de emissores...
+2025-12-01 06:48:02 | INFO     | Processando 10153 ativos únicos...
+2025-12-01 06:48:02 | INFO     | Iniciando upload para 'ativos': 10,153 registros em 11 lotes
+2025-12-01 06:48:07 | INFO     | ✓ Upload 'ativos' concluído: 10,153/10,153 sucesso (100.0%), 0 erros
+2025-12-01 06:48:07 | INFO     | Atualizando mapa de IDs de ativos...
+2025-12-01 06:48:07 | INFO     | Identificados 200 grandes fundos.
+2025-12-01 06:48:08 | INFO     | Filtrado para 46837 registros de grandes fundos.
+2025-12-01 06:48:08 | INFO     | Iniciando upload para 'patrimonio_liquido': 33 registros em 1 lotes
+2025-12-01 06:48:08 | INFO     | ✓ Upload 'patrimonio_liquido' concluído: 33/33 sucesso (100.0%), 0 erros
+2025-12-01 06:48:11 | INFO     | Iniciando upload para 'posicoes': 2,286 registros em 3 lotes
+2025-12-01 06:48:12 | INFO     | ✓ Upload 'posicoes' concluído: 2,286/2,286 sucesso (100.0%), 0 erros
