@@ -1,3 +1,71 @@
+```mermaid
+timeline
+    title JORNADA DAS SALAS VIP
+    ANO 1 : **Básico**
+          : *Objetivo:* Score e Histórico
+          : *Ex:* Nubank, C6 Básico
+    ANO 2 : **Primeiro VIP**
+          : *Objetivo:* Degustar benefícios
+          : *Ex:* XP Visa Infinite, Rico
+    ANO 3 : **Elite (Black)**
+          : *Objetivo:* Acesso Ilimitado
+          : *Ex:* Sicoob Merit, Sicredi
+    ANO 4 : **Estrategista**
+          : *Objetivo:* Combo (LK + DP)
+          : *Ex:* Visa + Mastercard
+```
+
+```mermaid
+graph TD
+    A[VOCÊ TEM R$ 1.000 PARA INVESTIR?]
+    
+    A -->|SIM| B[Rico Visa Infinite<br/>R$ 1k]
+    A -->|NÃO| C[TEM CONTA NO INTER?]
+    
+    C -->|SIM| D[Inter Black<br/>Duo Gourmet<br/>R$ 11,90/mês]
+    C -->|NÃO| E[SEU SCORE É BOM?]
+    
+    E -->|SIM| F[Will Bank<br/>Visa Infinite<br/>Grátis]
+    E -->|NÃO| G[PagBank<br/>Platinum<br/>R$ 29,90/mês]
+```
+
+#### **Estratégia 3: O Calendário de Maximização**
+
+Planeje o ANO INTEIRO de acessos.
+
+**Exemplo de Planejamento**:
+
+| Mês | Viagem | Aeroporto | Cartão a Usar | Motivo |
+|---------|-------------|-------------|-------------|-------------|
+| Mar | SP → RJ | GRU/SDU | Inter Black (ilimitado) | Viagem rápida, uso ilimitado |
+| Jul | SP → Miami | GRU/MIA | XP Infinite (2/4 acessos) | Internacional, vale a pena |
+| Set | SP → POA | GRU/POA | Inter Black (ilimitado) | Doméstico, uso ilimitado |
+| Dez | SP → Orlando | GRU/MCO | C6 Carbon (4/4 acessos) | Último do ano, queimar acessos |
+
+**Sacou a lógica?** Você PLANEJA onde vai usar cada acesso pra não desperdiçar.
+
+### A Planilha Mestra (Template Completo)
+#### 💳 ABA 1: Inventário de Cartões (O Arsenal)
+*Onde você cadastra o que tem na carteira.*
+
+| Cartão | 🏳️ Bandeira | 💎 Programa | 🔢 Acessos | 📅 Renovação | 💰 Anuidade | 🎯 Meta Isenção | Status |
+|---------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|
+| **XP Visa Inf.** | Visa | Dragon Pass | 4 | 01/2026 | Grátis | R$ 5k Invest. | ✅ Ativo |
+| **C6 Carbon** | Master | LoungeKey | Ilimitado | 06/2025 | 12x R$ 85 | R$ 50k Invest. | ⚠️ Atenção |
+| **Inter Black** | Master | LoungeKey | 6 | 12/2025 | Grátis | Duo Gourmet | ✅ Ativo |
+
+---
+
+#### ✈️ ABA 2: Controle de Uso (O Gasto)
+*Onde você registra cada entrada na sala VIP para não estourar a cota.*
+
+| Data | 📍 Aeroporto | 🛋️ Lounge | 💳 Cartão Usado | 📉 Restantes | 📝 Obs |
+|---------|-------------|-------------|-------------|-------------|-------------|
+| 10/02 | GRU (T3) | Espaço Safra | XP Visa Inf. | **3** | Eu + 1 convidado |
+| 15/05 | MIA | Turkish Lounge | C6 Carbon | **Ilim.** | Jantar ótimo |
+
+---
+
 # 📘 Guia Completo de Markdown para Ebook
 
 ## Introdução
@@ -278,395 +346,6 @@ gitGraph
     checkout main
     merge feature/mermaid
     commit id: "Release v1.0"
-```
-
----
-
-## Capítulo 5: Blocos de Código com Syntax Highlighting
-
-### Python com Classes
-
-```python
-class MarkdownToPDFConverter:
-    """
-    Conversor profissional de Markdown para PDF.
-
-    Attributes:
-        css_templates (dict): Dicionário de templates CSS
-        markdown_extensions (list): Extensões habilitadas
-    """
-
-    def __init__(self, templates=None):
-        self.css_templates = templates or self._load_default_templates()
-        self.markdown_extensions = [
-            'tables', 'fenced_code', 'codehilite',
-            'nl2br', 'sane_lists', 'attr_list'
-        ]
-
-    def convert(self, md_content: str, template: str) -> bytes:
-        """
-        Converte conteúdo Markdown em PDF.
-
-        Args:
-            md_content: Conteúdo em formato Markdown
-            template: Nome do template CSS a usar
-
-        Returns:
-            bytes: PDF gerado em formato binário
-
-        Raises:
-            ValueError: Se template não existir
-        """
-        html = markdown.markdown(
-            md_content,
-            extensions=self.markdown_extensions
-        )
-
-        css = self.css_templates.get(template)
-        if not css:
-            raise ValueError(f"Template '{template}' não encontrado")
-
-        full_html = self._build_html(html, css)
-        return HTML(string=full_html).write_pdf()
-
-    @staticmethod
-    def _build_html(content: str, css: str) -> str:
-        """Constrói HTML completo com CSS inline."""
-        return f"""
-        <!DOCTYPE html>
-        <html lang="pt-BR">
-        <head>
-            <meta charset="UTF-8">
-            <style>{css}</style>
-        </head>
-        <body>{content}</body>
-        </html>
-        """
-
-# Exemplo de uso
-converter = MarkdownToPDFConverter()
-pdf_bytes = converter.convert("# Meu Ebook", "minimalista")
-```
-
-### JavaScript/TypeScript
-
-```javascript
-// Sistema de conversão MD to PDF em JavaScript
-class MarkdownConverter {
-    constructor(config = {}) {
-        this.templates = config.templates || this.loadDefaultTemplates();
-        this.options = {
-            ...this.defaultOptions,
-            ...config.options
-        };
-    }
-
-    async convert(markdownText, templateName) {
-        try {
-            // Converter MD para HTML
-            const html = await this.parseMarkdown(markdownText);
-
-            // Aplicar template CSS
-            const styled = this.applyTemplate(html, templateName);
-
-            // Gerar PDF
-            const pdf = await this.generatePDF(styled);
-
-            return {
-                success: true,
-                data: pdf,
-                metadata: this.getMetadata()
-            };
-        } catch (error) {
-            console.error('Erro na conversão:', error);
-            return {
-                success: false,
-                error: error.message
-            };
-        }
-    }
-
-    // Arrow function
-    parseMarkdown = async (text) => {
-        const marked = await import('marked');
-        return marked.parse(text);
-    }
-}
-
-// Uso com Promises
-const converter = new MarkdownConverter();
-converter.convert(mdContent, 'executivo')
-    .then(result => console.log('PDF gerado!', result))
-    .catch(err => console.error('Falha:', err));
-```
-
-### Bash/Shell Script
-
-```bash
-#!/bin/bash
-
-# Script de automação para conversão em lote
-# Autor: Dev Team
-# Data: 2025-12-05
-
-set -e  # Para no primeiro erro
-
-# Configurações
-INPUT_DIR="./markdown_files"
-OUTPUT_DIR="./pdfs"
-TEMPLATE="${1:-minimalista}"
-
-# Cores para output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
-
-# Função para log
-log_info() {
-    echo -e "${GREEN}[INFO]${NC} $1"
-}
-
-log_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
-
-log_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
-
-# Criar diretório de saída
-mkdir -p "$OUTPUT_DIR"
-
-# Contar arquivos
-total_files=$(find "$INPUT_DIR" -name "*.md" | wc -l)
-log_info "Encontrados $total_files arquivos Markdown"
-
-# Loop através dos arquivos
-count=0
-for md_file in "$INPUT_DIR"/*.md; do
-    if [ -f "$md_file" ]; then
-        filename=$(basename "$md_file" .md)
-        output_file="$OUTPUT_DIR/${filename}.pdf"
-
-        log_info "[$((++count))/$total_files] Convertendo: $filename"
-
-        # Converter usando Python
-        if python3 md_to_pdf_app.py "$md_file" "$output_file" "$TEMPLATE"; then
-            log_info "✓ Sucesso: $output_file"
-        else
-            log_error "✗ Falha: $md_file"
-        fi
-    fi
-done
-
-log_info "Conversão concluída! Total: $count arquivos"
-```
-
-### SQL
-
-```sql
--- Schema para banco de dados de documentos
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE documents (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL,
-    filename VARCHAR(255) NOT NULL,
-    markdown_content TEXT NOT NULL,
-    template VARCHAR(50) DEFAULT 'minimalista',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE pdf_exports (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    document_id INTEGER NOT NULL,
-    file_size_kb INTEGER,
-    export_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
-);
-
--- Índices para performance
-CREATE INDEX idx_docs_user ON documents(user_id);
-CREATE INDEX idx_exports_doc ON pdf_exports(document_id);
-
--- Query complexa com JOIN
-SELECT
-    u.username,
-    d.filename,
-    d.template,
-    COUNT(p.id) as total_exports,
-    MAX(p.export_date) as last_export
-FROM users u
-INNER JOIN documents d ON u.id = d.user_id
-LEFT JOIN pdf_exports p ON d.id = p.document_id
-WHERE d.created_at >= DATE('now', '-30 days')
-GROUP BY u.username, d.filename
-HAVING total_exports > 0
-ORDER BY total_exports DESC
-LIMIT 10;
-```
-
-### HTML/CSS
-
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MD to PDF Converter</title>
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --dark-bg: #0d1117;
-            --light-text: #e6edf3;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f2e 100%);
-            color: var(--light-text);
-            padding: 2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        h1 {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>MD to PDF Converter</h1>
-        <p>Transforme seus arquivos Markdown em PDFs profissionais!</p>
-    </div>
-</body>
-</html>
-```
-
-### JSON
-
-```json
-{
-  "app_config": {
-    "name": "MD to PDF Converter",
-    "version": "1.0.0",
-    "author": "Dev Team",
-    "license": "MIT",
-    "dependencies": {
-      "customtkinter": ">=5.2.0",
-      "markdown": ">=3.5.0",
-      "weasyprint": ">=60.0",
-      "pygments": ">=2.17.0"
-    }
-  },
-  "templates": [
-    {
-      "id": "minimalista",
-      "name": "Minimalista",
-      "description": "Fundo branco, fonte serifada",
-      "font_family": "Merriweather",
-      "background": "#ffffff",
-      "primary_color": "#2c3e50",
-      "features": ["margens_generosas", "texto_justificado"]
-    },
-    {
-      "id": "executivo",
-      "name": "Executivo",
-      "description": "Visual corporativo",
-      "font_family": "Open Sans",
-      "background": "#ffffff",
-      "primary_color": "#1e3a5f",
-      "features": ["cabecalhos_destacados", "tabelas_estilizadas"]
-    },
-    {
-      "id": "dark_coder",
-      "name": "Dark/Coder",
-      "description": "Tema escuro para código",
-      "font_family": "Fira Code",
-      "background": "#0d1117",
-      "primary_color": "#58a6ff",
-      "features": ["syntax_highlighting", "fonte_monospace"]
-    }
-  ],
-  "statistics": {
-    "total_conversions": 1247,
-    "most_used_template": "minimalista",
-    "avg_file_size_kb": 245,
-    "success_rate": 98.5
-  }
-}
-```
-
-### YAML
-
-```yaml
-# Configuração da aplicação MD to PDF
-app:
-  name: MD to PDF Converter
-  version: 1.0.0
-  debug: false
-
-window:
-  title: "MD to PDF Converter - Professional Ebook Generator"
-  width: 700
-  height: 550
-  resizable: false
-  theme: dark
-
-templates:
-  minimalista:
-    font: Merriweather
-    background: "#ffffff"
-    color: "#2c3e50"
-    margins: 80px
-
-  executivo:
-    font: Open Sans
-    background: "#ffffff"
-    color: "#1e3a5f"
-    headers:
-      border_color: "#3498db"
-      border_width: 2px
-
-  dark_coder:
-    font: Inter
-    code_font: Fira Code
-    background: "#0d1117"
-    color: "#e6edf3"
-    syntax_theme: github-dark
-
-markdown_extensions:
-  - tables
-  - fenced_code
-  - codehilite
-  - nl2br
-  - sane_lists
-  - attr_list
-  - def_list
-  - footnotes
-  - abbr
 ```
 
 ---

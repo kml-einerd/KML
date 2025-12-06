@@ -16,6 +16,70 @@ import pako from 'pako';
 import { enhanceMarkdown, validateAndFix } from './markdown-enhancer.js';
 
 /**
+ * Custom plugin to convert custom Mermaid markers to proper format
+ * Supports multiple marker types:
+ * 1. HTML tags: <mermaid>...</mermaid>
+ * 2. Container syntax: :::mermaid ... :::
+ * 3. Shortcodes: {{mermaid}}...{{/mermaid}}
+ */
+function rehypeMermaidMarkers() {
+    return (tree) => {
+        visit(tree, 'element', (node, index, parent) => {
+            // Handle <mermaid> HTML tags
+            if (node.tagName === 'mermaid' ||
+                (node.tagName === 'diagram' && node.properties?.type === 'mermaid')) {
+
+                // Extract text content from children
+                let mermaidCode = '';
+                visit(node, 'text', (textNode) => {
+                    mermaidCode += textNode.value;
+                });
+
+                // Replace with pre.mermaid
+                const mermaidElement = {
+                    type: 'element',
+                    tagName: 'pre',
+                    properties: { className: ['mermaid'] },
+                    children: [{
+                        type: 'text',
+                        value: mermaidCode.trim()
+                    }]
+                };
+
+                if (parent && index !== undefined) {
+                    parent.children[index] = mermaidElement;
+                }
+            }
+        });
+    };
+}
+
+/**
+ * Plugin to process Mermaid container syntax (:::mermaid ... :::)
+ * This preprocesses the markdown before it's parsed
+ */
+function preprocessMermaidContainers(content) {
+    // Match :::mermaid ... ::: blocks
+    const containerRegex = /:::mermaid\s*\n([\s\S]*?)\n:::/g;
+
+    return content.replace(containerRegex, (match, code) => {
+        return '```mermaid\n' + code.trim() + '\n```';
+    });
+}
+
+/**
+ * Plugin to process Mermaid shortcodes ({{mermaid}}...{{/mermaid}})
+ */
+function preprocessMermaidShortcodes(content) {
+    // Match {{mermaid}} ... {{/mermaid}} blocks
+    const shortcodeRegex = /\{\{mermaid\}\}\s*\n([\s\S]*?)\n\{\{\/mermaid\}\}/g;
+
+    return content.replace(shortcodeRegex, (match, code) => {
+        return '```mermaid\n' + code.trim() + '\n```';
+    });
+}
+
+/**
  * Encode diagram for Kroki
  */
 function encodeKroki(source) {
@@ -184,6 +248,13 @@ export async function processMarkdown(markdownContent) {
     // Apply professional enhancements
     cleanedContent = enhanceMarkdown(cleanedContent);
 
+    // PREPROCESS: Convert custom Mermaid markers to standard format
+    // 1. :::mermaid ... ::: → ```mermaid ... ```
+    cleanedContent = preprocessMermaidContainers(cleanedContent);
+
+    // 2. {{mermaid}} ... {{/mermaid}} → ```mermaid ... ```
+    cleanedContent = preprocessMermaidShortcodes(cleanedContent);
+
     // Convert Markdown to HTML with GFM (tables, task lists, etc.)
     const file = await unified()
         .use(remarkParse)
@@ -191,6 +262,7 @@ export async function processMarkdown(markdownContent) {
         .use(remarkDiagrams) // Convert diagram code blocks (Mermaid, PlantUML, GraphViz, etc.)
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeRaw) // Allow raw HTML
+        .use(rehypeMermaidMarkers) // Convert <mermaid> HTML tags to proper format
         .use(rehypeFixImages) // Fix image attributes for better loading
         .use(rehypeHighlight) // Syntax highlighting for code blocks
         .use(rehypeStringify)

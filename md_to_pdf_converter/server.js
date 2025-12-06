@@ -254,10 +254,11 @@ app.post('/api/preview', upload.single('markdown'), async (req, res) => {
 
 /**
  * Helper function to determine Mermaid theme based on PDF theme
+ * Uses NEO themes (neo/neo-dark) for modern, sleek diagrams
  */
 function getMermaidTheme(themeName) {
-    const darkThemes = ['dark_tech', 'retro-future', 'creative-zine'];
-    return darkThemes.includes(themeName) ? 'dark' : 'default';
+    const darkThemes = ['dark_tech', 'retro-future', 'creative-zine', 'obsidian'];
+    return darkThemes.includes(themeName) ? 'neo-dark' : 'neo';
 }
 
 // Error handling middleware

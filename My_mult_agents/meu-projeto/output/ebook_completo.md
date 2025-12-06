@@ -1,16 +1,10 @@
-<!--
-    Guia Completo Sala VIP 0800™
-    Gerado automaticamente em: 2025-12-05 04:12:21
-    Por: Sistema de Montagem Automatizada
--->
-
 #  Guia Completo Sala VIP 0800™
 
-![Capa do Ebook](https://placehold.co/800x600/E84393/FFFFFF/png?text=Guia+Completo%0ASala+VIP+0800)
+![Capa do Ebook](https://viagemeturismo.abril.com.br/wp-content/uploads/2023/12/FCA_5633.jpg)
 
 *Por Lari Colares (@laricolares)*
 
----
+
 
 ## ✨ Boas-vindas à sua nova realidade de viagem!
 
@@ -28,7 +22,7 @@ Neste guia, eu vou te entregar o mapa da mina. Vou abrir a caixa-preta e te most
 
 Prepare-se para transformar a sua forma de viajar para sempre. Vamos começar?
 
----
+
 
 ## Capítulo 1: Vencendo as Barreiras de Entrada
 
@@ -195,7 +189,7 @@ Você chegou no aeroporto, passou pelo raio-x e já sabe para qual lounge ir. E 
 2.  **Apresente seu Acesso:** Chegue na recepção e apresente com confiança seu cartão de crédito elegível ou o QR Code do seu aplicativo. A recepcionista vai validar seu acesso.
 3.  **Relaxe e Aproveite:** Entre e sinta-se em casa. Pegue uma bebida, conecte no Wi-Fi, escolha sua poltrona e relaxe. Você conseguiu!
 
-![Buffet Sala VIP](https://placehold.co/600x400/2ECC71/FFFFFF/png?text=Comida+%26+Bebida%0D%C3%A0+vontade!)
+![Buffet Sala VIP](https://viagemeturismo.abril.com.br/wp-content/uploads/2023/12/FCA_5707.jpg)
 
 > 😉 **Dica de Ouro:** A primeira vez pode dar um friozinho na barriga. É normal. Aja com naturalidade. Você tem o direito de estar ali. Em poucos minutos, você vai estar se perguntando como viveu tanto tempo sem isso.
 
@@ -233,72 +227,39 @@ graph TD
 
 ## 📊 TABELA VISUAL: ESTRUTURA DE PROGRAMAS DE LOUNGE
 
-```
-                    PROGRAMAS DE ACESSO
-                           │
-        ┌──────────────────┼──────────────────┐
-        │                  │                  │
-   LoungeKey         Priority Pass      Dragon Pass
-        │                  │                  │
-    ┌───┴────┐        ┌────┴─────┐      ┌────┴─────┐
-    │        │        │          │      │          │
-1.100+   Mastercard   1.400+   Amex &  1.700+    Visa
-lounges   Black      lounges  Diners  lounges  Infinite
-          Focus       Global   Focus   +Restaurantes
-
-┌─────────────────────────────────────────────────────┐
-│ COMO FUNCIONA O SEU CARTÃO:                         │
-│                                                      │
-│ Seu Cartão → Bandeira → Programa → Lounge           │
-│                                                      │
-│ Exemplo:                                             │
-│ C6 Carbon → Mastercard → LoungeKey → 1.100 lounges  │
-│ XP Infinite → Visa → Dragon Pass → 1.700 lounges    │
-└─────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    A[VOCÊ TEM R$ 1.000 PARA INVESTIR?]
+    
+    A -->|SIM| B[Rico Visa Infinite<br/>R$ 1k]
+    A -->|NÃO| C[TEM CONTA NO INTER?]
+    
+    C -->|SIM| D[Inter Black<br/>Duo Gourmet<br/>R$ 11,90/mês]
+    C -->|NÃO| E[SEU SCORE É BOM?]
+    
+    E -->|SIM| F[Will Bank<br/>Visa Infinite<br/>Grátis]
+    E -->|NÃO| G[PagBank<br/>Platinum<br/>R$ 29,90/mês]
 ```
 
 ---
 
 ## 🔄 FLUXO DO SISTEMA A.V.I. EM AÇÃO
 
-```
-ANTES DA VIAGEM (Planejamento)
-        │
-        ▼
-┌──────────────────────────┐
-│  PASSO 1: ACESSOS        │
-│  "Quais cartões tenho?"  │
-└────────┬─────────────────┘
-         │
-         ▼
-┌──────────────────────────┐
-│  PASSO 2: VERIFICAÇÃO    │
-│  "Qual lounge funciona?" │
-└────────┬─────────────────┘
-         │
-         ▼
-┌──────────────────────────┐
-│  Checklist 5 min         │
-│  ✓ Aeroporto             │
-│  ✓ Lounges disponíveis   │
-│  ✓ Meus acessos          │
-│  ✓ Regras específicas    │
-└────────┬─────────────────┘
-         │
-         ▼
-NO DIA DA VIAGEM
-         │
-         ▼
-┌──────────────────────────┐
-│  PASSO 3: INGRESSO       │
-│  Apresentar cartão/QR    │
-└────────┬─────────────────┘
-         │
-         ▼
-┌──────────────────────────┐
-│  🎉 RELAXAR E APROVEITAR │
-│  Comida, bebida, Wi-Fi   │
-└──────────────────────────┘
+```mermaid
+graph TD
+    A[ANTES DA VIAGEM Planejamento]
+    
+    A --> B[PASSO 1: ACESSOS<br/>Quais cartões tenho?]
+    
+    B --> C[PASSO 2: VERIFICAÇÃO<br/>Qual lounge funciona?]
+    
+    C --> D[Checklist 5 min<br/>✓ Aeroporto<br/>✓ Lounges disponíveis<br/>✓ Meus acessos<br/>✓ Regras específicas]
+    
+    D --> E[NO DIA DA VIAGEM]
+    
+    E --> F[PASSO 3: INGRESSO<br/>Apresentar cartão/QR]
+    
+    F --> G[🎉 RELAXAR E APROVEITAR<br/>Comida, bebida, Wi-Fi]
 ```
 
 ### 💡 POR QUE ESSE FLUXO FUNCIONA?
@@ -1113,7 +1074,7 @@ Este guia visual foi criado para te dar respostas rápidas. Em vez de pesquisar 
 
 ### **GRU - Aeroporto de Guarulhos (São Paulo)**
 
-![Mapa GRU](https://placehold.co/700x300/3498DB/FFFFFF/png?text=Mapa+Simplificado%0AAeroporto+de+Guarulhos)
+![Mapa GRU](https://www.aeroportodeguarulhos.org/content-wp/uploads/2017/08/Mapa-Terminais-Aeroporto-Guarulhos-GRU-2017.jpg)
 
 **Terminal 2 (Voos Domésticos):**
 
@@ -1277,7 +1238,7 @@ O mundo dos benefícios de viagem é incrível, mas existem armadilhas. Fique at
 > *   Em um ano, a economia é de **R$6.240!**
 > *   Isso pagou com folga o investimento que ele tinha no Inter para manter o cartão Black e ainda "lucrou" com o conforto e a produtividade.
 
-![Pessoa trabalhando em lounge](https://placehold.co/600x300/8E44AD/FFFFFF/png?text=Produtividade+%26+Economia)
+![Pessoa trabalhando em lounge](https://static.vecteezy.com/ti/fotos-gratis/p1/11100102-empresario-rico-focado-lendo-jornal-no-cafe-gratis-foto.JPG)
 
 ---
 
@@ -1862,7 +1823,7 @@ Use este guia para encontrar "Salas VIP alternativas" – espaços mais calmos e
 3.  **Use Cafés "Escondidos":** Evite as grandes redes de fast-food. Procure por cafés menores e mais afastados. Compre uma água ou um café e use a mesa como seu escritório particular.
 4.  **"Portões Fantasmas":** Fique de olho em portões de embarque onde não há voos programados para sair. Eles se tornam áreas de espera vazias e silenciosas.
 
-> ![Descanso no Aeroporto](https://placehold.co/600x300/F1C40F/FFFFFF/png?text=Encontre+seu+canto+de+paz)
+> ![Descanso no Aeroporto](https://viagenspelomundo.com.br/wp-content/uploads/2024/03/onde-dormir-aeroporto-de-guarulhos-urban-lounge-1.jpg)
 >
 > Lembre-se: o objetivo é melhorar sua experiência. Mesmo sem o luxo de um lounge, um pouco de silêncio e uma tomada já fazem uma diferença enorme.
 

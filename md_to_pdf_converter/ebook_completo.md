@@ -1,9 +1,3 @@
----
-title: "Guia Completo Sala VIP 0800™"
-author: "Lari Colares (@laricolares)"
-date: "2025"
----
-
 # ✈️ Guia Completo Sala VIP 0800™
 
 ![Capa do Ebook](https://viagemeturismo.abril.com.br/wp-content/uploads/2023/12/FCA_5633.jpg)
@@ -42,7 +36,6 @@ Se você chegou até aqui, provavelmente está cansado de esperar seu voo em cad
 
 Mas e se eu te dissesse que existe um universo paralelo dentro dos aeroportos? Um lugar com comida e bebida de graça, Wi-Fi que realmente funciona, poltronas que parecem abraços e até chuveiros para se refrescar antes de um voo longo.
 
-> [!IMPORTANT]
 > **Esse lugar existe, são as Salas VIP. E você pode entrar nelas de graça.**
 
 Não, você não precisa ter um cartão black ou ser milionário. Eu mesma, usando as técnicas que vou te ensinar, fiz 13 viagens em 10 meses, economizando mais de 200 mil reais e aproveitando o melhor que os aeroportos têm a oferecer.
@@ -57,7 +50,6 @@ Prepare-se para transformar a sua forma de viajar para sempre. Vamos começar?
 
 Antes de mergulharmos nas técnicas, preciso falar sobre algo que eu vejo acontecer o tempo todo: pessoas que PODERIAM estar nas salas VIP, mas não estão. E sabe por quê?
 
-> [!CAUTION]
 > **Não é falta de dinheiro. Não é falta de cartão. É falta de INFORMAÇÃO e, principalmente, de CORAGEM.**
 
 ### 🛑 A Síndrome do "Isso Não é Pra Mim"
@@ -92,7 +84,6 @@ Eu mesma tinha um cartão há 2 anos que me dava acesso a salas VIP e **nunca ni
 
 Muita gente acha que precisa ter um "status" especial. Que precisa andar de terno, voar de executiva, ter uma renda altíssima.
 
-> [!TIP]
 > **MENTIRA.** Eu já entrei de chinelo, bermuda e camiseta (voo pro Nordeste, gente!). Ninguém me barrou. Ninguém me olhou torto. Porque o que vale é o SEU CARTÃO, não a sua roupa.
 
 Se você tem o acesso, você TEM O DIREITO. Ponto final.
@@ -136,7 +127,6 @@ Vou detalhar todos esses cartões mais à frente. Por agora, saiba que **o camin
 
 Depois de conseguir seu primeiro cartão com benefício, chegou a hora da verdade. E aqui vai a regra de ouro:
 
-> [!NOTE]
 > **🎯 Aja como se você já soubesse o que está fazendo.**
 
 Não precisa mentir ou fingir ser rico. Mas também não precisa chegar tímido, pedindo desculpas por estar ali. Você TEM O DIREITO. Você pagou (seja com anuidade, investimentos ou gastos). Você MERECE estar lá.
@@ -198,7 +188,6 @@ A primeira coisa que você precisa entender é: você provavelmente **JÁ TEM** 
 *   **Apps Gratuitos:** Existem aplicativos que, ao se cadastrar, te dão acessos gratuitos como cortesia.
 *   **Companhias Aéreas e Alianças:** Dependendo da sua passagem ou categoria no programa de fidelidade, a porta do lounge pode estar aberta para você.
 
-> [!TIP]
 > 🚀 **Sua primeira missão:** Pegue todos os seus cartões de crédito. TODOS. Até aquele que está esquecido na gaveta. Nós vamos investigar cada um deles.
 
 No nosso material extra **AcessoMap™**, você encontrará um guia visual para identificar rapidamente essas oportunidades em aeroportos brasileiros.
@@ -227,8 +216,7 @@ Você chegou no aeroporto, passou pelo raio-x e já sabe para qual lounge ir. E 
 ![Buffet Sala VIP](https://viagemeturismo.abril.com.br/wp-content/uploads/2023/12/FCA_5707.jpg)
 *Buffet variado em Sala VIP*
 
-> [!NOTE]
-> 😉 **Dica de Ouro:** A primeira vez pode dar um friozinho na barriga. É normal. Aja com naturalidade. Você tem o direito de estar ali. Em poucos minutos, você vai estar se perguntando como viveu tanto tempo sem isso.
+> **Dica de Ouro:** A primeira vez pode dar um friozinho na barriga. É normal. Aja com naturalidade. Você tem o direito de estar ali. Em poucos minutos, você vai estar se perguntando como viveu tanto tempo sem isso.
 
 ---
 
@@ -253,7 +241,7 @@ graph TD
 ### 🎯 DECISÃO SIMPLIFICADA:
 
 | SEU PERFIL | COMECE COM | PRÓXIMO PASSO |
-| :--- | :--- | :--- |
+|---------|-------------|-------------|
 | **Iniciante total** | Rico (R$ 1k) ou Inter Duo | C6 Carbon em 1 ano |
 | **Já invisto regularmente** | XP ou BTG (R$ 5k) | Genial (R$ 10k) |
 | **Score baixo** | PagBank ou Méliuz | Will Bank → C6 |
@@ -268,15 +256,15 @@ graph TD
 graph TD
     A[ANTES DA VIAGEM Planejamento]
     
-    A --> B[PASSO 1: ACESSOS<br/>Quais cartões tenho?]
+    A --> B[**PASSO 1:** ACESSOS<br/>Quais cartões tenho?]
     
-    B --> C[PASSO 2: VERIFICAÇÃO<br/>Qual lounge funciona?]
+    B --> C[**PASSO 2:** VERIFICAÇÃO<br/>Qual lounge funciona?]
     
-    C --> D[Checklist 5 min<br/>✓ Aeroporto<br/>✓ Lounges disponíveis<br/>✓ Meus acessos<br/>✓ Regras específicas]
+    C --> D["<div style='text-align: left'>"**Checklist 5 min**<br/>✓ Aeroporto<br/>✓ Lounges disponíveis<br/>✓ Meus acessos<br/>✓ Regras específicas]
     
     D --> E[NO DIA DA VIAGEM]
     
-    E --> F[PASSO 3: INGRESSO<br/>Apresentar cartão/QR]
+    E --> F[**PASSO 4:** INGRESSO<br/>Apresentar cartão/QR]
     
     F --> G[🎉 RELAXAR E APROVEITAR<br/>Comida, bebida, Wi-Fi]
 ```
@@ -323,7 +311,6 @@ Toda vez que você olha um cartão, existem 3 "personagens" envolvidos:
 -   **Elo**: Parcerias com **LoungeKey** e **Priority Pass**. Cartões Elo Nanquim e Elo Diners Club costumam ter ótimos benefícios.
 -   **American Express (Amex)**: Tem as próprias salas (American Express Lounge). Mas atenção: no Brasil, Amex é mais restrito.
 
-> [!NOTE]
 > **Regra de Ouro**: TODO Mastercard Black e TODO Visa Infinite tem ALGUM tipo de acesso a sala VIP. A questão é: gratuito ou pago?
 
 #### 2. **O EMISSOR** (Banco, Fintech, Cooperativa)
@@ -347,12 +334,11 @@ Mesmo bandeira, benefícios diferentes. Por quê? Porque cada emissor negocia se
 **Os 3 principais no Brasil:**
 
 | Programa | Como Funciona | Quais Cartões Costumam Ter |
-| :--- | :--- | :--- |
+|---------|-------------|-----------|
 | **LoungeKey** | Maior rede no Brasil. Mais de 1.100 lounges no mundo. | Mastercard Black, C6 Carbon, Inter Black, Sicoob/Sicredi Black |
 | **Priority Pass** | Rede global com 1.400+ lounges. Muito forte nos EUA e Europa. | Poucos cartões brasileiros (Elo Diners, alguns Black específicos) |
 | **Dragon Pass** (Visa Airport Companion) | Rede da Visa. 1.700+ lounges + restaurantes. | Visa Platinum, Visa Infinite, Visa Signature |
 
-> [!TIP]
 > **Dica Matadora**: Um cartão pode ter acesso a MAIS DE UM programa ao mesmo tempo. Ex: O BRB Dux Visa Infinite dá acesso aos 3 (LoungeKey + Priority Pass + Dragon Pass) com até 3 convidados. É o unicórnio dos cartões!
 
 ### Hierarquia de Cartões - Descomplicada
@@ -361,22 +347,16 @@ Você deve ter ouvido falar de Gold, Platinum, Black, Infinite, Signature... Mas
 
 Aqui está a hierarquia do MENOS pro MAIS premium:
 
-1.  **Standard / Clássico (sem categoria)**
-    *   Benefício VIP: Raro / Nenhum
-2.  **Gold / Ouro**
-    *   Benefício VIP: Raro, alguns têm
-3.  **Platinum**
-    *   Benefício VIP: **SIM!** (geralmente 2-4 acessos/ano)
-4.  **Infinite / Signature (Visa)**
-    *   Benefício VIP: **SIM!** (geralmente 2-6 acessos/ano, às vezes ilimitado)
-5.  **Black (Mastercard)**
-    *   Benefício VIP: **SIM, ILIMITADO** (LoungeKey na maioria)
-6.  **Nanquim / Diners (Elo)**
-    *   Benefício VIP: **SIM** (Priority Pass ou LoungeKey)
-7.  **The Platinum Card (Amex)**
-    *   Benefício VIP: **SIM** (Lounges Amex + Priority Pass)
+| Nível | Categoria | Benefício VIP (Lounge) |
+|---------|-------------|-----------|
+| 1 | Standard / Clássico | 🔴 **Raro / Nenhum** |
+| 2 | Gold / Ouro | 🟡 **Raro** (alguns pontuais) |
+| 3 | Platinum | 🟢 **SIM** (2-4 acessos/ano) |
+| 4 | Infinite / Signature | 🟢 **SIM** (2-6 acessos ou ilimitado) |
+| 5 | Black (Mastercard) | 🟣 **SIM, ILIMITADO** (foco LoungeKey) |
+| 6 | Nanquim / Diners | 🟣 **SIM** (Priority Pass ou LK) |
+| 7 | **The Platinum (Amex)** | 🏆 **SIM + Exclusivos** (Amex + PP) |
 
-> [!WARNING]
 > **⚠️ IMPORTANTE**: Essa hierarquia é GERAL. Existem exceções. Alguns Platinum são melhores que alguns Infinite. Sempre confira os benefícios ESPECÍFICOS do seu cartão!
 
 ### Como Ler os Benefícios: O Que Realmente Importa
@@ -521,7 +501,6 @@ Muitos bancos ESTORNAM a cobrança se você reclamar logo. É um hack pouco conh
 -   Seu perfil de crédito melhorou
 -   Você quer consolidar benefícios em menos cartões
 
-> [!CAUTION]
 > **Nunca peça upgrade se**: Você não tem como justificar (renda, gastos, investimentos). Vai ser negado e vai piorar suas chances futuras.
 
 ### Checklist: Está Na Hora de Pedir Novo Cartão?
@@ -588,14 +567,13 @@ Primeira coisa: você precisa de um lugar central onde você vê TODOS os seus c
 **Template do Inventário**:
 
 | Cartão | Bandeira | Programa | Acessos/Ano | Já Usei | Restantes | Data Renovação | Anuidade | Status |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|---------|-------------|-----------|------------|---------|-----------|----------------|----------|--------|
 | C6 Carbon | Mastercard Black | LoungeKey | 4 | 2 | 2 | 15/03/2026 | R$ 0 | Ativo |
 | XP Infinite | Visa Infinite | Dragon Pass | 2 | 0 | 2 | 01/01/2026 | R$ 0 | Ativo |
 | Inter Black | Mastercard Black | LoungeKey | Ilimitado | 8 | ∞ | - | R$ 0* | Ativo |
 
 **Preencha isso AGORA** com seus cartões atuais.
 
-> [!TIP]
 > *Dica*: Coloque um lembrete no celular 30 dias ANTES da renovação pra usar os acessos que estão sobrando!
 
 #### **Camada 2: A Estratégia (Saber QUANDO Usar Cada Um)**
@@ -648,22 +626,20 @@ Comece com cartões fáceis e vá evoluindo conforme seu perfil melhora.
 
 **Rota Sugerida**:
 
-```
-ANO 1: Cartão Básico (sem benefícios)
-   └─> Objetivo: Construir score e histórico
-   └─> Ex: Cartão Nubank padrão, C6 Bank básico
-
-ANO 2: Primeiro Cartão com Benefício
-   └─> Objetivo: Primeiros acessos VIP
-   └─> Ex: XP Visa Infinite (R$ 5k investidos), Rico Infinite (R$ 1k investidos)
-
-ANO 3: Upgrade pra Black/Infinite de Cooperativa
-   └─> Objetivo: Acesso ilimitado
-   └─> Ex: Sicoob Black Merit, Sicredi Infinite
-
-ANO 4: Diversificação Estratégica
-   └─> Objetivo: Ter backup e cobrir mais programas
-   └─> Ex: Adicionar um Visa Infinite (Dragon Pass) + um Mastercard Black (LoungeKey)
+```timeline
+    title JORNADA DAS SALAS VIP
+    ANO 1 : **Básico**
+          : *Objetivo:* Score e Histórico
+          : *Ex:* Nubank, C6 Básico
+    ANO 2 : **Primeiro VIP**
+          : *Objetivo:* Degustar benefícios
+          : *Ex:* XP Visa Infinite, Rico
+    ANO 3 : **Elite (Black)**
+          : *Objetivo:* Acesso Ilimitado
+          : *Ex:* Sicoob Merit, Sicredi
+    ANO 4 : **Estrategista**
+          : *Objetivo:* Combo (LK + DP)
+          : *Ex:* Visa + Mastercard
 ```
 
 #### **Estratégia 3: O Calendário de Maximização**
@@ -673,7 +649,7 @@ Planeje o ANO INTEIRO de acessos.
 **Exemplo de Planejamento**:
 
 | Mês | Viagem | Aeroporto | Cartão a Usar | Motivo |
-| :--- | :--- | :--- | :--- | :--- |
+|---------|-------------|-------------|-------------|-------------|
 | Mar | SP → RJ | GRU/SDU | Inter Black (ilimitado) | Viagem rápida, uso ilimitado |
 | Jul | SP → Miami | GRU/MIA | XP Infinite (2/4 acessos) | Internacional, vale a pena |
 | Set | SP → POA | GRU/POA | Inter Black (ilimitado) | Doméstico, uso ilimitado |
@@ -682,31 +658,49 @@ Planeje o ANO INTEIRO de acessos.
 **Sacou a lógica?** Você PLANEJA onde vai usar cada acesso pra não desperdiçar.
 
 ### A Planilha Mestra (Template Completo)
+#### 💳 ABA 1: Inventário de Cartões (O Arsenal)
+*Onde você cadastra o que tem na carteira.*
 
-Aqui está o template completo que você pode copiar pro Google Sheets:
+| Cartão | 🏳️ Bandeira | 💎 Programa | 🔢 Acessos | 📅 Renovação | 💰 Anuidade | 🎯 Meta Isenção | Status |
+|---------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|
+| **XP Visa Inf.** | Visa | Dragon Pass | 4 | 01/2026 | Grátis | R$ 5k Invest. | ✅ Ativo |
+| **C6 Carbon** | Master | LoungeKey | Ilimitado | 06/2025 | 12x R$ 85 | R$ 50k Invest. | ⚠️ Atenção |
+| **Inter Black** | Master | LoungeKey | 6 | 12/2025 | Grátis | Duo Gourmet | ✅ Ativo |
 
-**ABA 1: Inventário de Cartões**
-```
-Cartão | Bandeira | Programa | Acessos/Ano | Data Renovação | Anuidade | Investimento Necessário | Status
-```
+---
 
-**ABA 2: Controle de Uso**
-```
-Data | Aeroporto | Lounge | Cartão Usado | Acessos Restantes | Observações
-```
+#### ✈️ ABA 2: Controle de Uso (O Gasto)
+*Onde você registra cada entrada na sala VIP para não estourar a cota.*
 
-**ABA 3: Planejamento Anual**
-```
-Mês | Viagem | Aeroportos | Cartão Planejado | Executado? | Acessos Usados
-```
+| Data | 📍 Aeroporto | 🛋️ Lounge | 💳 Cartão Usado | 📉 Restantes | 📝 Obs |
+|---------|-------------|-------------|-------------|-------------|-------------|
+| 10/02 | GRU (T3) | Espaço Safra | XP Visa Inf. | **3** | Eu + 1 convidado |
+| 15/05 | MIA | Turkish Lounge | C6 Carbon | **Ilim.** | Jantar ótimo |
 
-**ABA 4: Metas e To-Dos**
-```
-- [ ] Renovar cartão X até [data]
-- [ ] Usar 2 acessos restantes do cartão Y até dezembro
-- [ ] Solicitar upgrade do cartão Z
-- [ ] Negociar anuidade do cartão W
-```
+---
+
+#### 🗓️ ABA 3: Planejamento Anual (A Estratégia)
+*Onde você cruza suas viagens futuras com o melhor cartão para usar.*
+
+| Mês | 🌍 Viagem | 🛫 Aeroportos | 💳 Cartão Planejado | ✅ Executado? | 📉 Saldo Final |
+|---------|-------------|-------------|-------------|-------------|-------------|
+| **Fev** | Carnaval | GRU, REC | XP (Dragon Pass) | Sim | -2 acessos |
+| **Jul** | Férias EUA | GRU, MIA, MCO | C6 (Ilimitado) | Não | Intacto |
+| **Dez** | Natal | CGH, SDU | Inter (LoungeKey) | ... | ... |
+
+---
+
+#### 🚀 ABA 4: Metas e To-Dos (O "Backstage")
+*O painel de controle para garantir que você não perca benefícios ou pague anuidade à toa.*
+
+| Status | Prioridade | Tarefa / Ação | Prazo |
+|---------|-------------|-------------|-------------|
+| 🔲 | 🔥 **ALTA** | **Renovar isenção** do C6 Carbon | 15/Jun |
+| 🔲 | 🟡 Média | Gastar os **2 acessos** restantes do Inter | Até Dez |
+| ✅ | 🟢 Baixa | Pedir **Upgrade** para o Visa Infinite | Feito |
+| 🔲 | 🔥 **ALTA** | Cancelar cartão antigo antes da anuidade | 30/Ago |
+
+---
 
 ### ⚠️ Erros Comuns de Organização (E Como Evitar)
 
@@ -997,7 +991,6 @@ Este guia visual foi criado para te dar respostas rápidas. Em vez de pesquisar 
     *   💳 **Acesso:** LoungeKey, Priority Pass, Dragon Pass.
     *   📱 **App:** Visa Airport Companion.
 
-> [!TIP]
 > 🔥 **Hack de Ouro:** Muitos não sabem, mas alguns cartões **Visa Platinum** já oferecem acessos via Dragon Pass (pelo app Visa Airport Companion). Não é privilégio apenas do Infinite! Verifique o seu agora mesmo.
 
 ---
@@ -1024,7 +1017,6 @@ Este guia visual foi criado para te dar respostas rápidas. Em vez de pesquisar 
     *   **A pegadinha:** Você acha que renova em janeiro, mas renova em julho.
     *   **Como evitar:** Consulte a central do seu cartão.
 
-> [!IMPORTANT]
 > 🚨 **REGRA DE OURO:** Na dúvida, **PERGUNTE**. Não tenha vergonha.
 
 ---
@@ -1084,7 +1076,6 @@ Faça este checklist 2-3 dias antes de **TODA VIAGEM**.
 *   [ ] App com QR Code logado.
 *   [ ] Celular com bateria.
 
-> [!TIP]
 > 📸 **Tire um Print!** Backup simples que pode salvar seu conforto.
 
 ---
