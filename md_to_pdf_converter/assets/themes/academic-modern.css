@@ -1,0 +1,16 @@
+/* TEMA 5: Academic Modern - Tese século 21 */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600&family=IBM+Plex+Sans:wght@400;600&display=swap');
+:root{--primary:#1565C0;--text:#212121;--gray:#757575}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:3cm;@bottom-center{content:"Página " counter(page);font-size:9pt}}
+.cover-page{page-break-after:always;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;border:3px double var(--primary)}
+.cover-title{font-family:'IBM Plex Serif',serif;font-size:36pt;font-weight:600;margin-bottom:30px}
+.content-body{font-family:'IBM Plex Serif',serif;font-size:11pt;line-height:1.8;color:var(--text);text-align:justify}
+h1{font-family:'IBM Plex Sans',sans-serif;font-size:24pt;margin:35px 0 20px;color:var(--primary);text-transform:uppercase;letter-spacing:0.05em}
+h2{font-size:18pt;margin:25px 0 15px;font-weight:600}
+blockquote{border-left:3px solid var(--primary);padding-left:20px;margin:20px 0;font-style:italic;color:var(--gray)}
+code{background:#ECEFF1;padding:2px 5px;font-family:monospace;color:#D32F2F}
+pre{background:#263238;color:#ECEFF1;padding:15px;margin:20px 0;border-radius:4px}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:10pt}
+th{background:#1565C0;color:white;padding:10px;text-align:left}
+td{border:1px solid #CFD8DC;padding:8px}

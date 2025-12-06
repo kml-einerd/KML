@@ -1,0 +1,20 @@
+/* TEMA 9: Technical Manual - Engenharia */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+:root{--tech-blue:#0066CC;--tech-gray:#4A4A4A;--bg:#F7F9FC}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:2cm 2.5cm;@top-right{content:"MANUAL TÉCNICO";font-size:8pt;color:var(--tech-gray)}@bottom-center{content:"Pág. " counter(page);font-size:9pt}}
+.cover-page{page-break-after:always;height:100vh;background:var(--tech-blue);color:white;display:flex;align-items:center;justify-content:center;border:10px solid #004080}
+.cover-title{font-family:'Roboto Mono',monospace;font-size:32pt;font-weight:700;margin-bottom:20px;text-transform:uppercase}
+.content-body{font-family:'Source Sans Pro',sans-serif;font-size:10pt;line-height:1.6;color:var(--tech-gray);background:var(--bg)}
+h1{font-family:'Roboto Mono',monospace;font-size:20pt;font-weight:700;margin:30px 0 15px;color:var(--tech-blue);border-bottom:3px solid var(--tech-blue);padding-bottom:8px}
+h1::before{content:"§ ";color:#FF6600}
+h2{font-size:16pt;font-weight:600;margin:25px 0 12px;color:#333}
+h2::before{content:"► "}
+h3{font-size:13pt;font-weight:600;margin:20px 0 10px;color:var(--tech-gray)}
+blockquote{background:#E8F1FF;border-left:4px solid var(--tech-blue);padding:15px 20px;margin:20px 0}
+code{font-family:'Roboto Mono',monospace;background:#FFE5CC;padding:2px 5px;color:#CC4400;border:1px solid #FFCC99}
+pre{background:#1E1E1E;color:#D4D4D4;padding:15px;margin:20px 0;border-left:4px solid var(--tech-blue);font-family:'Roboto Mono',monospace;font-size:9pt}
+table{width:100%;border-collapse:collapse;margin:20px 0;border:2px solid var(--tech-blue)}
+th{background:var(--tech-blue);color:white;padding:10px;font-weight:700;text-align:left}
+td{border:1px solid #CCC;padding:8px;background:white}
+tr:nth-child(even) td{background:#F7F9FC}

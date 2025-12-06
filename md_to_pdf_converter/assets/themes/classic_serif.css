@@ -1,0 +1,133 @@
+/* TEMA: Classic Novel - Best-seller Fiction */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=EB+Garamond:wght@400;500;700&display=swap');
+
+:root {
+    --serif-body: 'EB Garamond', Garamond, 'Times New Roman', serif;
+    --serif-title: 'Crimson Text', Georgia, serif;
+    --cream: #FFFEF2;
+    --ink: #2B2B2B;
+    --accent: #8B4513;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+@page {
+    size: A4;
+    margin: 3cm 2.5cm;
+    @bottom-center {
+        content: counter(page);
+        font-family: var(--serif-body);
+        font-size: 10pt;
+    }
+}
+
+.cover-page {
+    page-break-after: always;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    text-align: center;
+}
+
+.cover-title {
+    font-family: var(--serif-title);
+    font-size: 54pt;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 30px;
+    letter-spacing: 0.02em;
+}
+
+.cover-subtitle { font-size: 20pt; font-style: italic; margin-bottom: 50px; }
+.cover-author { font-size: 16pt; font-weight: 600; margin-top: 80px; }
+.cover-date { font-size: 12pt; opacity: 0.6; margin-top: 15px; }
+
+.content-body {
+    font-family: var(--serif-body);
+    font-size: 12pt;
+    line-height: 1.8;
+    color: var(--ink);
+    text-align: justify;
+    hyphens: auto;
+}
+
+h1 {
+    font-family: var(--serif-title);
+    font-size: 36pt;
+    font-weight: 700;
+    margin: 50px 0 25px;
+    text-align: center;
+    page-break-after: avoid;
+}
+
+h2 {
+    font-size: 24pt;
+    font-weight: 600;
+    margin: 40px 0 20px;
+    page-break-after: avoid;
+}
+
+h3 { font-size: 18pt; margin: 30px 0 15px; font-weight: 500; }
+p { margin-bottom: 18px; text-indent: 1.5em; }
+p:first-of-type { text-indent: 0; }
+
+blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 25px;
+    margin: 30px 0;
+    font-style: italic;
+    color: #555;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    background: #F5F5F0;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+pre {
+    background: #F9F9F5;
+    padding: 20px;
+    margin: 25px 0;
+    border-left: 4px solid var(--accent);
+    page-break-inside: avoid;
+}
+
+table {
+    width: 100%;
+    margin: 25px 0;
+    border-collapse: collapse;
+    font-size: 11pt;
+}
+
+th, td {
+    border: 1px solid #DDD;
+    padding: 10px;
+}
+
+th {
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+}
+
+img {
+    max-width: 100%;
+    margin: 30px auto;
+    display: block;
+}
+
+hr {
+    border: none;
+    text-align: center;
+    margin: 40px 0;
+}
+
+hr::after {
+    content: '***';
+    letter-spacing: 1em;
+    color: var(--accent);
+}

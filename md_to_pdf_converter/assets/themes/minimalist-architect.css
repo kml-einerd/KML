@@ -1,0 +1,19 @@
+/* TEMA 8: Minimalist Architect - Portfólio Design */
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400&family=Raleway:wght@200;400&display=swap');
+:root{--black:#000;--white:#FFF;--gray:#999}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:A4;margin:4cm 3cm;@bottom-right{content:counter(page);font-size:8pt;color:var(--gray)}}
+.cover-page{page-break-after:always;height:100vh;background:var(--white);color:var(--black);display:flex;align-items:center;justify-content:center}
+.cover-title{font-family:'Raleway',sans-serif;font-size:72pt;font-weight:200;letter-spacing:0.1em;margin-bottom:80px}
+.content-body{font-family:'Helvetica Neue',sans-serif;font-size:10pt;line-height:2;color:var(--black)}
+h1{font-family:'Raleway',sans-serif;font-size:24pt;font-weight:200;margin:60px 0 30px;letter-spacing:0.15em;text-transform:uppercase}
+h2{font-size:16pt;font-weight:300;margin:40px 0 20px;color:var(--gray)}
+p{margin-bottom:20px}
+blockquote{border-left:1px solid var(--black);padding-left:30px;margin:40px 0;font-style:italic;color:var(--gray)}
+code{font-family:monospace;background:#F5F5F5;padding:2px 4px}
+pre{background:#F9F9F9;padding:25px;margin:30px 0;border-left:2px solid var(--black)}
+table{width:100%;margin:30px 0;border:none}
+th,td{border-bottom:1px solid #EEE;padding:15px 0;text-align:left}
+th{font-weight:400;color:var(--gray);font-size:9pt;text-transform:uppercase;letter-spacing:0.1em}
+img{max-width:100%;margin:40px 0}
+hr{border:none;border-top:1px solid #EEE;margin:50px 0}

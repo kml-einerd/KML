@@ -320,5 +320,3 @@ Posso entregar agora qualquer um dos itens abaixo:
 2.  **DDL de Infra:** Script pronto de índices, MVs e instruções de refresh.
 3.  **Views de Frontend:** Views seguras e scripts de índices trigrams.
 4.  **Testes e Audit:** Scripts de validação de dados e tabela de logs.
-
-*Recomendo começar pelo ETL (item 1).*
