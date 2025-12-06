@@ -58,15 +58,16 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
     // Manually trigger Mermaid rendering
     console.log('🎨 Triggering Mermaid rendering...');
     await page.evaluate(async () => {
-        if (typeof mermaid !== 'undefined') {
+        if (typeof window.mermaid !== 'undefined') {
             try {
-                await mermaid.run({
+                // We use await here because mermaid.run is usually fast enough
+                await window.mermaid.run({
                     querySelector: '.mermaid'
                 });
                 window.mermaidRenderComplete = true;
                 console.log('Mermaid run finished.');
             } catch (error) {
-                console.error('Mermaid rendering error:', error);
+                console.error('Mermaid rendering error:', error.toString());
                 window.mermaidRenderComplete = false;
                 window.mermaidError = error.message;
             }
@@ -101,6 +102,18 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
     });
 
     console.log(`🎨 Mermaid status: ${mermaidStatus.rendered}/${mermaidStatus.total} diagrams rendered`);
+
+    // Manually trigger Paged.js
+    console.log('📖 Triggering Paged.js...');
+    await page.evaluate(() => {
+        // Fire and forget - do NOT await here to avoid protocol timeout if Paged.js is slow
+        if (window.PagedPolyfill) {
+            console.log("Starting Paged.js preview...");
+            window.PagedPolyfill.preview();
+        } else {
+            console.error('Paged.js polyfill not found on window');
+        }
+    });
 
     // Wait for Paged.js to finish rendering
     try {
@@ -197,7 +210,7 @@ export async function generatePdf(htmlContent, outputPath, options = {}) {
         await new Promise(resolve => setTimeout(resolve, 5000));
 
     } catch (e) {
-        console.warn('⚠️  Paged.js not detected or timed out');
+        console.warn('⚠️  Paged.js not detected or timed out', e);
     }
 
     console.log('🖨️  Printing PDF...');
