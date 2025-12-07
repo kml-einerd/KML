@@ -626,21 +626,7 @@ Comece com cartões fáceis e vá evoluindo conforme seu perfil melhora.
 
 **Rota Sugerida**:
 
-```timeline
-    title JORNADA DAS SALAS VIP
-    ANO 1 : **Básico**
-          : *Objetivo:* Score e Histórico
-          : *Ex:* Nubank, C6 Básico
-    ANO 2 : **Primeiro VIP**
-          : *Objetivo:* Degustar benefícios
-          : *Ex:* XP Visa Infinite, Rico
-    ANO 3 : **Elite (Black)**
-          : *Objetivo:* Acesso Ilimitado
-          : *Ex:* Sicoob Merit, Sicredi
-    ANO 4 : **Estrategista**
-          : *Objetivo:* Combo (LK + DP)
-          : *Ex:* Visa + Mastercard
-```
+![Timeline](https://i.imgur.com/Hp2LtBi.png)
 
 #### **Estratégia 3: O Calendário de Maximização**
 
@@ -1147,7 +1133,7 @@ Faça este checklist 2-3 dias antes de **TODA VIAGEM**.
 
 ---
 
-# 🤫 Quiet Zones Finder™
+# 🤫 Quiet Zones Finder
 
 *Onde se esconder quando a sala VIP não rolar.*
 
