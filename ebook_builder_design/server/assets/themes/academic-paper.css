@@ -1,0 +1,34 @@
+body {
+    column-count: 2;
+    column-gap: 2em;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    text-align: justify;
+}
+
+h1 {
+    column-span: all;
+    text-align: center;
+    font-size: 24pt;
+    margin-bottom: 2em;
+}
+
+h2 {
+    font-size: 14pt;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+
+p {
+    text-indent: 1em;
+    margin-top: 0;
+}
+
+blockquote {
+    font-size: 0.9em;
+    color: #555;
+    border: none;
+    font-style: normal;
+    background: #f9f9f9;
+    padding: 10px;
+}

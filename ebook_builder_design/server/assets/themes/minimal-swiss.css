@@ -1,0 +1,38 @@
+:root {
+  --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-secondary: 'Times New Roman', Times, serif;
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-accent: #000000;
+  --spacing-unit: 1rem;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    margin-bottom: 2rem;
+    border-bottom: 4px solid black;
+    padding-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+blockquote {
+    border-left: 2px solid black;
+    font-style: italic;
+    font-family: var(--font-secondary);
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+}

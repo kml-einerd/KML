@@ -1,0 +1,30 @@
+:root {
+  --green: #4a6741;
+  --cream: #f4f1ea;
+  --brown: #8b5a2b;
+}
+
+body {
+    background-color: var(--cream);
+    color: #3e3e3e;
+    font-family: 'Verdana', sans-serif;
+}
+
+h1, h2, h3 {
+    color: var(--green);
+    font-weight: normal;
+}
+
+h1 {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    border-bottom: 1px dashed var(--brown);
+}
+
+blockquote {
+    border-left: none;
+    background: #ece8df;
+    border-radius: 10px;
+    padding: 1.5em;
+    color: var(--brown);
+}
