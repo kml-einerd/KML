@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de Ações B3 - MindBill</title>
+    <meta name="description" content="Análise profissional de ações brasileiras da B3">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/home.css">
+
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">📊 MindBill</h1>
+            <p class="tagline">Análise Profissional de Ações B3</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- TradingView Widget Section -->
+            <section class="widget-section">
+                <div id="stockGrid" class="stock-grid">
+                    <!-- Widget will be injected here -->
+                </div>
+            </section>
+
+            <!-- Interactive Stock Cards -->
+            <section class="stocks-section">
+                <h2 class="section-title">Clique para análise detalhada</h2>
+                <div id="stockCards" class="stock-cards-grid">
+                    <!-- Cards will be injected here -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+
+
+    <!-- Stock Detail Modal -->
+    <div id="stockModal" class="modal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <iframe id="widgetFrame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/home.js?v=2"></script>
+</body>
+
+</html>

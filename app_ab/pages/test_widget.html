@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Widget TradingView</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #2962FF;
+        }
+
+        .test-info {
+            background: #1a1a1a;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .tradingview-widget-container {
+            width: 100%;
+            height: 300px;
+            /* Adjusted height for two widgets */
+            background: #0F0F0F;
+            border: 2px solid #2962FF;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            /* Space between widgets */
+        }
+
+        .tradingview-widget-container__widget {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧪 Teste de Widgets TradingView</h1>
+
+        <div class="test-info">
+            <p><strong>Status:</strong> Carregando widgets...</p>
+            <p id="loaded-info">Aguarde...</p>
+        </div>
+
+        <div id="test-widget"></div>
+    </div>
+
+    <script>
+        function createTradingViewMarketQuotesWidget(parentElement, symbols, title, widgetId) {
+            console.log(`🧪 Iniciando criação do widget ${widgetId}...`);
+
+            const widgetContainer = document.createElement('div');
+            widgetContainer.className = 'tradingview-widget-container';
+            widgetContainer.id = `tradingview-widget-${widgetId}`;
+
+            const widgetDiv = document.createElement('div');
+            widgetDiv.className = 'tradingview-widget-container__widget';
+            widgetContainer.appendChild(widgetDiv);
+
+            const copyrightDiv = document.createElement('div');
+            copyrightDiv.className = 'tradingview-widget-copyright';
+            copyrightDiv.innerHTML = '<a href="https://br.tradingview.com/markets/" rel="noopener" target="_blank"><span style="color:#2962FF">TradingView</span></a>';
+            widgetContainer.appendChild(copyrightDiv);
+
+            parentElement.appendChild(widgetContainer);
+
+            // Configuração base do widget
+            const widgetConfig = {
+                "colorTheme": "dark",
+                "locale": "br",
+                "largeChartUrl": "http://localhost:8001/pages/index.html",
+                "isTransparent": false,
+                "showSymbolLogo": true,
+                "backgroundColor": "#0F0F0F",
+                "support_host": "https://www.tradingview.com",
+                "width": "100%",
+                "height": 350,
+                "symbolsGroups": [
+                    {
+                        "name": title,
+                        "symbols": symbols
+                    }
+                ]
+            };
+
+            const script = document.createElement('script');
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js';
+            script.type = 'text/javascript';
+            script.async = true;
+            script.innerHTML = JSON.stringify(widgetConfig);
+
+            widgetContainer.appendChild(script);
+
+            console.log(`✅ Widget ${widgetId} configurado com ${symbols.length} símbolos.`);
+        }
+
+        async function loadAndCreateWidgets() {
+            const testWidgetContainer = document.getElementById('test-widget');
+            const infoText = document.getElementById('loaded-info');
+
+            try {
+                // Fetch both JSON files in parallel
+                console.log('🔄 Buscando arquivos JSON...');
+                const [response1, response2] = await Promise.all([
+                    fetch('../data/fonte_acoes_1.json'),
+                    fetch('../data/fonte_acoes_2.json')
+                ]);
+
+                if (!response1.ok || !response2.ok) {
+                    throw new Error(`Erro no fetch: ${response1.status} / ${response2.status}`);
+                }
+
+                const data1 = await response1.json();
+                const data2 = await response2.json();
+
+                console.log('✅ Dados carregados:', data1, data2);
+
+                // Transform Data for Widget 1
+                const symbols1 = data1.map(item => ({
+                    name: `BMFBOVESPA:${item.ticket}`,
+                    displayName: `${item.ticket} - ${item.setor}`
+                }));
+
+                // Transform Data for Widget 2
+                const symbols2 = data2.map(item => ({
+                    name: `BMFBOVESPA:${item.ticket}`,
+                    displayName: `${item.ticket} - ${item.setor}`
+                }));
+
+                // Create Widgets
+                createTradingViewMarketQuotesWidget(testWidgetContainer, symbols1, "Carteira 1 (fonte_acoes_1)", 'widget1');
+                createTradingViewMarketQuotesWidget(testWidgetContainer, symbols2, "Carteira 2 (fonte_acoes_2)", 'widget2');
+
+                // Update UI
+                infoText.innerHTML = `
+                    <strong>Dados carregados:</strong><br>
+                    Widget 1: ${symbols1.length} ações<br>
+                    Widget 2: ${symbols2.length} ações
+                `;
+                document.querySelector('.test-info p:first-child').innerHTML = '<strong>Status:</strong> ✅ Widgets iniciados com sucesso!';
+
+            } catch (error) {
+                console.error('❌ Erro ao carregar widgets:', error);
+                document.querySelector('.test-info p:first-child').innerHTML = '<strong>Status:</strong> ❌ Erro ao carregar dados';
+                infoText.innerHTML = `<span style="color: #ff4444">Erro: ${error.message}. <br>Verifique se você está rodando em um servidor local (http) e não direto do arquivo (file://).</span>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAndCreateWidgets);
+    </script>
+</body>
+
+</html>

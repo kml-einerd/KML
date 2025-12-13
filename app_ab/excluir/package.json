@@ -1,0 +1,22 @@
+{
+  "name": "scraper-widgets-tradingview",
+  "version": "1.0.0",
+  "description": "Scraper automático de widgets TradingView para CSV",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js",
+    "scraper": "node scraper.js"
+  },
+  "keywords": [
+    "scraper",
+    "tradingview",
+    "puppeteer",
+    "csv",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.6.1"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "ticket": "VAMO3",
+    "empresa": "Grupo Vamos",
+    "setor": "Logística/Aluguel de Caminhões."
+  },
+  {
+    "id": 2,
+    "ticket": "TASA4",
+    "empresa": "Taurus Armas",
+    "setor": "Defesa e Segurança."
+  },
+  {
+    "id": 3,
+    "ticket": "ROMI3",
+    "empresa": "Indústrias Romi",
+    "setor": "Máquinas e Ferramentas."
+  },
+  {
+    "id": 4,
+    "ticket": "MGLU3",
+    "empresa": "Magazine Luiza",
+    "setor": "Varejo."
+  }
+]

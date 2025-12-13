@@ -1,0 +1,28 @@
+@page {
+    margin: 3cm 2cm;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+    line-height: 2; /* Double spacing */
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14pt;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 12pt;
+    font-variant: small-caps;
+}
+
+p {
+    text-align: justify;
+    text-indent: 2em;
+}
+
+/* Line numbers simulation requires more complex HTML structure or specific CSS tricks not easily doable in pure standard CSS without JS wrapping lines, but we can style margins */

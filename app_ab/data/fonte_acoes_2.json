@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "ticket": "ABEV3",
+    "empresa": "Ambev",
+    "setor": "Bebidas"
+  },
+  {
+    "id": 2,
+    "ticket": "MGLU3",
+    "empresa": "Magazine Luiza",
+    "setor": "Varejo"
+  },
+  {
+    "id": 3,
+    "ticket": "BBAS3",
+    "empresa": "Banco do Brasil",
+    "setor": "Bancos"
+  },
+  {
+    "id": 4,
+    "ticket": "SUZB3",
+    "empresa": "Suzano",
+    "setor": "Papel e Celulose"
+  },
+  {
+    "id": 5,
+    "ticket": "GGBR4",
+    "empresa": "Gerdau",
+    "setor": "Siderurgia"
+  },
+  {
+    "id": 6,
+    "ticket": "VIVT3",
+    "empresa": "Telefonica Brasil",
+    "setor": "Telecomunicacoes"
+  }
+]

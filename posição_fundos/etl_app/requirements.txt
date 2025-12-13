@@ -1,0 +1,18 @@
+# ============================================
+# ETL - Análise de Fundos Top 100
+# ============================================
+
+# Supabase Client
+supabase==2.3.4
+postgrest==0.13.2
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Environment & Config
+python-dotenv==1.0.0
+
+# Utilities
+tqdm==4.66.1
+colorama==0.4.6

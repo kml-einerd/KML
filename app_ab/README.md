@@ -1,69 +1,122 @@
-# AB Widget - Dashboard de Ações B3
+# App AB - Análise de Ações B3
 
-Aplicação web para análise de ações brasileiras usando widgets TradingView.
+Sistema de visualização de ações brasileiras com widgets TradingView e coleta automatizada de dados.
 
-## 📊 Páginas Disponíveis
+## O que é
 
-### 1. Home (Market Overview)
-**Arquivo:** `home.html`
+Aplicação web para monitorar ações da B3 com:
+- Widgets TradingView em tempo real
+- 4 páginas com diferentes visualizações
+- Scraper Node.js para coleta de dados
+- Carteiras customizáveis via JSON
 
-Exibe um widget TradingView Market Overview com 12 ações principais da B3:
-- VALE3, PETR4, ITUB4, BBDC4, ABEV3, WEGE3
-- RENT3, MGLU3, BBAS3, SUZB3, GGBR4, VIVT3
+## Início Rápido
 
-### 2. Dashboard (Análise Completa)
-**Arquivo:** `index.html`
+### Iniciar o servidor
 
-Dashboard completo com:
-- 🔍 Busca de ações
-- 📊 Symbol Info Widget
-- 📈 Symbol Overview (gráfico interativo)
-- 🏢 Company Profile
-- 💰 Fundamental Data
-- 📉 Technical Analysis
-- 📰 News Timeline
+```bash
+bash iniciar_servidor.sh
+```
 
-## 🚀 Como Usar
+Ou manualmente:
+```bash
+python3 -m http.server 8001
+```
 
-### GitHub Pages
-Acesse diretamente:
-- Home: `https://kml-einerd.github.io/KML/app_ab/home.html`
-- Dashboard: `https://kml-einerd.github.io/KML/app_ab/index.html`
+### Acessar as páginas
 
-### Local
-1. Clone o repositório
-2. Abra os arquivos HTML no navegador
-3. Ou use um servidor HTTP local:
-   ```bash
-   python3 -m http.server 8000
-   # Acesse: http://localhost:8000/app_ab/
-   ```
+- **Carteiras:** http://localhost:8001/pages/carteiras.html
+- **Dashboard:** http://localhost:8001/pages/index.html
+- **Grade:** http://localhost:8001/pages/home.html
+- **Teste:** http://localhost:8001/pages/test_widget.html
 
-## 📁 Estrutura
+### Scripts disponíveis
+
+```bash
+bash scripts/abrir_carteiras.sh      # Inicia servidor e abre carteiras
+bash scripts/iniciar_scraper.sh      # Coleta dados a cada 10 segundos
+```
+
+## Estrutura do Projeto
 
 ```
 app_ab/
-├── data.js          # Mock database com ações B3
-├── favicon.svg      # Ícone da aplicação
-├── home.html        # Página principal
-├── home.css         # Estilos da home
-├── home.js          # Lógica da home
-├── index.html       # Dashboard completo
-├── script.js        # Widgets TradingView
-└── style.css        # Estilos do dashboard
+├── pages/          → Páginas HTML (index, home, carteiras, test_widget)
+├── assets/         → CSS, JavaScript, imagens
+├── data/           → JSONs com dados das carteiras
+├── scripts/        → Automação (scraper.js + shell scripts)
+└── iniciar_servidor.sh
 ```
 
-## 🎯 Tecnologias
+## Editar Carteiras
 
-- HTML5
-- CSS3 (Design minimalista)
-- JavaScript (Vanilla)
+1. Edite os arquivos JSON em `data/`:
+   - `fonte_acoes_1.json`
+   - `fonte_acoes_2.json`
+
+2. Formato:
+```json
+[
+  {
+    "id": 1,
+    "ticket": "VAMO3",
+    "empresa": "Grupo Vamos",
+    "setor": "Logística/Aluguel de Caminhões."
+  }
+]
+```
+
+3. Recarregue a página (Ctrl+R ou Cmd+R)
+
+## Scraper
+
+O scraper usa Puppeteer para capturar dados dos widgets e salvar em CSV.
+
+**Primeira vez:**
+```bash
+cd scripts
+npm install
+```
+
+**Executar:**
+```bash
+bash scripts/iniciar_scraper.sh
+```
+
+**Configuração:** `scripts/scraper.js` (linha 14)
+
+## Comandos Úteis
+
+```bash
+# Parar servidor
+pkill -f "python3 -m http.server"
+
+# Verificar porta
+lsof -i:8001
+
+# Liberar porta
+lsof -ti:8001 | xargs kill -9
+```
+
+## Solução de Problemas
+
+**Widgets não carregam:**
+- Use `http://localhost:8001` (não `file://`)
+- Aguarde 5-10 segundos
+- Veja console do navegador (F12)
+
+**Scraper não conecta:**
+- Verifique se o servidor está rodando: `lsof -i:8001`
+- Instale as dependências: `cd scripts && npm install`
+
+**Erro ao carregar JSON:**
+- Verifique se os arquivos existem em `data/`
+- Valide o JSON em jsonlint.com
+- Confirme que o servidor está rodando
+
+## Tecnologias
+
+- HTML5, CSS3, JavaScript
 - TradingView Widgets API
-- Google News RSS
-
-## 📝 Notas
-
-- Dados mockados em `data.js`
-- Preparado para integração com Supabase
-- Design responsivo
-- Lazy loading de widgets
+- Node.js + Puppeteer (scraper)
+- Python 3 (servidor HTTP)

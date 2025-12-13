@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteiras de Ações - MindBill</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+        .header {
+            height: 60px;
+            background: #0F0F0F;
+            border-bottom: 1px solid #2a2a2a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2962FF 0%, #64B5F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .widgets-container {
+            height: calc(100vh - 60px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .widget-wrapper {
+            height: 100%;
+            background: #0F0F0F;
+            border-right: 1px solid #2a2a2a;
+            position: relative;
+        }
+        .widget-wrapper:last-child {
+            border-right: none;
+        }
+        .tradingview-widget-container {
+            width: 100%;
+            height: 100%;
+        }
+        .tradingview-widget-container__widget {
+            width: 100%;
+            height: 100%;
+        }
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            flex-direction: column;
+            color: #999;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #2a2a2a;
+            border-top-color: #2962FF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+            .widgets-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+            .widget-wrapper {
+                border-right: none;
+                border-bottom: 1px solid #2a2a2a;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">📊 MindBill - Carteiras de Ações</div>
+    </div>
+
+    <div class="widgets-container">
+        <!-- Widget 1 -->
+        <div class="widget-wrapper">
+            <div id="widget1" class="loading">
+                <div class="spinner"></div>
+                <p>Carregando Carteira 1...</p>
+            </div>
+        </div>
+
+        <!-- Widget 2 -->
+        <div class="widget-wrapper">
+            <div id="widget2" class="loading">
+                <div class="spinner"></div>
+                <p>Carregando Carteira 2...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('🚀 Iniciando carteiras...');
+
+        // Função para carregar JSON
+        async function loadJSON(filename) {
+            try {
+                const response = await fetch(`../data/${filename}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                console.error(`❌ Erro ao carregar ${filename}:`, error);
+                return null;
+            }
+        }
+
+        // Função para criar widget
+        function createWidget(containerId, stocks, title) {
+            console.log(`🔧 Criando widget ${containerId}:`, stocks);
+
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Limpar loading
+
+            // Criar estrutura do widget
+            const widgetContainer = document.createElement('div');
+            widgetContainer.className = 'tradingview-widget-container';
+
+            const widgetDiv = document.createElement('div');
+            widgetDiv.className = 'tradingview-widget-container__widget';
+            widgetContainer.appendChild(widgetDiv);
+
+            const copyrightDiv = document.createElement('div');
+            copyrightDiv.className = 'tradingview-widget-copyright';
+            copyrightDiv.style.cssText = 'font-size:11px;text-align:center;padding:8px;background:#0F0F0F;';
+            copyrightDiv.innerHTML = '<a href="https://br.tradingview.com/markets/" rel="noopener" target="_blank" style="color:#2962FF;text-decoration:none;">TradingView</a>';
+            widgetContainer.appendChild(copyrightDiv);
+
+            container.appendChild(widgetContainer);
+
+            // Converter stocks para formato TradingView
+            const symbols = stocks.map(stock => ({
+                name: `BMFBOVESPA:${stock.ticket}`,
+                displayName: `${stock.ticket} - ${stock.setor}`
+            }));
+
+            // Configuração do widget
+            const config = {
+                "colorTheme": "dark",
+                "locale": "br",
+                "largeChartUrl": "http://localhost:8001/pages/index.html",
+                "isTransparent": false,
+                "showSymbolLogo": true,
+                "backgroundColor": "#0F0F0F",
+                "support_host": "https://www.tradingview.com",
+                "width": "100%",
+                "height": "100%",
+                "symbolsGroups": [
+                    {
+                        "name": title,
+                        "symbols": symbols
+                    }
+                ]
+            };
+
+            // Criar e adicionar script
+            const script = document.createElement('script');
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js';
+            script.type = 'text/javascript';
+            script.async = true;
+            script.innerHTML = JSON.stringify(config, null, 2);
+
+            widgetContainer.appendChild(script);
+
+            console.log(`✅ Widget ${containerId} configurado com ${symbols.length} ações`);
+        }
+
+        // Inicializar
+        (async () => {
+            try {
+                // Carregar os 2 JSONs em paralelo
+                const [stocks1, stocks2] = await Promise.all([
+                    loadJSON('fonte_acoes_1.json'),
+                    loadJSON('fonte_acoes_2.json')
+                ]);
+
+                console.log('📊 Dados carregados:', { stocks1, stocks2 });
+
+                // Criar Widget 1
+                if (stocks1 && stocks1.length > 0) {
+                    createWidget('widget1', stocks1, 'Carteira 1');
+                } else {
+                    document.getElementById('widget1').innerHTML = '<p style="color:#EF5350;">❌ Erro ao carregar Carteira 1</p>';
+                }
+
+                // Criar Widget 2
+                if (stocks2 && stocks2.length > 0) {
+                    createWidget('widget2', stocks2, 'Carteira 2');
+                } else {
+                    document.getElementById('widget2').innerHTML = '<p style="color:#EF5350;">❌ Erro ao carregar Carteira 2</p>';
+                }
+
+                console.log('✅ Inicialização completa!');
+
+            } catch (error) {
+                console.error('💥 Erro fatal:', error);
+                document.getElementById('widget1').innerHTML = '<p style="color:#EF5350;">❌ Erro fatal</p>';
+                document.getElementById('widget2').innerHTML = '<p style="color:#EF5350;">❌ Erro fatal</p>';
+            }
+        })();
+    </script>
+</body>
+</html>

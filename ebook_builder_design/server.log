@@ -1,0 +1,52 @@
+
+> ebook-builder-server@1.0.0 dev
+> node --watch index.js
+
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+node:internal/fs/promises:554
+    const bytesRead = (await PromisePrototypeThen(
+                       ^
+
+Error: ECANCELED: operation canceled, read
+    at async readFileHandle (node:internal/fs/promises:554:24)
+    at async getSource (node:internal/modules/esm/load:42:14)
+    at async defaultLoad (node:internal/modules/esm/load:114:34)
+    at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:514:32) {
+  errno: -89,
+  code: 'ECANCELED',
+  syscall: 'read'
+}
+
+Node.js v22.14.0
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+Restarting 'index.js'
+node:internal/fs/promises:554
+    const bytesRead = (await PromisePrototypeThen(
+                       ^
+
+Error: ECANCELED: operation canceled, read
+    at async readFileHandle (node:internal/fs/promises:554:24)
+    at async getSource (node:internal/modules/esm/load:42:14)
+    at async defaultLoad (node:internal/modules/esm/load:114:34)
+    at async ModuleLoader.loadAndTranslate (node:internal/modules/esm/loader:514:32) {
+  errno: -89,
+  code: 'ECANCELED',
+  syscall: 'read'
+}
+
+Node.js v22.14.0
+Failed running 'index.js'
