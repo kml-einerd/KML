@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "ticket": "CSAN3",
+    "empresa": "Cosan",
+    "setor": "Energia e Infraestrutura."
+  },
+  {
+    "id": 2,
+    "ticket": "KEPL3",
+    "empresa": "Kepler Weber",
+    "setor": "Equipamentos Agrícolas."
+  },
+  {
+    "id": 3,
+    "ticket": "CIEL3",
+    "empresa": "Cielo",
+    "setor": "Meios de Pagamento."
+  },
+  {
+    "id": 4,
+    "ticket": "PETZ3",
+    "empresa": "Petz",
+    "setor": "Pet Shop."
+  },
+  {
+    "id": 5,
+    "ticket": "MRFG3",
+    "empresa": "Marfrig",
+    "setor": "Alimentos/Proteína Animal."
+  },
+  {
+    "id": 6,
+    "ticket": "ALLD3",
+    "empresa": "Allied",
+    "setor": "Distribuição de Tecnologia."
+  }
+]
