@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Master Dashboard - Fundos Top 100</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0a0e1a',
+                            800: '#111827',
+                            700: '#1f2937',
+                            600: '#374151',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Card Hover Effect */
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Loading Shimmer */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #1f2937 25%, #374151 50%, #1f2937 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Badge Pill */
+        .badge {
+            @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold;
+        }
+
+        /* Tooltip */
+        [data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 12px;
+            background: #1f2937;
+            color: white;
+            border-radius: 6px;
+            white-space: nowrap;
+            font-size: 12px;
+            margin-bottom: 8px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 antialiased">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-dark-800/90 backdrop-blur-md border-b border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-white text-lg">
+                        F
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold gradient-text">Master Dashboard</h1>
+                        <p class="text-xs text-gray-400">Fundos Top 100</p>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex items-center gap-3">
+                    <select id="mesSelect" onchange="loadAllData()"
+                            class="bg-dark-700 border border-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                        <option>Carregando...</option>
+                    </select>
+
+                    <button onclick="loadAllData()"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- LOADING OVERLAY -->
+        <div id="loadingOverlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+            <div class="bg-dark-800 rounded-xl p-8 flex flex-col items-center gap-4">
+                <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-white font-medium">Processando dados...</p>
+            </div>
+        </div>
+
+        <!-- ===== SEÇÃO 1: OVERVIEW RÁPIDO ===== -->
+        <section class="mb-12 fade-in">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-white mb-2">📊 Panorama do Mercado</h2>
+                <p class="text-gray-400">Visão geral do sentimento e fluxo institucional</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <!-- Card 1: Compras -->
+                <div class="bg-dark-800 rounded-xl p-6 border border-gray-700 card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-gray-500 font-mono">COMPRA</span>
+                    </div>
+                    <div class="text-3xl font-bold text-green-400 mb-1" id="stat-compras">-</div>
+                    <p class="text-sm text-gray-400">ações em acumulação</p>
+                </div>
+
+                <!-- Card 2: Vendas -->
+                <div class="bg-dark-800 rounded-xl p-6 border border-gray-700 card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-red-500/10 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-gray-500 font-mono">VENDA</span>
+                    </div>
+                    <div class="text-3xl font-bold text-red-400 mb-1" id="stat-vendas">-</div>
+                    <p class="text-sm text-gray-400">ações em distribuição</p>
+                </div>
+
+                <!-- Card 3: Alta Convicção -->
+                <div class="bg-dark-800 rounded-xl p-6 border border-gray-700 card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-gray-500 font-mono">CONSENSO</span>
+                    </div>
+                    <div class="text-3xl font-bold text-blue-400 mb-1" id="stat-consenso">-</div>
+                    <p class="text-sm text-gray-400">com >80% consenso</p>
+                </div>
+
+                <!-- Card 4: Volume -->
+                <div class="bg-dark-800 rounded-xl p-6 border border-gray-700 card-hover">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-yellow-500/10 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs text-gray-500 font-mono">VOLUME</span>
+                    </div>
+                    <div class="text-3xl font-bold text-yellow-400 mb-1" id="stat-volume">-</div>
+                    <p class="text-sm text-gray-400">bilhões movimentados</p>
+                </div>
+            </div>
+
+            <!-- Insight Inteligente -->
+            <div id="insight-container" class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-xl p-6 border border-purple-500/30 pulse-glow" style="display: none;">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-white mb-2">🧠 Análise Inteligente</h3>
+                        <p class="text-gray-300 leading-relaxed" id="insight-text"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO 2: SINAIS FORTES (COMPRA E VENDA) ===== -->
+        <section class="mb-12 fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- Compra Forte -->
+                <div class="bg-dark-800 rounded-xl border border-gray-700 overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-600 to-green-500 p-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                            Sinais de Compra
+                        </h3>
+                        <p class="text-green-100 text-sm mt-1">Consenso >80% • Top 10</p>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="space-y-3" id="list-compra-forte">
+                            <!-- Skeleton -->
+                            <div class="skeleton h-16 rounded-lg"></div>
+                            <div class="skeleton h-16 rounded-lg"></div>
+                            <div class="skeleton h-16 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Venda Forte -->
+                <div class="bg-dark-800 rounded-xl border border-gray-700 overflow-hidden">
+                    <div class="bg-gradient-to-r from-red-600 to-red-500 p-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/>
+                            </svg>
+                            Sinais de Venda
+                        </h3>
+                        <p class="text-red-100 text-sm mt-1">Consenso >80% • Top 10</p>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="space-y-3" id="list-venda-forte">
+                            <!-- Skeleton -->
+                            <div class="skeleton h-16 rounded-lg"></div>
+                            <div class="skeleton h-16 rounded-lg"></div>
+                            <div class="skeleton h-16 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO 3: GRÁFICOS DE ANÁLISE ===== -->
+        <section class="mb-12 fade-in">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-white mb-2">📈 Análise Visual</h2>
+                <p class="text-gray-400">Distribuição e tendências do mercado</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- Gráfico: Top Movimentações -->
+                <div class="bg-dark-800 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-lg font-bold text-white mb-4">Top 10 Movimentações</h3>
+                    <div class="h-80">
+                        <canvas id="chart-movimentacoes"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico: Consenso vs Volume -->
+                <div class="bg-dark-800 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-lg font-bold text-white mb-4">Matriz Consenso x Volume</h3>
+                    <div class="h-80">
+                        <canvas id="chart-scatter"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO 4: GESTORAS ===== -->
+        <section class="mb-12 fade-in">
+            <div class="mb-6 flex items-end justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2">🏢 Análise por Gestora</h2>
+                    <p class="text-gray-400">Veja as posições de cada fundo</p>
+                </div>
+
+                <select id="gestoraSelect" onchange="loadGestoraDetail()"
+                        class="bg-dark-700 border border-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer">
+                    <option value="">Selecione uma gestora...</option>
+                </select>
+            </div>
+
+            <div class="bg-dark-800 rounded-xl border border-gray-700 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-dark-700 text-gray-400 text-xs uppercase font-semibold">
+                            <tr>
+                                <th class="px-6 py-4 text-left">Ticker</th>
+                                <th class="px-6 py-4 text-center">Movimento</th>
+                                <th class="px-6 py-4 text-right">Fluxo Líquido</th>
+                                <th class="px-6 py-4 text-right">Posição Final</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-700 text-gray-300" id="tbody-gestora">
+                            <tr>
+                                <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+                                    Selecione uma gestora acima para ver suas posições
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SEÇÃO 5: DESCOBERTA ===== -->
+        <section class="mb-12 fade-in">
+            <div class="mb-6">
+                <h2 class="text-3xl font-bold text-white mb-2">💎 Descoberta</h2>
+                <p class="text-gray-400">Ações populares e oportunidades escondidas</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Mais Populares -->
+                <div class="bg-gradient-to-br from-dark-800 to-dark-700 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                        Mais Populares
+                    </h3>
+                    <p class="text-sm text-gray-400 mb-4">Presentes em mais carteiras</p>
+                    <div class="space-y-3" id="list-populares">
+                        <div class="skeleton h-12 rounded-lg"></div>
+                        <div class="skeleton h-12 rounded-lg"></div>
+                        <div class="skeleton h-12 rounded-lg"></div>
+                    </div>
+                </div>
+
+                <!-- Maiores Posições -->
+                <div class="bg-gradient-to-br from-dark-800 to-dark-700 rounded-xl p-6 border border-gray-700">
+                    <h3 class="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                        </svg>
+                        Maiores Exposições
+                    </h3>
+                    <p class="text-sm text-gray-400 mb-4">Maior valor em carteira</p>
+                    <div class="space-y-3" id="list-posicoes">
+                        <div class="skeleton h-12 rounded-lg"></div>
+                        <div class="skeleton h-12 rounded-lg"></div>
+                        <div class="skeleton h-12 rounded-lg"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark-800 border-t border-gray-700 py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400 text-sm mb-2">Fonte: CVM • Top 100 Fundos por Patrimônio Líquido</p>
+            <div class="inline-flex items-center gap-2 bg-blue-500/10 px-4 py-2 rounded-lg">
+                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="text-xs font-bold text-blue-400">Dados Oficiais • 100% Transparente</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ========== CONFIGURAÇÃO ==========
+        const SUPABASE_URL = 'https://ryfhupidxkghwkczulgg.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5Zmh1cGlkeGtnaHdrY3p1bGdnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU0NjYyMzcsImV4cCI6MjA4MTA0MjIzN30.Bne0WnMN9URE3kock_jd4u-0ZeyFUkKVAcGKr27kF5Q';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let currentMes = null;
+        let allData = {};
+
+        // ========== INICIALIZAÇÃO ==========
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 Master Dashboard iniciando...');
+            await loadMeses();
+        });
+
+        // ========== CARREGAR MESES ==========
+        async function loadMeses() {
+            try {
+                const { data, error } = await supabase
+                    .from('resumo_mensal')
+                    .select('mes_referencia')
+                    .order('mes_referencia', { ascending: false });
+
+                if (error) throw error;
+
+                const meses = [...new Set(data.map(d => d.mes_referencia))];
+                const select = document.getElementById('mesSelect');
+
+                select.innerHTML = meses.map(mes => {
+                    const date = new Date(mes + 'T00:00:00');
+                    const mesNome = date.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+                    const capitalizado = mesNome.charAt(0).toUpperCase() + mesNome.slice(1);
+                    return `<option value="${mes}">${capitalizado}</option>`;
+                }).join('');
+
+                currentMes = meses[0];
+                await loadAllData();
+
+            } catch (error) {
+                console.error('Erro:', error);
+                alert('Erro ao conectar com banco de dados. Verifique se o script SQL 99_HABILITAR_ACESSO_PUBLICO.sql foi executado.');
+            }
+        }
+
+        // ========== CARREGAR TODOS OS DADOS ==========
+        async function loadAllData() {
+            const mes = document.getElementById('mesSelect').value;
+            if (!mes) return;
+
+            currentMes = mes;
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+
+            try {
+                await Promise.all([
+                    loadStats(),
+                    loadCompraForte(),
+                    loadVendaForte(),
+                    loadGestoras(),
+                    loadPopulares(),
+                    loadPosicoes(),
+                    loadChartMovimentacoes(),
+                    loadChartScatter()
+                ]);
+
+                generateInsight();
+
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                alert('Erro ao carregar alguns dados. Verifique o console.');
+            } finally {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+            }
+        }
+
+        // ========== STATS ==========
+        async function loadStats() {
+            const { data, error } = await supabase
+                .from('resumo_mensal')
+                .select('tendencia_mercado, fluxo_liquido, intensidade_consenso')
+                .eq('mes_referencia', currentMes);
+
+            if (error) throw error;
+
+            const compras = data.filter(d => d.tendencia_mercado === 'COMPRA');
+            const vendas = data.filter(d => d.tendencia_mercado === 'VENDA');
+            const consenso = data.filter(d => d.intensidade_consenso > 80);
+
+            const volumeCompra = compras.reduce((s, d) => s + (d.fluxo_liquido || 0), 0) / 1e9;
+            const volumeVenda = Math.abs(vendas.reduce((s, d) => s + (d.fluxo_liquido || 0), 0) / 1e9);
+            const volumeTotal = volumeCompra + volumeVenda;
+
+            document.getElementById('stat-compras').textContent = compras.length;
+            document.getElementById('stat-vendas').textContent = vendas.length;
+            document.getElementById('stat-consenso').textContent = consenso.length;
+            document.getElementById('stat-volume').textContent = `R$ ${volumeTotal.toFixed(1)}B`;
+
+            allData.stats = { compras: compras.length, vendas: vendas.length, consenso: consenso.length, volume: volumeTotal };
+        }
+
+        // ========== COMPRA FORTE ==========
+        async function loadCompraForte() {
+            const { data, error } = await supabase
+                .from('resumo_mensal')
+                .select('ticker, empresa, intensidade_consenso, total_comprado, qtd_fundos_compradores')
+                .eq('mes_referencia', currentMes)
+                .eq('tendencia_mercado', 'COMPRA')
+                .gte('intensidade_consenso', 80)
+                .gte('total_comprado', 50000000)
+                .order('intensidade_consenso', { ascending: false })
+                .limit(10);
+
+            if (error) throw error;
+
+            const container = document.getElementById('list-compra-forte');
+
+            if (!data || data.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500 py-8">Nenhuma ação com consenso >80%</div>';
+                return;
+            }
+
+            container.innerHTML = data.map((row, idx) => `
+                <div class="bg-dark-700 rounded-lg p-4 border border-gray-600 hover:border-green-500 transition-all cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400 font-bold text-sm">
+                                ${idx + 1}
+                            </div>
+                            <div>
+                                <div class="font-mono font-bold text-white">${row.ticker}</div>
+                                <div class="text-xs text-gray-400">${row.empresa || '-'}</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-green-400 font-bold">R$ ${(row.total_comprado / 1e6).toFixed(0)}M</div>
+                            <div class="text-xs text-gray-400">${Math.round(row.intensidade_consenso)}% • ${row.qtd_fundos_compradores} fundos</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== VENDA FORTE ==========
+        async function loadVendaForte() {
+            const { data, error } = await supabase
+                .from('resumo_mensal')
+                .select('ticker, empresa, intensidade_consenso, total_vendido, qtd_fundos_vendedores')
+                .eq('mes_referencia', currentMes)
+                .eq('tendencia_mercado', 'VENDA')
+                .gte('intensidade_consenso', 80)
+                .gte('total_vendido', 50000000)
+                .order('intensidade_consenso', { ascending: false })
+                .limit(10);
+
+            if (error) throw error;
+
+            const container = document.getElementById('list-venda-forte');
+
+            if (!data || data.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500 py-8">✅ Nenhum alerta crítico</div>';
+                return;
+            }
+
+            container.innerHTML = data.map((row, idx) => `
+                <div class="bg-dark-700 rounded-lg p-4 border border-gray-600 hover:border-red-500 transition-all cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center text-red-400 font-bold text-sm">
+                                ${idx + 1}
+                            </div>
+                            <div>
+                                <div class="font-mono font-bold text-white">${row.ticker}</div>
+                                <div class="text-xs text-gray-400">${row.empresa || '-'}</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-red-400 font-bold">R$ ${(row.total_vendido / 1e6).toFixed(0)}M</div>
+                            <div class="text-xs text-gray-400">${Math.round(row.intensidade_consenso)}% • ${row.qtd_fundos_vendedores} fundos</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== GESTORAS ==========
+        async function loadGestoras() {
+            const { data, error } = await supabase
+                .from('grupos_fundos')
+                .select('id, nome_grupo')
+                .order('nome_grupo');
+
+            if (error) throw error;
+
+            const select = document.getElementById('gestoraSelect');
+            select.innerHTML = '<option value="">Selecione uma gestora...</option>' +
+                data.map(g => `<option value="${g.id}">${g.nome_grupo}</option>`).join('');
+        }
+
+        async function loadGestoraDetail() {
+            const grupoId = document.getElementById('gestoraSelect').value;
+            const tbody = document.getElementById('tbody-gestora');
+
+            if (!grupoId) {
+                tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-gray-500">Selecione uma gestora acima</td></tr>';
+                return;
+            }
+
+            const { data, error } = await supabase
+                .from('acoes_fundos')
+                .select('ticker, empresa, tipo_movimento, fluxo_liquido, posicao_final, valor_mercado')
+                .eq('mes_referencia', currentMes)
+                .eq('grupo_id', grupoId)
+                .order('fluxo_liquido', { ascending: false })
+                .limit(50);
+
+            if (error) throw error;
+
+            if (!data || data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="px-6 py-12 text-center text-gray-500">Sem posições neste período</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = data.map(row => `
+                <tr class="hover:bg-dark-700 transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="font-mono font-bold text-white">${row.ticker}</div>
+                        <div class="text-xs text-gray-400">${row.empresa || '-'}</div>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="badge ${row.tipo_movimento === 'COMPRA' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}">
+                            ${row.tipo_movimento || 'NEUTRO'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <span class="font-mono ${row.fluxo_liquido > 0 ? 'text-green-400' : 'text-red-400'}">
+                            ${row.fluxo_liquido > 0 ? '+' : ''}${(row.fluxo_liquido / 1e6).toFixed(1)}M
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right font-mono text-gray-300">
+                        R$ ${(row.valor_mercado / 1e6).toFixed(1)}M
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // ========== POPULARES ==========
+        async function loadPopulares() {
+            const { data, error } = await supabase
+                .from('resumo_mensal')
+                .select('ticker, empresa, qtd_fundos_posicionados')
+                .eq('mes_referencia', currentMes)
+                .order('qtd_fundos_posicionados', { ascending: false })
+                .limit(5);
+
+            if (error) throw error;
+
+            const container = document.getElementById('list-populares');
+            container.innerHTML = data.map((row, idx) => `
+                <div class="bg-dark-700 rounded-lg p-3 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">${idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '⭐'}</span>
+                        <div>
+                            <div class="font-mono font-bold text-white text-sm">${row.ticker}</div>
+                            <div class="text-xs text-gray-400">${row.empresa || '-'}</div>
+                        </div>
+                    </div>
+                    <div class="text-cyan-400 font-bold">${row.qtd_fundos_posicionados} fundos</div>
+                </div>
+            `).join('');
+        }
+
+        // ========== MAIORES POSIÇÕES ==========
+        async function loadPosicoes() {
+            const { data, error } = await supabase
+                .from('acoes_fundos')
+                .select('ticker, empresa, valor_mercado')
+                .eq('mes_referencia', currentMes)
+                .gt('valor_mercado', 0)
+                .order('valor_mercado', { ascending: false })
+                .limit(100);
+
+            if (error) throw error;
+
+            const agregado = {};
+            for (const row of data) {
+                if (!agregado[row.ticker]) {
+                    agregado[row.ticker] = { ticker: row.ticker, empresa: row.empresa, valor_total: 0 };
+                }
+                agregado[row.ticker].valor_total += row.valor_mercado || 0;
+            }
+
+            const ranked = Object.values(agregado).sort((a, b) => b.valor_total - a.valor_total).slice(0, 5);
+
+            const container = document.getElementById('list-posicoes');
+            container.innerHTML = ranked.map((row, idx) => `
+                <div class="bg-dark-700 rounded-lg p-3 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">${idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '💎'}</span>
+                        <div>
+                            <div class="font-mono font-bold text-white text-sm">${row.ticker}</div>
+                            <div class="text-xs text-gray-400">${row.empresa || '-'}</div>
+                        </div>
+                    </div>
+                    <div class="text-purple-400 font-bold">R$ ${(row.valor_total / 1e9).toFixed(2)}B</div>
+                </div>
+            `).join('');
+        }
+
+        // ========== CHART: MOVIMENTAÇÕES ==========
+        let chartMovimentacoes = null;
+        async function loadChartMovimentacoes() {
+            const { data, error } = await supabase
+                .from('resumo_mensal')
+                .select('ticker, total_comprado, total_vendido')
+                .eq('mes_referencia', currentMes)
+                .order('total_comprado', { ascending: false })
+                .limit(10);
+
+            if (error) throw error;
+
+            const labels = data.map(d => d.ticker);
+            const values = data.map(d => (d.total_comprado + d.total_vendido) / 1e6);
+
+            const ctx = document.getElementById('chart-movimentacoes').getContext('2d');
+
+            if (chartMovimentacoes) chartMovimentacoes.destroy();
+
+            chartMovimentacoes = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Volume Total (R$ Milhões)',
+                        data: values,
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `R$ ${context.parsed.y.toFixed(0)}M`
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: '#374151' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ========== CHART: SCATTER ==========
+        let chartScatter = null;
+        async function loadChartScatter() {
+            const { data, error } = await supabase
+                .from('resumo_mensal')
+                .select('ticker, intensidade_consenso, total_comprado, total_vendido')
+                .eq('mes_referencia', currentMes)
+                .limit(50);
+
+            if (error) throw error;
+
+            const points = data.map(d => ({
+                x: d.intensidade_consenso,
+                y: (d.total_comprado + d.total_vendido) / 1e6,
+                label: d.ticker
+            }));
+
+            const ctx = document.getElementById('chart-scatter').getContext('2d');
+
+            if (chartScatter) chartScatter.destroy();
+
+            chartScatter = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Ações',
+                        data: points,
+                        backgroundColor: 'rgba(139, 92, 246, 0.6)',
+                        borderColor: 'rgba(139, 92, 246, 1)',
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => {
+                                    const point = context.raw;
+                                    return `${point.label} • Consenso: ${point.x.toFixed(0)}% • Volume: R$ ${point.y.toFixed(0)}M`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Volume (R$ Milhões)', color: '#9ca3af' },
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: '#374151' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Consenso (%)', color: '#9ca3af' },
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: '#374151' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ========== INSIGHT INTELIGENTE ==========
+        function generateInsight() {
+            if (!allData.stats) return;
+
+            const { compras, vendas, consenso, volume } = allData.stats;
+            let insight = '';
+            let emoji = '';
+
+            if (compras > vendas * 1.5) {
+                emoji = '🟢';
+                insight = `<strong>Mercado Otimista:</strong> Os fundos Top 100 estão acumulando posições em <strong>${compras} ações</strong>, contra apenas ${vendas} em distribuição. Há <strong>${consenso} ações com alta convicção</strong> (>80%). Volume total de <strong>R$ ${volume.toFixed(1)}B</strong>. Momento favorável para buscar oportunidades de compra.`;
+            } else if (vendas > compras * 1.5) {
+                emoji = '🔴';
+                insight = `<strong>Mercado Cauteloso:</strong> Os fundos estão reduzindo exposição em <strong>${vendas} ações</strong>, contra ${compras} em acumulação. Apenas ${consenso} ações com alto consenso. Volume total de R$ ${volume.toFixed(1)}B. Momento de proteção de capital e seletividade.`;
+            } else {
+                emoji = '🟡';
+                insight = `<strong>Mercado Neutro:</strong> Equilíbrio entre compras (${compras}) e vendas (${vendas}). ${consenso} ações com alta convicção. Volume de R$ ${volume.toFixed(1)}B. Fundos em modo seletivo - foque em ações com alto consenso.`;
+            }
+
+            document.getElementById('insight-text').innerHTML = `${emoji} ${insight}`;
+            document.getElementById('insight-container').style.display = 'block';
+        }
+
+        console.log('✅ Master Dashboard carregado');
+    </script>
+</body>
+</html>

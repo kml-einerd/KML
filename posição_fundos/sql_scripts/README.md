@@ -1,171 +1,92 @@
-# Scripts SQL - Modelo Dimensional Posição de Fundos
+# 📂 SQL Scripts - Organização
 
-Scripts SQL para criação das tabelas do modelo dimensional no Supabase.
+Esta pasta contém todos os scripts SQL do sistema de análise de fundos.
 
-## Estrutura dos Scripts
+---
 
-### Scripts CREATE TABLE
-
-Execute na ordem:
-
-1. **01_dim_tempo.sql** - Dimensão temporal
-2. **02_dim_grupos_economicos.sql** - Grupos econômicos (BTG, Itaú, XP, etc.)
-3. **03_dim_categoria_ativo.sql** - Hierarquia de categorias (3 níveis)
-4. **04_dim_emissores.sql** - Cadastro de emissores
-5. **05_dim_ativos.sql** - Cadastro de ativos específicos
-6. **06_dim_fundos.sql** - Cadastro de fundos (SCD Type 2)
-7. **07_fato_posicoes.sql** - Tabela fato principal
-8. **08_dim_patrimonio_liquido.sql** - Histórico de PL dos fundos
-9. **09_dados_exemplo.sql** - Dados de exemplo (4 linhas por tabela)
-
-## Como Usar no Supabase
-
-### Opção 1: Via SQL Editor (Recomendado)
-
-1. Acesse o Supabase Dashboard
-2. Vá em **SQL Editor**
-3. Crie uma nova query
-4. Copie e cole o conteúdo de cada arquivo na ordem acima
-5. Execute cada script (Cmd+Enter ou Ctrl+Enter)
-
-### Opção 2: Via CLI
-
-```bash
-# Conectar ao banco
-psql "postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres"
-
-# Executar scripts na ordem
-\i 01_dim_tempo.sql
-\i 02_dim_grupos_economicos.sql
-\i 03_dim_categoria_ativo.sql
-\i 04_dim_emissores.sql
-\i 05_dim_ativos.sql
-\i 06_dim_fundos.sql
-\i 07_fato_posicoes.sql
-\i 08_dim_patrimonio_liquido.sql
-\i 09_dados_exemplo.sql
-```
-
-### Opção 3: Script Único
-
-```bash
-# Criar um único arquivo com todos os scripts
-cat 01_dim_tempo.sql 02_dim_grupos_economicos.sql 03_dim_categoria_ativo.sql 04_dim_emissores.sql 05_dim_ativos.sql 06_dim_fundos.sql 07_fato_posicoes.sql 08_dim_patrimonio_liquido.sql > create_all_tables.sql
-
-# Executar no Supabase
-psql "postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres" < create_all_tables.sql
-```
-
-## Tabelas Criadas
-
-### Dimensões
-
-| Tabela | Descrição | Registros Exemplo |
-|--------|-----------|-------------------|
-| `dim_tempo` | Dimensão temporal | 4 datas |
-| `dim_grupos_economicos` | Grupos econômicos | 4 grupos |
-| `dim_categoria_ativo` | Hierarquia de categorias | 4 categorias |
-| `dim_emissores` | Cadastro de emissores | 4 emissores |
-| `dim_ativos` | Cadastro de ativos | 4 ativos |
-| `dim_fundos` | Cadastro de fundos | 4 fundos |
-| `dim_patrimonio_liquido` | Histórico de PL | 4 registros |
-
-### Fatos
-
-| Tabela | Descrição | Registros Exemplo |
-|--------|-----------|-------------------|
-| `fato_posicoes` | Posições dos fundos | 4 posições |
-
-## Dados de Exemplo
-
-O arquivo `09_dados_exemplo.sql` contém 4 linhas de exemplo para cada tabela, baseadas nos arquivos CSV reais:
-
-- **Títulos Públicos**: LFT com vencimentos diferentes
-- **Ações**: ITUB3 (Itaú) e JHSF3 (JHSF Participações)
-- **Fundos**: 4 fundos diferentes (FIF, FIA)
-- **Grupos**: BTG Pactual, Itaú, XP, Caixa
-
-Todos os valores (CNPJs, quantidades, valores) são reais extraídos de:
-- `source/cda_fi_BLC_1_202510.csv` (Títulos Públicos)
-- `source/cda_fi_BLC_4_202510.csv` (Ações)
-- `source/cda_fi_PL_202510.csv` (Patrimônio Líquido)
-
-## Relacionamentos
+## 📋 ESTRUTURA
 
 ```
-dim_grupos_economicos
-    ↓
-dim_fundos ──────────────┐
-    ↓                     │
-dim_patrimonio_liquido   │
-                         │
-dim_tempo ───────────────┤
-                         │
-dim_categoria_ativo ─────┤
-                         ↓
-dim_emissores ──────→ fato_posicoes
-                         ↑
-dim_ativos ──────────────┘
+sql_scripts/
+├── 00_LIMPAR_TUDO.sql          ⭐ Limpa V1 e V2 completo
+├── 01_CRIAR_SCHEMA_V2.sql      ⭐ Cria schema V2 (3 tabelas + 4 views)
+├── queries_uteis/              📊 Queries prontas para análise
+│   └── consultas_frequentes.sql
+└── excluir/                    🗑️  Scripts obsoletos do V1
 ```
 
-## Próximos Passos
+---
 
-Após criar as tabelas:
+## ⭐ SCRIPTS ESSENCIAIS (RAIZ)
 
-1. Popular dimensões com dados completos dos CSVs
-2. Carregar fato_posicoes com todas as ~600K posições
-3. Criar materialized views para agregações
-4. Configurar refresh automático das views
-5. Criar índices adicionais conforme necessário
+### `00_LIMPAR_TUDO.sql`
+**Quando usar:** Antes de criar o schema V2 pela primeira vez, ou quando quiser resetar tudo.
 
-## Manutenção
+**O que faz:**
+- Remove TODAS as tabelas do V1 (dimensional)
+- Remove TODAS as views do V1
+- Remove TODAS as funções antigas
+- Remove tabelas do V2 (se existirem)
 
-### Verificar tabelas criadas
+**Como usar:**
+1. Abra Supabase SQL Editor
+2. Copie e cole TODO o conteúdo deste arquivo
+3. Clique RUN
+4. Deve aparecer: `✅ Limpeza concluída!`
 
-```sql
-SELECT table_name
-FROM information_schema.tables
-WHERE table_schema = 'public'
-  AND table_name LIKE 'dim_%' OR table_name LIKE 'fato_%';
-```
+---
 
-### Verificar registros
+### `01_CRIAR_SCHEMA_V2.sql`
+**Quando usar:** Após limpar tudo com `00_LIMPAR_TUDO.sql`
 
-```sql
-SELECT
-    'dim_tempo' AS tabela, COUNT(*) AS registros FROM dim_tempo
-UNION ALL
-SELECT 'dim_grupos_economicos', COUNT(*) FROM dim_grupos_economicos
-UNION ALL
-SELECT 'dim_categoria_ativo', COUNT(*) FROM dim_categoria_ativo
-UNION ALL
-SELECT 'dim_emissores', COUNT(*) FROM dim_emissores
-UNION ALL
-SELECT 'dim_ativos', COUNT(*) FROM dim_ativos
-UNION ALL
-SELECT 'dim_fundos', COUNT(*) FROM dim_fundos
-UNION ALL
-SELECT 'dim_patrimonio_liquido', COUNT(*) FROM dim_patrimonio_liquido
-UNION ALL
-SELECT 'fato_posicoes', COUNT(*) FROM fato_posicoes;
-```
+**O que faz:**
+- Cria 3 tabelas: `grupos_fundos`, `acoes_fundos`, `resumo_mensal`
+- Cria 4 views: `v_top_compras_mes`, `v_top_vendas_mes`, `v_movimentos_grupo`, `v_consenso_mercado`
+- Cria 1 função: `atualizar_resumo_mensal()`
 
-### Limpar tudo (cuidado!)
+**Como usar:**
+1. Abra Supabase SQL Editor
+2. Copie e cole TODO o conteúdo deste arquivo
+3. Clique RUN
+4. Deve aparecer: `✅ Schema V2 criado com sucesso!`
 
-```sql
--- ATENÇÃO: Apaga todas as tabelas
-DROP TABLE IF EXISTS fato_posicoes CASCADE;
-DROP TABLE IF EXISTS dim_patrimonio_liquido CASCADE;
-DROP TABLE IF EXISTS dim_fundos CASCADE;
-DROP TABLE IF EXISTS dim_ativos CASCADE;
-DROP TABLE IF EXISTS dim_emissores CASCADE;
-DROP TABLE IF EXISTS dim_categoria_ativo CASCADE;
-DROP TABLE IF EXISTS dim_grupos_economicos CASCADE;
-DROP TABLE IF EXISTS dim_tempo CASCADE;
-```
+---
 
-## Referências
+## 📊 QUERIES ÚTEIS (`queries_uteis/`)
 
-- **ANALISE_E_OTIMIZACAO.md** - Documentação completa do modelo
-- **GUIA_MIGRACAO.md** - Guia de migração passo a passo
-- **QUERIES_EXEMPLOS.md** - Queries de exemplo para análise
+### `consultas_frequentes.sql`
+**12 queries prontas para usar!**
+
+1. Top 20 Ações Mais Compradas
+2. Top 20 Ações Mais Vendidas
+3. Consenso de Mercado
+4. Movimentos de um Grupo
+5. Evolução de uma Ação
+6. Grupos Mais Ativos
+7. Ações Mais Populares
+8. Comparar Dois Grupos
+9. Resumo Geral
+10. Lista de Grupos
+11. Ações com Divergência
+12. Rentabilidade dos Grupos
+
+---
+
+## 🗑️ EXCLUIR (`excluir/`)
+
+Scripts obsoletos do Sistema V1. Podem ser deletados.
+
+Contém 17 arquivos antigos do modelo dimensional que foram substituídos pelo V2 simplificado.
+
+---
+
+## 🚀 PASSO A PASSO
+
+**Primeira vez:**
+1. Execute: `00_LIMPAR_TUDO.sql`
+2. Execute: `01_CRIAR_SCHEMA_V2.sql`
+3. Execute o ETL: `./executar_etl.sh`
+4. Use queries de `queries_uteis/`
+
+**Já configurado:**
+- Use apenas queries de `queries_uteis/`

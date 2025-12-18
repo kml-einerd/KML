@@ -197,3 +197,76 @@ class SupabaseUploader:
         except Exception as e:
             self._log(f"❌ Erro ao contar registros: {str(e)}", "error")
             return 0
+
+    def upsert_patrimonio_liquido_top100(self, df: pd.DataFrame, batch_size: int = 1000) -> Dict:
+        """
+        Faz upsert de patrimônio líquido usando stored procedure
+        Converte dados flat em modelo dimensional automaticamente
+
+        Args:
+            df: DataFrame com colunas: cnpj_fundo, nome_fundo, grupo_economico, data_competencia, valor_pl
+            batch_size: Tamanho do lote
+
+        Returns:
+            Dict com estatísticas
+        """
+        if df.empty:
+            self._log("⚠️  DataFrame vazio para patrimônio líquido", "warning")
+            return {'inserted': 0, 'updated': 0, 'ignored': 0}
+
+        self._log(f"Iniciando upsert de PL: {len(df):,} registros")
+
+        total_inserted = 0
+        total_updated = 0
+        total_ignored = 0
+
+        # Processar em batches
+        batches = [df.iloc[i:i + batch_size] for i in range(0, len(df), batch_size)]
+
+        with tqdm(total=len(batches), desc="Upsert PL", unit="batch") as pbar:
+            for batch_df in batches:
+                try:
+                    # Converter DataFrame para JSON (array de objetos)
+                    records = batch_df.to_dict('records')
+
+                    # Converter valores para string para JSONB
+                    for record in records:
+                        # Garantir formato correto de data
+                        if isinstance(record.get('data_competencia'), pd.Timestamp):
+                            record['data_competencia'] = record['data_competencia'].strftime('%Y-%m-%d')
+                        # Converter valor_pl para string
+                        if 'valor_pl' in record and not pd.isna(record['valor_pl']):
+                            record['valor_pl'] = str(record['valor_pl'])
+                        else:
+                            record['valor_pl'] = '0'
+
+                    # Chamar stored procedure
+                    response = self.supabase.rpc(
+                        'upsert_patrimonio_liquido_top100',
+                        {'p_dados': records}
+                    ).execute()
+
+                    # Processar resultado
+                    if response.data and len(response.data) > 0:
+                        result = response.data[0]
+                        total_inserted += result.get('registros_inseridos', 0)
+                        total_updated += result.get('registros_atualizados', 0)
+                        total_ignored += result.get('registros_ignorados', 0)
+
+                    pbar.update(1)
+                    time.sleep(0.1)
+
+                except Exception as e:
+                    self._log(f"❌ Erro no batch: {str(e)}", "error")
+                    total_ignored += len(batch_df)
+
+        self._log(f"✓ Upsert PL concluído:")
+        self._log(f"  • Inseridos: {total_inserted:,}")
+        self._log(f"  • Atualizados: {total_updated:,}")
+        self._log(f"  • Ignorados: {total_ignored:,}")
+
+        return {
+            'inserted': total_inserted,
+            'updated': total_updated,
+            'ignored': total_ignored
+        }

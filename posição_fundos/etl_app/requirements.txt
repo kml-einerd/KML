@@ -3,16 +3,16 @@
 # ============================================
 
 # Supabase Client
-supabase==2.3.4
-postgrest==0.13.2
+supabase
+postgrest
 
 # Data Processing
-pandas==2.1.4
-numpy==1.26.2
+pandas
+numpy
 
 # Environment & Config
-python-dotenv==1.0.0
+python-dotenv
 
 # Utilities
-tqdm==4.66.1
-colorama==0.4.6
+tqdm
+colorama
