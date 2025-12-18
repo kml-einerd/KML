@@ -114,20 +114,20 @@ class ETLPipeline:
             self.logger.info("Salvando dados localmente...")
             self._save_processed_data(df_pl, df_acoes, df_cadastro)
 
-            # Upload PL
+            # Upload PL usando stored procedure (transforma flat → dimensional)
             self.logger.info("\nUpload: Patrimônio Líquido")
-            # TODO: Ajustar para tabelas corretas do Supabase
-            # self.uploader.upload_dataframe(df_pl, 'dim_patrimonio_liquido', self.batch_size)
+            result_pl = self.uploader.upsert_patrimonio_liquido_top100(df_pl, self.batch_size)
+            self.logger.info(f"  ✓ PL: {result_pl['inserted']:,} inseridos, {result_pl['updated']:,} atualizados")
 
             # Upload Ações
             self.logger.info("\nUpload: Posições em Ações")
-            # TODO: Ajustar para tabelas corretas do Supabase
-            # self.uploader.upload_dataframe(df_acoes, 'fato_posicoes', self.batch_size)
+            # TODO: Implementar procedure para ações (similar ao PL)
+            # self.uploader.upsert_posicoes_acoes_top100(df_acoes, self.batch_size)
 
             # Upload Cadastro
             self.logger.info("\nUpload: Cadastro de Fundos")
-            # TODO: Ajustar para tabelas corretas do Supabase
-            # self.uploader.upload_dataframe(df_cadastro, 'dim_fundos', self.batch_size)
+            # TODO: Implementar procedure para cadastro (similar ao PL)
+            # self.uploader.upsert_cadastro_fundos_top100(df_cadastro, self.batch_size)
 
             # 5. Calcular Ranking Top 100
             self.logger.info("\n[5/5] Calculando Ranking Top 100...")

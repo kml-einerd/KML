@@ -1,0 +1,92 @@
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | ======================================================================
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | 🚀 INICIANDO ETL - Top 100 Grupos
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | 📅 Período: 10/2025
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | ======================================================================
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | 
+[1/5] Processando Patrimônio Líquido...
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | Lendo arquivo: cda_fi_PL_202510.csv
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | ✓ 25,235 linhas carregadas
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | Processando dados de PL...
+2025-12-14 00:03:01 | [32mINFO[0m | ETL | Identificando grupos econômicos...
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | Calculando Top 100 grupos por PL...
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | ✓ Top 100 grupos identificados
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |   Total de grupos únicos: 12337
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | ✓ 25,235 registros de PL processados
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | 
+📊 Top 100 Grupos Identificados:
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     1. BANCO DO BRASIL
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     2. ITAÚ
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     3. BRADESCO
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     4. SANTANDER
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     5. BRASILPREV TOP
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     6. SAFRA
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     7. FUNDO
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     8. CAIXA PÓS
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |     9. CAIXA MASTER
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |    10. BRASILPREV FIX
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |    ... e mais 90 grupos
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | 
+💰 Estatísticas de PL:
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |    Total de fundos: 25,235
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |    Total de grupos: 12,337
+2025-12-14 00:03:02 | [32mINFO[0m | ETL |    PL total: R$ 13024.87 bi
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | 
+[2/5] Processando Posições em Ações (Top 100)...
+2025-12-14 00:03:02 | [32mINFO[0m | ETL | Lendo arquivo: cda_fi_BLC_4_202510.csv
+2025-12-14 00:03:03 | [32mINFO[0m | ETL | ✓ 108,791 linhas carregadas
+2025-12-14 00:03:03 | [32mINFO[0m | ETL | Processando posições em ações...
+2025-12-14 00:03:04 | [32mINFO[0m | ETL | Fazendo join com dados de PL...
+2025-12-14 00:03:05 | [32mINFO[0m | ETL | Filtrando apenas Top 100 grupos...
+2025-12-14 00:03:05 | [32mINFO[0m | ETL | ✓ 40,793 posições após filtro Top grupos
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | ✓ 40,793 posições em ações processadas
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | 
+📈 Estatísticas de Ações:
+2025-12-14 00:03:06 | [32mINFO[0m | ETL |    Total de posições: 40,793
+2025-12-14 00:03:06 | [32mINFO[0m | ETL |    Total de tickers: 2,856
+2025-12-14 00:03:06 | [32mINFO[0m | ETL |    Valor total: R$ 267.78 bi
+2025-12-14 00:03:06 | [32mINFO[0m | ETL |    Fluxo líquido: R$ 2.30 bi
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | 
+[3/5] Processando Cadastro de Fundos (Top 100)...
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | Lendo arquivo: cda_fie_202510.csv
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | ✓ 10,301 linhas carregadas
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | Processando cadastro de fundos...
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | Fazendo join com dados de PL...
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | Filtrando apenas Top 100 grupos...
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | ✓ 0 fundos cadastrados (Top grupos)
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | 
+[4/5] Fazendo Upload para Supabase...
+2025-12-14 00:03:06 | [32mINFO[0m | ETL | Salvando dados localmente...
+2025-12-14 00:03:07 | [32mINFO[0m | ETL | ✓ Dados salvos localmente
+2025-12-14 00:03:07 | [32mINFO[0m | ETL | 
+Upload: Patrimônio Líquido
+2025-12-14 00:03:07 | [32mINFO[0m | ETL | Iniciando upsert de PL: 25,235 registros
+2025-12-14 00:03:22 | [32mINFO[0m | ETL | ✓ Upsert PL concluído:
+2025-12-14 00:03:22 | [32mINFO[0m | ETL |   • Inseridos: 25,234
+2025-12-14 00:03:22 | [32mINFO[0m | ETL |   • Atualizados: 1
+2025-12-14 00:03:22 | [32mINFO[0m | ETL |   • Ignorados: 0
+2025-12-14 00:03:22 | [32mINFO[0m | ETL |   ✓ PL: 25,234 inseridos, 1 atualizados
+2025-12-14 00:03:22 | [32mINFO[0m | ETL | 
+Upload: Posições em Ações
+2025-12-14 00:03:22 | [32mINFO[0m | ETL | 
+Upload: Cadastro de Fundos
+2025-12-14 00:03:22 | [32mINFO[0m | ETL | 
+[5/5] Calculando Ranking Top 100...
+2025-12-14 00:03:22 | [32mINFO[0m | ETL | Executando função 'atualizar_ranking_top100_v2'...
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | ✓ Função 'atualizar_ranking_top100_v2' executada com sucesso
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | ✓ Ranking calculado: [{'grupos_atualizados': 100, 'data_referencia': '2025-10-31'}]
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | 
+======================================================================
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | ✅ ETL CONCLUÍDO COM SUCESSO!
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | ======================================================================
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | 
+📊 Resumo:
+2025-12-14 00:03:23 | [32mINFO[0m | ETL |    • Top 100 grupos processados
+2025-12-14 00:03:23 | [32mINFO[0m | ETL |    • 25,235 fundos
+2025-12-14 00:03:23 | [32mINFO[0m | ETL |    • 40,793 posições em ações
+2025-12-14 00:03:23 | [32mINFO[0m | ETL |    • R$ 267.78 bi em ações
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | 
+💾 Dados salvos em: /Users/kemueldemelleopoldino/Desktop/DEV_KML/GITHUB/KML-1/posição_fundos/processed
+2025-12-14 00:03:23 | [32mINFO[0m | ETL | 
+🎯 Próximos passos:
+2025-12-14 00:03:23 | [32mINFO[0m | ETL |    1. Consulte: SELECT * FROM v_top100_atual;
+2025-12-14 00:03:23 | [32mINFO[0m | ETL |    2. Dashboard: SELECT * FROM v_dashboard_top100;
